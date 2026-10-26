@@ -1,0 +1,60 @@
+{
+  "start_date": "2026-10-01",
+  "live_from": "2026-10-27",
+  "benchmark": "^CRSLDX",
+  "universe": "NIFTY500",
+
+  "accounts": {
+    "A_lumpsum": {
+      "label": "₹1L lump sum",
+      "initial_cash": 100000,
+      "monthly_contribution": 0
+    },
+    "B_monthly": {
+      "label": "₹10k + ₹10k/month",
+      "initial_cash": 10000,
+      "monthly_contribution": 10000
+    }
+  },
+
+  "risk": {
+    "risk_per_trade_pct": 2.0,
+    "max_position_pct": 25.0,
+    "max_open_positions": 8,
+    "max_cost_to_reward_pct": 15.0,
+    "min_reward_risk": 2.0,
+    "max_holding_days": 40
+  },
+
+  "fills": {
+    "slippage_pct": 0.10,
+    "stop_and_target_same_day": "stop"
+  },
+
+  "costs": {
+    "broker": "groww",
+    "brokerage_pct": 0.10,
+    "brokerage_max": 20.0,
+    "brokerage_min": 5.0,
+    "stt_pct": 0.10,
+    "exchange_txn_pct": 0.00297,
+    "sebi_per_crore": 10.0,
+    "stamp_duty_buy_pct": 0.015,
+    "gst_pct": 18.0,
+    "dp_charge_per_sell": 20.0,
+    "dp_waiver_below": 100.0
+  },
+
+  "tax": {
+    "stcg_pct": 20.0,
+    "ltcg_pct": 12.5,
+    "ltcg_exemption": 125000,
+    "ltcg_min_days": 365
+  },
+
+  "go_live": {
+    "min_days": 90,
+    "max_drawdown_pct": 15.0,
+    "must_beat_benchmark": true
+  }
+}
