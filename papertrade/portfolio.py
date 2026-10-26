@@ -33,6 +33,8 @@ class Position:
     proposal_id: str
     entry_charges: float
     breakeven_moved: bool = False
+    last_close: float = 0.0          # last traded close, for valuing suspended/delisted stock
+    last_bar: str = ""
 
 
 @dataclass
@@ -87,7 +89,7 @@ class Account:
         return next((p for p in self.positions if p.symbol == symbol), None)
 
     def market_value(self, closes: dict[str, float]) -> float:
-        return sum(p.qty * closes.get(p.symbol, p.entry_price) for p in self.positions)
+        return sum(p.qty * closes.get(p.symbol, p.last_close or p.entry_price) for p in self.positions)
 
     def liquid_value(self, closes: dict[str, float]) -> float:
         if not self.liquid_units:

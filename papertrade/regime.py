@@ -52,7 +52,10 @@ def compute(prices: pd.DataFrame, ind: pd.DataFrame, benchmark: str, universe: s
     b = _close(prices, benchmark, days)
     sma200, sma50, ema20 = b.rolling(200).mean(), b.rolling(50).mean(), b.ewm(span=20, adjust=False).mean()
 
-    stocks = ind[ind.index.get_level_values("symbol").isin(universe)]
+    if "member" in ind.columns:   # point-in-time universe
+        stocks = ind[ind["member"]]
+    else:
+        stocks = ind[ind.index.get_level_values("symbol").isin(universe)]
     has200 = stocks["sma200"].notna()
     above200 = (stocks["close"] > stocks["sma200"])[has200].groupby(level="date").mean().reindex(days)
     above20 = (stocks["close"] > stocks["ema20"]).groupby(level="date").mean().reindex(days)

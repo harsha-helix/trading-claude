@@ -1,0 +1,36 @@
+lazy IS 2011-2018   always invested              top20  every 1m  ₹100,000: +23.0%/yr  NIFTY500  +8.2%/yr  maxDD -32.7%  charges 3.30%/yr
+lazy IS 2011-2018   always invested              top10  every 1m  ₹100,000: +14.4%/yr  NIFTY500  +8.2%/yr  maxDD -47.1%  charges 2.63%/yr
+lazy IS 2011-2018   always invested              top20  every 3m  ₹100,000: +12.6%/yr  NIFTY500  +8.2%/yr  maxDD -40.2%  charges 2.21%/yr
+lazy IS 2011-2018   always invested              top10  every 3m  ₹ 10,000:  +6.9%/yr  NIFTY500  +8.2%/yr  maxDD -54.0%  charges 7.52%/yr
+lazy IS 2011-2018   200-day on/off               top20  every 1m  ₹100,000: +18.8%/yr  NIFTY500  +8.2%/yr  maxDD -32.0%  charges 3.43%/yr
+lazy IS 2011-2018   200-day on/off               top10  every 1m  ₹100,000: +20.4%/yr  NIFTY500  +8.2%/yr  maxDD -40.3%  charges 3.16%/yr
+lazy IS 2011-2018   200-day on/off               top20  every 3m  ₹100,000: +17.3%/yr  NIFTY500  +8.2%/yr  maxDD -30.7%  charges 1.70%/yr
+lazy IS 2011-2018   200-day on/off               top10  every 3m  ₹ 10,000: +13.4%/yr  NIFTY500  +8.2%/yr  maxDD -43.7%  charges 5.46%/yr
+lazy IS 2011-2018   long-term score: 100% / 50%  top20  every 1m  ₹100,000: +21.9%/yr  NIFTY500  +8.2%/yr  maxDD -31.5%  charges 3.06%/yr
+lazy IS 2011-2018   long-term score: 100% / 50%  top10  every 1m  ₹100,000: +15.2%/yr  NIFTY500  +8.2%/yr  maxDD -46.9%  charges 2.53%/yr
+lazy IS 2011-2018   long-term score: 100% / 50%  top20  every 3m  ₹100,000: +11.9%/yr  NIFTY500  +8.2%/yr  maxDD -35.9%  charges 2.04%/yr
+lazy IS 2011-2018   long-term score: 100% / 50%  top10  every 3m  ₹ 10,000:  +7.8%/yr  NIFTY500  +8.2%/yr  maxDD -46.9%  charges 7.37%/yr
+lazy OOS 2019-2026  always invested              top20  every 1m  ₹100,000: +24.0%/yr  NIFTY500 +12.2%/yr  maxDD -39.7%  charges 4.53%/yr
+lazy OOS 2019-2026  always invested              top10  every 1m  ₹100,000: +26.9%/yr  NIFTY500 +12.2%/yr  maxDD -48.5%  charges 3.91%/yr
+lazy OOS 2019-2026  always invested              top20  every 3m  ₹100,000: +22.9%/yr  NIFTY500 +12.2%/yr  maxDD -41.2%  charges 3.23%/yr
+lazy OOS 2019-2026  always invested              top10  every 3m  ₹ 10,000: +20.4%/yr  NIFTY500 +12.2%/yr  maxDD -49.7%  charges 7.89%/yr
+lazy OOS 2019-2026  200-day on/off               top20  every 1m  ₹100,000: +14.3%/yr  NIFTY500 +12.2%/yr  maxDD -36.6%  charges 3.56%/yr
+lazy OOS 2019-2026  200-day on/off               top10  every 1m  ₹100,000: +11.5%/yr  NIFTY500 +12.2%/yr  maxDD -54.3%  charges 2.90%/yr
+lazy OOS 2019-2026  200-day on/off               top20  every 3m  ₹100,000:  +1.8%/yr  NIFTY500 +12.2%/yr  maxDD -41.3%  charges 1.80%/yr
+lazy OOS 2019-2026  200-day on/off               top10  every 3m  ₹ 10,000:  -1.9%/yr  NIFTY500 +12.2%/yr  maxDD -59.0%  charges 5.38%/yr
+lazy OOS 2019-2026  long-term score: 100% / 50%  top20  every 1m  ₹100,000: +20.9%/yr  NIFTY500 +12.2%/yr  maxDD -41.3%  charges 4.29%/yr
+lazy OOS 2019-2026  long-term score: 100% / 50%  top10  every 1m  ₹100,000: +20.8%/yr  NIFTY500 +12.2%/yr  maxDD -50.3%  charges 3.60%/yr
+lazy OOS 2019-2026  long-term score: 100% / 50%  top20  every 3m  ₹100,000: +18.1%/yr  NIFTY500 +12.2%/yr  maxDD -42.5%  charges 2.76%/yr
+lazy OOS 2019-2026  long-term score: 100% / 50%  top10  every 3m  ₹ 10,000: +14.2%/yr  NIFTY500 +12.2%/yr  maxDD -49.8%  charges 7.04%/yr
+lazy 2024-2026      always invested              top20  every 1m  ₹100,000: +10.3%/yr  NIFTY500  +4.8%/yr  maxDD -39.7%  charges 3.08%/yr
+lazy 2024-2026      always invested              top10  every 1m  ₹100,000: +26.8%/yr  NIFTY500  +4.8%/yr  maxDD -40.2%  charges 2.36%/yr
+lazy 2024-2026      always invested              top20  every 3m  ₹100,000:  +6.9%/yr  NIFTY500  +4.8%/yr  maxDD -41.7%  charges 2.05%/yr
+lazy 2024-2026      always invested              top10  every 3m  ₹ 10,000: +16.1%/yr  NIFTY500  +4.8%/yr  maxDD -25.0%  charges 5.92%/yr
+lazy 2024-2026      200-day on/off               top20  every 1m  ₹100,000:  +2.4%/yr  NIFTY500  +4.8%/yr  maxDD -29.0%  charges 2.58%/yr
+lazy 2024-2026      200-day on/off               top10  every 1m  ₹100,000:  +7.8%/yr  NIFTY500  +4.8%/yr  maxDD -32.2%  charges 2.10%/yr
+lazy 2024-2026      200-day on/off               top20  every 3m  ₹100,000:  -8.5%/yr  NIFTY500  +4.8%/yr  maxDD -41.2%  charges 1.81%/yr
+lazy 2024-2026      200-day on/off               top10  every 3m  ₹ 10,000:  -1.8%/yr  NIFTY500  +4.8%/yr  maxDD -23.3%  charges 4.94%/yr
+lazy 2024-2026      long-term score: 100% / 50%  top20  every 1m  ₹100,000:  +3.7%/yr  NIFTY500  +4.8%/yr  maxDD -41.7%  charges 3.05%/yr
+lazy 2024-2026      long-term score: 100% / 50%  top10  every 1m  ₹100,000: +14.2%/yr  NIFTY500  +4.8%/yr  maxDD -40.0%  charges 2.30%/yr
+lazy 2024-2026      long-term score: 100% / 50%  top20  every 3m  ₹100,000:  +4.8%/yr  NIFTY500  +4.8%/yr  maxDD -40.8%  charges 1.98%/yr
+lazy 2024-2026      long-term score: 100% / 50%  top10  every 3m  ₹ 10,000: +15.1%/yr  NIFTY500  +4.8%/yr  maxDD -23.3%  charges 5.45%/yr

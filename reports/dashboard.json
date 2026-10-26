@@ -3,170 +3,135 @@
  "live_from": "2026-10-27",
  "regime": {
   "date": "2026-10-26",
-  "entries_allowed": false
+  "regime": "BEAR",
+  "entries_allowed": true,
+  "text": "Bear: long-term and short-term trends both down. Long-term score 0.12, short-term 0.00. 31% of stocks are above their 200-day average, 14% above their 20-day. The market model is shown for context; the momentum strategy stays invested."
  },
  "watchlist": [
   {
    "symbol": "STLTECH",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 867.55,
-   "stop": 705.94,
-   "target": 1271.59,
-   "atr": 54.91,
-   "rsi": 49.3,
-   "rel_strength_63d": 0.5947,
-   "trend": "Above its 50-day (814) and 200-day (461) averages, and the 50-day is rising. 3-month return is 53.8% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (883.73) in an uptrend, then closed above the prior day's high (840.00). RSI 49.",
-   "fundamental": "no fundamentals cached"
+   "rank": 1,
+   "score": 7.25
   },
   {
-   "symbol": "COFORGE",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1993.0,
-   "stop": 1740.46,
-   "target": 2624.34,
-   "atr": 71.74,
-   "rsi": 64.1,
-   "rel_strength_63d": 0.3993,
-   "trend": "Above its 50-day (1867) and 200-day (1534) averages, and the 50-day is rising. 3-month return is 34.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1891.43) in an uptrend, then closed above the prior day's high (1992.40). RSI 64.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "ATHERENERG",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1575.0,
-   "stop": 1274.32,
-   "target": 2326.7,
-   "atr": 75.17,
-   "rsi": 59.7,
-   "rel_strength_63d": 0.36,
-   "trend": "Above its 50-day (1515) and 200-day (1062) averages, and the 50-day is rising. 3-month return is 30.3% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1472.06) in an uptrend, then closed above the prior day's high (1442.30). RSI 60.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "SANSERA",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 4147.7,
-   "stop": 3680.92,
-   "target": 5314.64,
-   "atr": 188.28,
-   "rsi": 50.5,
-   "rel_strength_63d": 0.3593,
-   "trend": "Above its 50-day (4096) and 200-day (2933) averages, and the 50-day is rising. 3-month return is 30.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (4142.58) in an uptrend, then closed above the prior day's high (4046.00). RSI 50.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "CUPID",
+   "rank": 2,
+   "score": 6.13
   },
   {
    "symbol": "LAURUSLABS",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 2058.9,
-   "stop": 1875.19,
-   "target": 2518.18,
-   "atr": 58.31,
-   "rsi": 57.4,
-   "rel_strength_63d": 0.3428,
-   "trend": "Above its 50-day (1948) and 200-day (1427) averages, and the 50-day is rising. 3-month return is 28.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (2014.14) in an uptrend, then closed above the prior day's high (2009.60). RSI 57.",
-   "fundamental": "no fundamentals cached"
+   "rank": 3,
+   "score": 4.25
   },
   {
-   "symbol": "TDPOWERSYS",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 688.35,
-   "stop": 570.3,
-   "target": 983.48,
-   "atr": 43.15,
-   "rsi": 41.6,
-   "rel_strength_63d": 0.2932,
-   "trend": "Above its 50-day (754) and 200-day (568) averages, and the 50-day is rising. 3-month return is 23.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (737.12) in an uptrend, then closed above the prior day's high (663.10). RSI 42.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "HFCL",
+   "rank": 4,
+   "score": 4.09
+  },
+  {
+   "symbol": "WELCORP",
+   "rank": 5,
+   "score": 3.47
+  },
+  {
+   "symbol": "SANSERA",
+   "rank": 6,
+   "score": 3.21
+  },
+  {
+   "symbol": "CPPLUS",
+   "rank": 7,
+   "score": 3.08
+  },
+  {
+   "symbol": "ATHERENERG",
+   "rank": 8,
+   "score": 2.44
+  },
+  {
+   "symbol": "DIVISLAB",
+   "rank": 9,
+   "score": 2.15
+  },
+  {
+   "symbol": "GLAND",
+   "rank": 10,
+   "score": 2.05
+  },
+  {
+   "symbol": "AEGISLOG",
+   "rank": 11,
+   "score": 1.98
+  },
+  {
+   "symbol": "SONACOMS",
+   "rank": 12,
+   "score": 1.95
+  },
+  {
+   "symbol": "ANANDRATHI",
+   "rank": 13,
+   "score": 1.94
+  },
+  {
+   "symbol": "ACUTAAS",
+   "rank": 14,
+   "score": 1.91
+  },
+  {
+   "symbol": "SYRMA",
+   "rank": 15,
+   "score": 1.87
+  },
+  {
+   "symbol": "MTARTECH",
+   "rank": 16,
+   "score": 1.86
+  },
+  {
+   "symbol": "RRKABEL",
+   "rank": 17,
+   "score": 1.83
   },
   {
    "symbol": "SAILIFE",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1445.3,
-   "stop": 1310.62,
-   "target": 1782.01,
-   "atr": 49.98,
-   "rsi": 44.7,
-   "rel_strength_63d": 0.2292,
-   "trend": "Above its 50-day (1510) and 200-day (1185) averages, and the 50-day is rising. 3-month return is 17.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1462.12) in an uptrend, then closed above the prior day's high (1429.00). RSI 45.",
-   "fundamental": "no fundamentals cached"
+   "rank": 18,
+   "score": 1.81
   },
   {
-   "symbol": "LENSKART",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 651.2,
-   "stop": 593.53,
-   "target": 795.38,
-   "atr": 21.67,
-   "rsi": 48.3,
-   "rel_strength_63d": 0.2284,
-   "trend": "Above its 50-day (663) and 200-day (546) averages, and the 50-day is rising. 3-month return is 17.1% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (654.48) in an uptrend, then closed above the prior day's high (635.00). RSI 48.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "CRAFTSMAN",
+   "rank": 19,
+   "score": 1.7
   },
   {
-   "symbol": "ETERNAL",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 325.55,
-   "stop": 291.28,
-   "target": 411.22,
-   "atr": 10.47,
-   "rsi": 53.0,
-   "rel_strength_63d": 0.2196,
-   "trend": "Above its 50-day (324) and 200-day (279) averages, and the 50-day is rising. 3-month return is 16.3% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (320.91) in an uptrend, then closed above the prior day's high (318.00). RSI 53.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "KOTAKBANK",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 440.75,
-   "stop": 417.71,
-   "target": 498.34,
-   "atr": 9.99,
-   "rsi": 58.9,
-   "rel_strength_63d": 0.2025,
-   "trend": "Above its 50-day (419) and 200-day (400) averages, and the 50-day is rising. 3-month return is 14.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (432.63) in an uptrend, then closed above the prior day's high (439.40). RSI 59.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "WELSPUNLIV",
+   "rank": 20,
+   "score": 1.69
   }
  ],
  "accounts": {
   "A_lumpsum": {
    "label": "₹1L lump sum",
    "metrics": {
-    "equity": 100306.95,
+    "equity": 91808.99,
     "contributed": 100000.0,
-    "cash": 657.65,
-    "liquid": 99649.3,
-    "liquid_units": 895,
-    "pnl": 306.95,
-    "return_twr": 0.0031,
+    "cash": 1231.95,
+    "liquid": 0.0,
+    "liquid_units": 0,
+    "core": 0.0,
+    "core_units": 0,
+    "core_symbol": "NIFTYBEES",
+    "pnl": -8191.01,
+    "return_twr": -0.0819,
     "benchmark_return": -0.021,
-    "max_drawdown": 0.0,
+    "max_drawdown": 0.1321,
     "trades": 0,
-    "open": 0,
+    "open": 19,
     "win_rate": null,
     "avg_win": null,
     "avg_loss": null,
     "expectancy_r": null,
-    "charges_paid": 42.1,
+    "charges_paid": 240.5,
     "est_tax": {
      "stcg": 0,
      "ltcg": 0,
@@ -182,11 +147,297 @@
     "checks": {
      "90+ trading days": false,
      "max drawdown < 15.0%": true,
-     "beats NIFTY 500 after costs": true
+     "beats NIFTY 500 after costs": false
     },
     "ready": false
    },
-   "positions": [],
+   "positions": [
+    {
+     "symbol": "STLTECH",
+     "qty": 5,
+     "entry_date": "2026-10-01",
+     "entry_price": 956.3,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-STLTECH",
+     "entry_charges": 11.57,
+     "breakeven_moved": false,
+     "last_close": 867.5499877929688,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "CUPID",
+     "qty": 16,
+     "entry_date": "2026-10-01",
+     "entry_price": 313.8,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-CUPID",
+     "entry_charges": 11.88,
+     "breakeven_moved": false,
+     "last_close": 314.04998779296875,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "WELCORP",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 2710.7,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-WELCORP",
+     "entry_charges": 12.83,
+     "breakeven_moved": false,
+     "last_close": 2342.60009765625,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "HFCL",
+     "qty": 21,
+     "entry_date": "2026-10-01",
+     "entry_price": 238.6,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-HFCL",
+     "entry_charges": 11.86,
+     "breakeven_moved": false,
+     "last_close": 244.6300048828125,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "LAURUSLABS",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 1975.55,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-LAURUSLABS",
+     "entry_charges": 10.58,
+     "breakeven_moved": false,
+     "last_close": 2058.89990234375,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "SANSERA",
+     "qty": 1,
+     "entry_date": "2026-10-01",
+     "entry_price": 4469.65,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-SANSERA",
+     "entry_charges": 11.19,
+     "breakeven_moved": false,
+     "last_close": 4147.7001953125,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "MTARTECH",
+     "qty": 1,
+     "entry_date": "2026-10-01",
+     "entry_price": 8194.7,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-MTARTECH",
+     "entry_charges": 19.38,
+     "breakeven_moved": false,
+     "last_close": 6582.5,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "CPPLUS",
+     "qty": 1,
+     "entry_date": "2026-10-01",
+     "entry_price": 3841.75,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-CPPLUS",
+     "entry_charges": 10.45,
+     "breakeven_moved": false,
+     "last_close": 3867.39990234375,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "SYRMA",
+     "qty": 3,
+     "entry_date": "2026-10-01",
+     "entry_price": 1784.7,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-SYRMA",
+     "entry_charges": 12.66,
+     "breakeven_moved": false,
+     "last_close": 1495.4000244140625,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "SONACOMS",
+     "qty": 6,
+     "entry_date": "2026-10-01",
+     "entry_price": 828.85,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-SONACOMS",
+     "entry_charges": 11.8,
+     "breakeven_moved": false,
+     "last_close": 781.9000244140625,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "RRKABEL",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 2526.5,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-RRKABEL",
+     "entry_charges": 11.96,
+     "breakeven_moved": false,
+     "last_close": 2182.0,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "TDPOWERSYS",
+     "qty": 6,
+     "entry_date": "2026-10-01",
+     "entry_price": 780.7,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-TDPOWERSYS",
+     "entry_charges": 11.45,
+     "breakeven_moved": false,
+     "last_close": 688.3499755859375,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "AEGISLOG",
+     "qty": 4,
+     "entry_date": "2026-10-01",
+     "entry_price": 1372.45,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-AEGISLOG",
+     "entry_charges": 12.99,
+     "breakeven_moved": false,
+     "last_close": 1291.0999755859375,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "DIVISLAB",
+     "qty": 1,
+     "entry_date": "2026-10-01",
+     "entry_price": 9286.3,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-DIVISLAB",
+     "entry_charges": 21.98,
+     "breakeven_moved": false,
+     "last_close": 9050.0,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "ATHERENERG",
+     "qty": 3,
+     "entry_date": "2026-10-01",
+     "entry_price": 1423.4,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-ATHERENERG",
+     "entry_charges": 10.96,
+     "breakeven_moved": false,
+     "last_close": 1575.0,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "AZAD",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 2985.0,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-AZAD",
+     "entry_charges": 14.14,
+     "breakeven_moved": false,
+     "last_close": 2547.800048828125,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "KIRLOSENG",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 2313.0,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-KIRLOSENG",
+     "entry_charges": 11.39,
+     "breakeven_moved": false,
+     "last_close": 1819.4000244140625,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "WELSPUNLIV",
+     "qty": 21,
+     "entry_date": "2026-10-01",
+     "entry_price": 226.95,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-WELSPUNLIV",
+     "entry_charges": 11.55,
+     "breakeven_moved": false,
+     "last_close": 208.9600067138672,
+     "last_bar": "2026-10-26"
+    },
+    {
+     "symbol": "AETHER",
+     "qty": 2,
+     "entry_date": "2026-10-01",
+     "entry_price": 1681.7,
+     "stop": 0.0,
+     "target": 0.0,
+     "initial_stop": 0.0,
+     "setup": "momentum",
+     "proposal_id": "2026-09-30-AETHER",
+     "entry_charges": 9.88,
+     "breakeven_moved": false,
+     "last_close": 1471.5,
+     "last_bar": "2026-10-26"
+    }
+   ],
    "closed": [],
    "events": [
     {
@@ -197,149 +448,509 @@
     },
     {
      "date": "2026-10-01",
-     "kind": "park",
-     "text": "Parked ₹99,300 in GROWWLIQID (895 units @ ₹110.95)",
-     "units": 895,
-     "price": 110.95,
+     "kind": "buy",
+     "text": "BUY 5 STLTECH @ ₹956.30",
+     "symbol": "STLTECH",
+     "qty": 5,
+     "price": 956.3,
      "charges": {
-      "brokerage": 20.0,
-      "stt": 0.0,
-      "exchange": 2.95,
-      "sebi": 0.1,
-      "stamp": 14.9,
-      "gst": 4.15,
+      "brokerage": 5.0,
+      "stt": 4.78,
+      "exchange": 0.14,
+      "sebi": 0.0,
+      "stamp": 0.72,
+      "gst": 0.93,
       "dp": 0.0,
-      "total": 42.1
-     }
+      "total": 11.57
+     },
+     "proposal_id": "2026-09-30-STLTECH"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 16 CUPID @ ₹313.80",
+     "symbol": "CUPID",
+     "qty": 16,
+     "price": 313.8,
+     "charges": {
+      "brokerage": 5.02,
+      "stt": 5.02,
+      "exchange": 0.15,
+      "sebi": 0.01,
+      "stamp": 0.75,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.88
+     },
+     "proposal_id": "2026-09-30-CUPID"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 WELCORP @ ₹2,710.70",
+     "symbol": "WELCORP",
+     "qty": 2,
+     "price": 2710.7,
+     "charges": {
+      "brokerage": 5.42,
+      "stt": 5.42,
+      "exchange": 0.16,
+      "sebi": 0.01,
+      "stamp": 0.81,
+      "gst": 1.01,
+      "dp": 0.0,
+      "total": 12.83
+     },
+     "proposal_id": "2026-09-30-WELCORP"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 21 HFCL @ ₹238.60",
+     "symbol": "HFCL",
+     "qty": 21,
+     "price": 238.6,
+     "charges": {
+      "brokerage": 5.01,
+      "stt": 5.01,
+      "exchange": 0.15,
+      "sebi": 0.01,
+      "stamp": 0.75,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.86
+     },
+     "proposal_id": "2026-09-30-HFCL"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 LAURUSLABS @ ₹1,975.55",
+     "symbol": "LAURUSLABS",
+     "qty": 2,
+     "price": 1975.55,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 3.95,
+      "exchange": 0.12,
+      "sebi": 0.0,
+      "stamp": 0.59,
+      "gst": 0.92,
+      "dp": 0.0,
+      "total": 10.58
+     },
+     "proposal_id": "2026-09-30-LAURUSLABS"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 1 SANSERA @ ₹4,469.65",
+     "symbol": "SANSERA",
+     "qty": 1,
+     "price": 4469.65,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.47,
+      "exchange": 0.13,
+      "sebi": 0.0,
+      "stamp": 0.67,
+      "gst": 0.92,
+      "dp": 0.0,
+      "total": 11.19
+     },
+     "proposal_id": "2026-09-30-SANSERA"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 1 MTARTECH @ ₹8,194.70",
+     "symbol": "MTARTECH",
+     "qty": 1,
+     "price": 8194.7,
+     "charges": {
+      "brokerage": 8.19,
+      "stt": 8.19,
+      "exchange": 0.24,
+      "sebi": 0.01,
+      "stamp": 1.23,
+      "gst": 1.52,
+      "dp": 0.0,
+      "total": 19.38
+     },
+     "proposal_id": "2026-09-30-MTARTECH"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 1 CPPLUS @ ₹3,841.75",
+     "symbol": "CPPLUS",
+     "qty": 1,
+     "price": 3841.75,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 3.84,
+      "exchange": 0.11,
+      "sebi": 0.0,
+      "stamp": 0.58,
+      "gst": 0.92,
+      "dp": 0.0,
+      "total": 10.45
+     },
+     "proposal_id": "2026-09-30-CPPLUS"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 3 SYRMA @ ₹1,784.70",
+     "symbol": "SYRMA",
+     "qty": 3,
+     "price": 1784.7,
+     "charges": {
+      "brokerage": 5.35,
+      "stt": 5.35,
+      "exchange": 0.16,
+      "sebi": 0.01,
+      "stamp": 0.8,
+      "gst": 0.99,
+      "dp": 0.0,
+      "total": 12.66
+     },
+     "proposal_id": "2026-09-30-SYRMA"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 6 SONACOMS @ ₹828.85",
+     "symbol": "SONACOMS",
+     "qty": 6,
+     "price": 828.85,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.97,
+      "exchange": 0.15,
+      "sebi": 0.0,
+      "stamp": 0.75,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.8
+     },
+     "proposal_id": "2026-09-30-SONACOMS"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 RRKABEL @ ₹2,526.50",
+     "symbol": "RRKABEL",
+     "qty": 2,
+     "price": 2526.5,
+     "charges": {
+      "brokerage": 5.05,
+      "stt": 5.05,
+      "exchange": 0.15,
+      "sebi": 0.01,
+      "stamp": 0.76,
+      "gst": 0.94,
+      "dp": 0.0,
+      "total": 11.96
+     },
+     "proposal_id": "2026-09-30-RRKABEL"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 6 TDPOWERSYS @ ₹780.70",
+     "symbol": "TDPOWERSYS",
+     "qty": 6,
+     "price": 780.7,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.68,
+      "exchange": 0.14,
+      "sebi": 0.0,
+      "stamp": 0.7,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.45
+     },
+     "proposal_id": "2026-09-30-TDPOWERSYS"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 4 AEGISLOG @ ₹1,372.45",
+     "symbol": "AEGISLOG",
+     "qty": 4,
+     "price": 1372.45,
+     "charges": {
+      "brokerage": 5.49,
+      "stt": 5.49,
+      "exchange": 0.16,
+      "sebi": 0.01,
+      "stamp": 0.82,
+      "gst": 1.02,
+      "dp": 0.0,
+      "total": 12.99
+     },
+     "proposal_id": "2026-09-30-AEGISLOG"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 1 DIVISLAB @ ₹9,286.30",
+     "symbol": "DIVISLAB",
+     "qty": 1,
+     "price": 9286.3,
+     "charges": {
+      "brokerage": 9.29,
+      "stt": 9.29,
+      "exchange": 0.28,
+      "sebi": 0.01,
+      "stamp": 1.39,
+      "gst": 1.72,
+      "dp": 0.0,
+      "total": 21.98
+     },
+     "proposal_id": "2026-09-30-DIVISLAB"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 3 ATHERENERG @ ₹1,423.40",
+     "symbol": "ATHERENERG",
+     "qty": 3,
+     "price": 1423.4,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.27,
+      "exchange": 0.13,
+      "sebi": 0.0,
+      "stamp": 0.64,
+      "gst": 0.92,
+      "dp": 0.0,
+      "total": 10.96
+     },
+     "proposal_id": "2026-09-30-ATHERENERG"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 AZAD @ ₹2,985.00",
+     "symbol": "AZAD",
+     "qty": 2,
+     "price": 2985.0,
+     "charges": {
+      "brokerage": 5.97,
+      "stt": 5.97,
+      "exchange": 0.18,
+      "sebi": 0.01,
+      "stamp": 0.9,
+      "gst": 1.11,
+      "dp": 0.0,
+      "total": 14.14
+     },
+     "proposal_id": "2026-09-30-AZAD"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 KIRLOSENG @ ₹2,313.00",
+     "symbol": "KIRLOSENG",
+     "qty": 2,
+     "price": 2313.0,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.63,
+      "exchange": 0.14,
+      "sebi": 0.0,
+      "stamp": 0.69,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.39
+     },
+     "proposal_id": "2026-09-30-KIRLOSENG"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 21 WELSPUNLIV @ ₹226.95",
+     "symbol": "WELSPUNLIV",
+     "qty": 21,
+     "price": 226.95,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 4.77,
+      "exchange": 0.14,
+      "sebi": 0.0,
+      "stamp": 0.71,
+      "gst": 0.93,
+      "dp": 0.0,
+      "total": 11.55
+     },
+     "proposal_id": "2026-09-30-WELSPUNLIV"
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "buy",
+     "text": "BUY 2 AETHER @ ₹1,681.70",
+     "symbol": "AETHER",
+     "qty": 2,
+     "price": 1681.7,
+     "charges": {
+      "brokerage": 5.0,
+      "stt": 3.36,
+      "exchange": 0.1,
+      "sebi": 0.0,
+      "stamp": 0.5,
+      "gst": 0.92,
+      "dp": 0.0,
+      "total": 9.88
+     },
+     "proposal_id": "2026-09-30-AETHER"
     }
    ],
    "equity": [
     {
      "date": "2026-10-01",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99353.95,
-     "equity": 100011.6,
+     "cash": 1231.95,
+     "holdings": 97249.58,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 98481.53,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-05",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99362.9,
-     "equity": 100020.55,
+     "cash": 1231.95,
+     "holdings": 97515.89,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 98747.84,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-06",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99371.85,
-     "equity": 100029.5,
+     "cash": 1231.95,
+     "holdings": 100312.64,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 101544.59,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-07",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99389.75,
-     "equity": 100047.4,
+     "cash": 1231.95,
+     "holdings": 101357.76,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 102589.71,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-08",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99407.65,
-     "equity": 100065.3,
+     "cash": 1231.95,
+     "holdings": 98808.93,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 100040.88,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-09",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99443.45,
-     "equity": 100101.1,
+     "cash": 1231.95,
+     "holdings": 99515.55,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 100747.5,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-12",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99461.35,
-     "equity": 100119.0,
+     "cash": 1231.95,
+     "holdings": 101017.73,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 102249.68,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-13",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99470.3,
-     "equity": 100127.95,
+     "cash": 1231.95,
+     "holdings": 99663.18,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 100895.13,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-14",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99488.2,
-     "equity": 100145.85,
+     "cash": 1231.95,
+     "holdings": 98893.58,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 100125.53,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-15",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99497.15,
-     "equity": 100154.8,
+     "cash": 1231.95,
+     "holdings": 95558.17,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 96790.12,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-16",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99541.9,
-     "equity": 100199.55,
+     "cash": 1231.95,
+     "holdings": 94904.61,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 96136.56,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-19",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99568.75,
-     "equity": 100226.4,
+     "cash": 1231.95,
+     "holdings": 94443.28,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 95675.23,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-21",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99586.65,
-     "equity": 100244.3,
+     "cash": 1231.95,
+     "holdings": 92067.32,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 93299.27,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-22",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99595.6,
-     "equity": 100253.25,
+     "cash": 1231.95,
+     "holdings": 90522.84,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 91754.79,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-23",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99640.35,
-     "equity": 100298.0,
+     "cash": 1231.95,
+     "holdings": 87804.34,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 89036.29,
      "contributed": 100000.0
     },
     {
      "date": "2026-10-26",
-     "cash": 657.65,
-     "holdings": 0,
-     "liquid": 99649.3,
-     "equity": 100306.95,
+     "cash": 1231.95,
+     "holdings": 90577.04,
+     "liquid": 0.0,
+     "core": 0.0,
+     "equity": 91808.99,
      "contributed": 100000.0
     }
    ]
@@ -347,22 +958,25 @@
   "B_monthly": {
    "label": "₹10k + ₹10k/month",
    "metrics": {
-    "equity": 10020.27,
+    "equity": 9404.85,
     "contributed": 10000.0,
-    "cash": 556.37,
-    "liquid": 9463.9,
-    "liquid_units": 85,
-    "pnl": 20.27,
-    "return_twr": 0.002,
+    "cash": 525.04,
+    "liquid": 0.0,
+    "liquid_units": 0,
+    "core": 8879.81,
+    "core_units": 313,
+    "core_symbol": "MOM30IETF",
+    "pnl": -595.15,
+    "return_twr": -0.0595,
     "benchmark_return": -0.021,
-    "max_drawdown": 0.0,
+    "max_drawdown": 0.0843,
     "trades": 0,
     "open": 0,
     "win_rate": null,
     "avg_win": null,
     "avg_loss": null,
     "expectancy_r": null,
-    "charges_paid": 12.88,
+    "charges_paid": 22.36,
     "est_tax": {
      "stcg": 0,
      "ltcg": 0,
@@ -378,7 +992,7 @@
     "checks": {
      "90+ trading days": false,
      "max drawdown < 15.0%": true,
-     "beats NIFTY 500 after costs": true
+     "beats NIFTY 500 after costs": false
     },
     "ready": false
    },
@@ -393,149 +1007,165 @@
     },
     {
      "date": "2026-10-01",
-     "kind": "park",
-     "text": "Parked ₹9,431 in GROWWLIQID (85 units @ ₹110.95)",
-     "units": 85,
-     "price": 110.95,
+     "kind": "core",
+     "text": "Core: bought 313 MOM30IETF @ ₹30.20 (₹9,453). Monthly investment of spare cash.",
+     "units": 313,
+     "price": 30.2,
      "charges": {
-      "brokerage": 9.43,
-      "stt": 0.0,
+      "brokerage": 9.45,
+      "stt": 9.45,
       "exchange": 0.28,
       "sebi": 0.01,
-      "stamp": 1.41,
+      "stamp": 1.42,
       "gst": 1.75,
       "dp": 0.0,
-      "total": 12.88
+      "total": 22.36
      }
     }
    ],
    "equity": [
     {
      "date": "2026-10-01",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9435.85,
-     "equity": 9992.22,
+     "liquid": 0.0,
+     "core": 9333.66,
+     "equity": 9858.7,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-05",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9436.7,
-     "equity": 9993.07,
+     "liquid": 0.0,
+     "core": 9377.48,
+     "equity": 9902.52,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-06",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9437.55,
-     "equity": 9993.92,
+     "liquid": 0.0,
+     "core": 9537.11,
+     "equity": 10062.15,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-07",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9439.25,
-     "equity": 9995.62,
+     "liquid": 0.0,
+     "core": 9449.47,
+     "equity": 9974.51,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-08",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9440.95,
-     "equity": 9997.32,
+     "liquid": 0.0,
+     "core": 9214.72,
+     "equity": 9739.76,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-09",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9444.35,
-     "equity": 10000.72,
+     "liquid": 0.0,
+     "core": 9277.32,
+     "equity": 9802.36,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-12",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9446.05,
-     "equity": 10002.42,
+     "liquid": 0.0,
+     "core": 9299.23,
+     "equity": 9824.27,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-13",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9446.9,
-     "equity": 10003.27,
+     "liquid": 0.0,
+     "core": 9333.66,
+     "equity": 9858.7,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-14",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9448.6,
-     "equity": 10004.97,
+     "liquid": 0.0,
+     "core": 9346.18,
+     "equity": 9871.22,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-15",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9449.45,
-     "equity": 10005.82,
+     "liquid": 0.0,
+     "core": 9261.67,
+     "equity": 9786.71,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-16",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9453.7,
-     "equity": 10010.07,
+     "liquid": 0.0,
+     "core": 9258.54,
+     "equity": 9783.58,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-19",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9456.25,
-     "equity": 10012.62,
+     "liquid": 0.0,
+     "core": 9199.07,
+     "equity": 9724.11,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-21",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9457.95,
-     "equity": 10014.32,
+     "liquid": 0.0,
+     "core": 9001.88,
+     "equity": 9526.92,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-22",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9458.8,
-     "equity": 10015.17,
+     "liquid": 0.0,
+     "core": 8920.5,
+     "equity": 9445.54,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-23",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9463.05,
-     "equity": 10019.42,
+     "liquid": 0.0,
+     "core": 8688.88,
+     "equity": 9213.92,
      "contributed": 10000.0
     },
     {
      "date": "2026-10-26",
-     "cash": 556.37,
+     "cash": 525.04,
      "holdings": 0,
-     "liquid": 9463.9,
-     "equity": 10020.27,
+     "liquid": 0.0,
+     "core": 8879.81,
+     "equity": 9404.85,
      "contributed": 10000.0
     }
    ]
@@ -561,5 +1191,686 @@
   "2026-10-26": 21608.75
  },
  "pending": [],
- "recent_proposals": []
+ "recent_proposals": [
+  {
+   "id": "2026-09-30-STLTECH",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "STLTECH",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 909.9,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 1,
+   "score": 7.64,
+   "technical": "Momentum rank 1 of 475. 6-month return +389%, 12-month +637%, volatility 61% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 5,
+     "value": 4549.5,
+     "risk": null,
+     "reward": null,
+     "est_costs": 46.82,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 5 @ 956.31",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-CUPID",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "CUPID",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 311.65,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 2,
+   "score": 6.47,
+   "technical": "Momentum rank 2 of 475. 6-month return +268%, 12-month +608%, volatility 59% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 16,
+     "value": 4986.4,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.48,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 16 @ 313.81",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-WELCORP",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "WELCORP",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 2717.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 3,
+   "score": 4.9,
+   "technical": "Momentum rank 3 of 475. 6-month return +232%, 12-month +208%, volatility 42% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 5434.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 48.15,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 2710.71",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-HFCL",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "HFCL",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 227.02,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 4,
+   "score": 3.89,
+   "technical": "Momentum rank 4 of 475. 6-month return +221%, 12-month +201%, volatility 50% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 21,
+     "value": 4767.42,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.15,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 21 @ 238.61",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-LAURUSLABS",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "LAURUSLABS",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 1980.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 5,
+   "score": 3.24,
+   "technical": "Momentum rank 5 of 475. 6-month return +96%, 12-month +118%, volatility 29% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 3960.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 45.94,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 1975.57",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-SANSERA",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "SANSERA",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 4537.5,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 6,
+   "score": 3.22,
+   "technical": "Momentum rank 6 of 475. 6-month return +110%, 12-month +203%, volatility 42% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 1,
+     "value": 4537.5,
+     "risk": null,
+     "reward": null,
+     "est_costs": 46.81,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 1 @ 4469.67",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-MTARTECH",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "MTARTECH",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 7797.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 7,
+   "score": 2.96,
+   "technical": "Momentum rank 7 of 475. 6-month return +118%, 12-month +317%, volatility 60% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 1,
+     "value": 7797.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 51.7,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 1 @ 8194.69",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-CPPLUS",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "CPPLUS",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 3846.5,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 8,
+   "score": 2.82,
+   "technical": "Momentum rank 8 of 475. 6-month return +111%, 12-month +176%, volatility 44% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 1,
+     "value": 3846.5,
+     "risk": null,
+     "reward": null,
+     "est_costs": 45.77,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 1 @ 3841.74",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-SYRMA",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "SYRMA",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 1782.9,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 9,
+   "score": 2.34,
+   "technical": "Momentum rank 9 of 475. 6-month return +118%, 12-month +118%, volatility 44% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 3,
+     "value": 5348.7,
+     "risk": null,
+     "reward": null,
+     "est_costs": 48.02,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 3 @ 1784.68",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-SONACOMS",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "SONACOMS",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 830.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 10,
+   "score": 2.3,
+   "technical": "Momentum rank 10 of 475. 6-month return +70%, 12-month +97%, volatility 31% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 6,
+     "value": 4980.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.47,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 6 @ 828.83",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-RRKABEL",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "RRKABEL",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 2518.6,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 11,
+   "score": 2.08,
+   "technical": "Momentum rank 11 of 475. 6-month return +92%, 12-month +95%, volatility 39% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 5037.2,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.56,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 2526.52",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-TDPOWERSYS",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "TDPOWERSYS",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 786.05,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 12,
+   "score": 1.99,
+   "technical": "Momentum rank 12 of 475. 6-month return +85%, 12-month +184%, volatility 54% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 6,
+     "value": 4716.3,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.07,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 6 @ 780.68",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-AEGISLOG",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "AEGISLOG",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 1380.1,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 13,
+   "score": 1.96,
+   "technical": "Momentum rank 13 of 475. 6-month return +126%, 12-month +79%, volatility 47% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 4,
+     "value": 5520.4,
+     "risk": null,
+     "reward": null,
+     "est_costs": 48.28,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 4 @ 1372.47",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-DIVISLAB",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "DIVISLAB",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 9291.5,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 14,
+   "score": 1.95,
+   "technical": "Momentum rank 14 of 475. 6-month return +55%, 12-month +54%, volatility 24% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 1,
+     "value": 9291.5,
+     "risk": null,
+     "reward": null,
+     "est_costs": 53.94,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 1 @ 9286.28",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-ATHERENERG",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "ATHERENERG",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 1425.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 15,
+   "score": 1.9,
+   "technical": "Momentum rank 15 of 475. 6-month return +79%, 12-month +149%, volatility 48% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 3,
+     "value": 4275.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 46.41,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 3 @ 1423.42",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-AZAD",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "AZAD",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 2963.2,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 16,
+   "score": 1.85,
+   "technical": "Momentum rank 16 of 475. 6-month return +100%, 12-month +84%, volatility 43% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 5926.4,
+     "risk": null,
+     "reward": null,
+     "est_costs": 48.89,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 2984.98",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-KIRLOSENG",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "KIRLOSENG",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 2304.2,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 17,
+   "score": 1.77,
+   "technical": "Momentum rank 17 of 475. 6-month return +71%, 12-month +139%, volatility 47% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 4608.4,
+     "risk": null,
+     "reward": null,
+     "est_costs": 46.91,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 2313.01",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-WELSPUNLIV",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "WELSPUNLIV",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 227.33,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 18,
+   "score": 1.76,
+   "technical": "Momentum rank 18 of 475. 6-month return +95%, 12-month +86%, volatility 44% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 21,
+     "value": 4773.93,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.16,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 21 @ 226.93",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-AETHER",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "AETHER",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 1699.3,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 19,
+   "score": 1.7,
+   "technical": "Momentum rank 19 of 475. 6-month return +45%, 12-month +129%, volatility 39% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 3,
+     "value": 5097.9,
+     "risk": null,
+     "reward": null,
+     "est_costs": 47.65,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "bought 2 @ 1681.68",
+    "B_monthly": "not taken: None"
+   }
+  },
+  {
+   "id": "2026-09-30-ANANDRATHI",
+   "type": "ENTRY",
+   "status": "approved",
+   "created": "2026-09-30",
+   "symbol": "ANANDRATHI",
+   "setup": "momentum",
+   "asof": "2026-09-30",
+   "ref_price": 2120.0,
+   "stop": 0.0,
+   "target": 0.0,
+   "rank": 20,
+   "score": 1.6,
+   "technical": "Momentum rank 20 of 475. 6-month return +40%, 12-month +43%, volatility 21% a year.",
+   "trend": "",
+   "fundamental": null,
+   "sizing": {
+    "A_lumpsum": {
+     "qty": 2,
+     "value": 4240.0,
+     "risk": null,
+     "reward": null,
+     "est_costs": 46.36,
+     "skip": null
+    }
+   },
+   "news": null,
+   "closed_on": "2026-10-01",
+   "approved_by": "claude (backfill)",
+   "fills": {
+    "A_lumpsum": "skipped: not enough cash",
+    "B_monthly": "not taken: None"
+   }
+  }
+ ]
 }

@@ -54,7 +54,7 @@ def metrics(a: Account, cfg: dict, bench: dict[str, float]) -> dict:
     return {
         "equity": last["equity"], "contributed": a.contributed, "cash": round(a.cash, 2),
         "liquid": last.get("liquid", 0.0), "liquid_units": a.liquid_units,
-        "core": last.get("core", 0.0), "core_units": a.core_units,
+        "core": last.get("core", 0.0), "core_units": a.core_units, "core_symbol": a.core_symbol,
         "pnl": round(last["equity"] - a.contributed, 2),
         "return_twr": round(twr[-1] - 1, 4) if twr else 0.0,
         "benchmark_return": round(bench_ret, 4),
@@ -117,11 +117,13 @@ def text_summary(d: dict) -> str:
             f"{m['trades']} closed, {m['open']} open | win rate "
             f"{(m['win_rate'] or 0):.0%} | charges ₹{m['charges_paid']:,.0f}")
         for p in a["positions"]:
-            lines.append(f"   open: {p['qty']} {p['symbol']} @ {p['entry_price']} "
-                         f"stop {p['stop']} target {p['target']}")
+            lines.append(f"   open: {p['qty']} {p['symbol']} @ {p['entry_price']}"
+                         + (f" stop {p['stop']} target {p['target']}" if p["setup"] != "momentum" else ""))
     r = d.get("regime") or {}
     lines.append(f"\nMarket ({r.get('date')}): {r.get('text', '')}")
-    if d.get("watchlist"):
+    if d.get("watchlist") and "rank" in d["watchlist"][0]:
+        lines.append("Momentum top 20 today: " + ", ".join(f"{w['rank']}. {w['symbol']}" for w in d["watchlist"]))
+    elif d.get("watchlist"):
         lines.append("Watchlist (would qualify if the filter were on): " + ", ".join(
             f"{w['symbol']} ({w['setup']})" for w in d["watchlist"]))
     if d["pending"]:

@@ -46,7 +46,8 @@ def _write(path: Path, obj) -> None:
 class Engine:
     def __init__(self, prices: pd.DataFrame, actions: pd.DataFrame, fundamentals: dict,
                  cfg: dict | None = None, universe: set[str] | None = None,
-                 sectors: dict[str, str] | None = None, ind: pd.DataFrame | None = None):
+                 sectors: dict[str, str] | None = None, ind: pd.DataFrame | None = None,
+                 members: dict[str, set[str]] | None = None):
         self.cfg = cfg or load_cfg()
         self.prices = prices
         self.actions = actions
@@ -54,12 +55,21 @@ class Engine:
         self.ind = strategy.compute_all(prices) if ind is None else ind
         g = self.cfg.get("global_symbols", {})
         self.special = {self.cfg["benchmark"], self.cfg.get("cash_management", {}).get("liquid_etf", ""),
-                        self.cfg.get("core", {}).get("etf", ""), *g.values()}
+                        self.cfg.get("core", {}).get("etf", ""), *g.values(),
+                        *(a.get("core", {}).get("etf", "") for a in self.cfg["accounts"].values())}
         self.universe = universe or {s for s in prices["symbol"].unique()
                                      if s not in self.special and not s.startswith("^")}
         self.sectors = sectors or {}
+        # point-in-time universe: members[YYYY-MM] = stocks eligible during the FOLLOWING month
+        self.members = members
+        if members:
+            months = self.ind.index.get_level_values("date").to_period("M") - 1
+            keys = pd.Series(list(zip(months.astype(str), self.ind.index.get_level_values("symbol"))))
+            allowed = {(m, s) for m, ss in members.items() for s in ss}
+            self.ind = self.ind.assign(member=keys.isin(allowed).values)
+        self.mode = self.cfg.get("strategy", {}).get("mode", "swing")
         self.regime = None
-        if strategy.PARAMS["market_model"] == "quadrant":
+        if strategy.PARAMS["market_model"] == "quadrant" or self.mode == "momentum":
             self.regime = regime.compute(prices, self.ind, self.cfg["benchmark"], self.universe, g,
                                          strategy.PARAMS["use_global"])
         self.bars = prices.set_index(["date", "symbol"]).sort_index()
@@ -80,7 +90,7 @@ class Engine:
             else:
                 out[name] = Account.new(name, acfg, self.cfg["start_date"])
             out[name].liquid_symbol = self.cfg.get("cash_management", {}).get("liquid_etf", "")
-            out[name].core_symbol = self.cfg.get("core", {}).get("etf", "")
+            out[name].core_symbol = self.core_cfg(name).get("etf", "")
         return out
 
     def save(self) -> None:
@@ -105,6 +115,11 @@ class Engine:
     def tdays_between(self, a: str, b) -> int:
         a, b = pd.Timestamp(a), pd.Timestamp(b)
         return max(0, bisect.bisect_right(self.days, b) - bisect.bisect_right(self.days, a))
+
+    def universe_at(self, d: pd.Timestamp) -> set[str]:
+        if not self.members:
+            return self.universe
+        return self.members.get(str(d.to_period("M") - 1), set())
 
     def prev_day(self, d: pd.Timestamp) -> pd.Timestamp | None:
         i = bisect.bisect_left(self.days, d)
@@ -187,9 +202,9 @@ class Engine:
         session_open = datetime(d.year, d.month, d.day, 9, 15, tzinfo=IST)
         slip = self.cfg["fills"]["slippage_pct"] / 100
         cc = self.cfg["costs"]
-        for prop in self.proposals:
-            if prop["status"] != "pending":
-                continue
+        pending = [p for p in self.proposals if p["status"] == "pending"]
+        pending.sort(key=lambda p: p["type"] != "EXIT")   # sells first, so buys have the cash
+        for prop in pending:
             ap = self._approved(prop, session_open)
             if ap is None or ap["decision"] != "approve":
                 prop["status"] = "rejected" if ap else "expired"
@@ -214,10 +229,12 @@ class Engine:
                     prop["fills"][name] = f"not taken: {plan.get('skip')}"
                     continue
                 price = b["open"] * (1 + slip)
-                if b["open"] <= prop["stop"]:
+                if prop.get("setup") == "momentum":
+                    pass  # monthly rebalance: no stop, target or gap rules
+                elif b["open"] <= prop["stop"]:
                     prop["fills"][name] = "skipped: opened at or below the stop"
                     continue
-                if b["open"] >= prop["target"] or b["open"] > prop["ref_price"] * 1.03:
+                elif b["open"] >= prop["target"] or b["open"] > prop["ref_price"] * 1.03:
                     prop["fills"][name] = "skipped: gapped up more than 3%, so not chasing"
                     continue
                 self.raise_cash(a, d, plan["qty"] * price * 1.003)
@@ -228,6 +245,15 @@ class Engine:
                 a.buy(ds, prop["symbol"], qty, price, prop["stop"], prop["target"],
                       prop["setup"], prop["id"], cc)
                 prop["fills"][name] = f"bought {qty} @ {price:.2f}"
+
+    def core_cfg(self, name: str) -> dict:
+        """Core settings for one account: global `core` overridden by the account's own."""
+        return {**self.cfg.get("core", {}), **self.cfg["accounts"][name].get("core", {})}
+
+    def direct(self, name: str, eq: float) -> bool:
+        """Momentum stocks held directly (else via the account's momentum ETF core)."""
+        a = self.cfg["accounts"][name]
+        return a.get("vehicle", "direct") == "direct" or eq >= a.get("direct_from", float("inf"))
 
     # ------------------------------------------------------------ market model
     def limits(self, d: pd.Timestamp) -> dict:
@@ -255,25 +281,30 @@ class Engine:
         Target = core fraction x money not tied up in swing trades. The fraction is
         constant or set by the market regime (config core.mode). Trades only when
         off target by more than `band` of equity, to keep charges down."""
-        cc = self.cfg.get("core", {})
-        if not cc.get("enabled"):
-            return
         prev = [x for x in [self.prev_day(d)] if x is not None]
-        b = self.bar(d, cc["etf"])
-        if not prev or b is None:
+        if not prev:
             return
-        lim = self.limits(prev[-1])
-        frac = lim["core"] if cc.get("mode") == "regime" and lim.get("core") is not None else cc["constant"]
         cl = self.closes(prev[-1])
         slip = self.cfg["fills"]["slippage_pct"] / 100
         ds = d.strftime("%Y-%m-%d")
-        for a in self.accounts.values():
+        for name, a in self.accounts.items():
+            cc = self.core_cfg(name)
+            if not cc.get("enabled"):
+                continue
+            b = self.bar(d, cc["etf"])
+            if b is None:
+                continue
             eq = a.equity_value(cl)
+            if self.mode == "momentum" and self.direct(name, eq) and cc.get("vehicle_only"):
+                continue  # account has graduated to direct stocks; ETF is sold as buys need cash
+            lim = self.limits(prev[-1])
+            frac = lim["core"] if cc.get("mode") == "regime" and lim.get("core") is not None else cc["constant"]
             target = frac * (eq - a.market_value(cl))
             diff = target - a.core_value(cl)
             if abs(diff) < max(cc["band"] * eq, cc["min_trade"]):
                 continue
-            why = f"Target {frac:.0%} of uninvested money ({lim['regime']})."
+            why = ("Monthly investment of spare cash." if cc.get("vehicle_only")
+                   else f"Target {frac:.0%} of uninvested money ({lim['regime']}).")
             if diff > 0:
                 self.raise_cash(a, d, diff, use_core=False)
                 amt = min(diff, a.cash - self.cfg.get("cash_management", {}).get("cash_buffer", 0))
@@ -326,7 +357,7 @@ class Engine:
         cl = self.closes(prev[-1]) if prev else {}
         for a in self.accounts.values():
             keep = cm["cash_buffer"]
-            if entries_allowed:
+            if entries_allowed and self.mode != "momentum":  # momentum buys monthly, unparking as needed
                 keep += a.equity_value(cl) * self.cfg["risk"]["max_position_pct"] / 100
             spare = a.cash - keep
             if spare >= cm["min_park"]:
@@ -340,15 +371,25 @@ class Engine:
             for p in list(a.positions):
                 b = self.bar(d, p.symbol)
                 if b is None:
+                    # suspended or delisted: after 10 sessions without a trade, write it off at
+                    # a 20% haircut to the last price (the realistic outcome is usually worse than par)
+                    if p.last_bar and self.tdays_between(p.last_bar, d) > 10:
+                        a.sell(ds, p, (p.last_close or p.entry_price) * 0.8, "delisted/suspended", cc,
+                               self.tdays_between(p.entry_date, d))
                     continue
+                p.last_close, p.last_bar = float(b["close"]), ds
                 held = self.tdays_between(p.entry_date, d)
                 o, h, l, c = b["open"], b["high"], b["low"], b["close"]
                 if p.entry_date == ds:
                     o = p.entry_price  # filled at the open; only the rest of the day counts
+                if p.setup == "momentum":
+                    continue
                 if o <= p.stop:
                     a.sell(ds, p, o * (1 - slip), "stop (gap)", cc, held)
                 elif o >= p.target:
                     a.sell(ds, p, o * (1 - slip), "target (gap)", cc, held)
+                elif p.setup == "momentum":
+                    continue  # leaves only through the monthly ranking (or delisting above)
                 elif l <= p.stop:  # if both hit intraday, assume the stop came first
                     a.sell(ds, p, p.stop * (1 - slip), "stop", cc, held)
                 elif h >= p.target:
@@ -362,19 +403,21 @@ class Engine:
                         a.log(ds, "stop", f"{p.symbol}: up 1R, so the stop moves to breakeven ({p.entry_price:.2f})")
 
     def propose(self, d: pd.Timestamp, auto_approve: bool) -> list[dict]:
+        if self.mode == "momentum":
+            return self.propose_momentum(d, auto_approve)
         ds = d.strftime("%Y-%m-%d")
         held = {p.symbol for a in self.accounts.values() for p in a.positions}
         lim = self.limits(d)
         quadrant = self.regime is not None
         cands = strategy.scan(self.ind, d, self.cfg["benchmark"], self.fund, exclude=self.special,
-                              ignore_regime=quadrant, universe=self.universe, setups=lim["setups"],
+                              ignore_regime=quadrant, universe=self.universe_at(d), setups=lim["setups"],
                               min_rs=lim["min_rs"], sectors=self.sectors) if lim["entries_allowed"] else []
         self.meta["regime"] = {"date": ds, "regime": lim["regime"], "entries_allowed": lim["entries_allowed"],
                                "risk_pct": lim["risk_pct"], "max_pos": lim["max_pos"],
                                "setups": list(lim["setups"]), "text": lim["text"]}
         self.meta["watchlist"] = [] if lim["entries_allowed"] else strategy.scan(
             self.ind, d, self.cfg["benchmark"], self.fund, exclude=self.special, ignore_regime=True,
-            universe=self.universe, sectors=self.sectors)
+            universe=self.universe_at(d), sectors=self.sectors)
         rk = dict(self.cfg["risk"], risk_per_trade_pct=lim["risk_pct"], max_open_positions=lim["max_pos"])
         cl = self.closes(d)
         new = []
@@ -398,6 +441,81 @@ class Engine:
                         "sizing": {}, "news": None})
         for prop in new:
             actionable = prop["type"] == "EXIT" or any(s["qty"] for s in prop["sizing"].values())
+            if not actionable:
+                prop["status"], prop["closed_on"] = "not_sized", ds
+            elif auto_approve:
+                self.approvals[prop["id"]] = {"decision": "approve", "by": "claude (backfill)",
+                                              "at": f"{ds}T20:00:00+05:30"}
+        self.proposals.extend(new)
+        if auto_approve:
+            _write(APPROVALS, self.approvals)
+        return new
+
+    # --------------------------------------------------------------- momentum
+    def propose_momentum(self, d: pd.Timestamp, auto_approve: bool) -> list[dict]:
+        """Monthly rebalance, proposed on the evening before a new month's first session.
+
+        Sell holdings that fell out of the top N x buffer; buy the best names not held to
+        fill the empty slots, each sized at equity / N."""
+        ds = d.strftime("%Y-%m-%d")
+        nxt = d + pd.offsets.BDay(1)
+        target = nxt.strftime("%Y-%m")
+        due = target != self.meta.get("mom_target") and (nxt.month != d.month or ds[:7] == target)
+        lim = self.limits(d)
+        uni = self.universe_at(nxt)
+        rank = strategy.momentum_ranking(self.ind, d, uni - self.special)
+        n, buf = strategy.MOMENTUM["top_n"], strategy.MOMENTUM["buffer"]
+        self.meta["regime"] = {"date": ds, "regime": lim["regime"], "entries_allowed": True,
+                               "text": lim["text"] + " The market model is shown for context; "
+                                       "the momentum strategy stays invested."}
+        self.meta["watchlist"] = [{"symbol": s, "rank": i + 1, "score": round(float(v), 2)}
+                                  for i, (s, v) in enumerate(rank.head(n).items())]
+        if not due or rank.empty:
+            return []
+        self.meta["mom_target"] = target
+        cl = self.closes(d)
+        top, keep_zone = list(rank.index[:n]), set(rank.index[: n * buf])
+        rows = self.ind.loc[d]
+        new, sells, buys = [], set(), {}
+        for name, a in self.accounts.items():
+            eq = a.equity_value(cl)
+            if not self.direct(name, eq):
+                continue
+            held = [p.symbol for p in a.positions if p.setup == "momentum"]
+            out = [s for s in held if s not in keep_zone]
+            sells.update(out)
+            slots = n - (len(held) - len(out))
+            free = a.cash + a.liquid_value(cl) + a.core_value(cl) + sum(
+                p.qty * cl.get(p.symbol, p.last_close) for p in a.positions if p.symbol in out)
+            # 98%: headroom for rounding to whole shares and buy charges, so the last name still fits
+            each = 0.98 * min(eq / n, free / max(1, slots))
+            for s in [s for s in top if s not in held][:max(0, slots)]:
+                px = float(cl.get(s, 0))
+                # nearest whole share (not floor): with ₹5k slots, flooring leaves expensive
+                # stocks badly under-filled; the fill step still caps it at available cash
+                qty = int(round(each / (px * 1.004))) if px > 0 else 0
+                buys.setdefault(s, {})[name] = (
+                    {"qty": qty, "value": round(qty * px, 2), "risk": None, "reward": None,
+                     "est_costs": round(2 * self.cfg["costs"]["brokerage_max"] + qty * px * 0.0015, 2),
+                     "skip": None} if qty else
+                    {"qty": 0, "skip": f"₹{each:,.0f} per slot is less than one share at ₹{px:,.0f}"})
+        for s in sorted(sells):
+            r = rank.index.get_loc(s) + 1 if s in rank.index else None
+            new.append({"id": f"{ds}-{s}-EXIT", "type": "EXIT", "status": "pending", "created": ds,
+                        "symbol": s, "asof": ds, "setup": "momentum", "sizing": {}, "news": None,
+                        "technical": (f"Momentum rank fell to {r} of {len(rank)}, outside the top {n * buf} "
+                                      f"it needs to stay in." if r else "No longer in the stock universe.")})
+        for s, sizing in buys.items():
+            t = rows.loc[s]
+            new.append({"id": f"{ds}-{s}", "type": "ENTRY", "status": "pending", "created": ds,
+                        "symbol": s, "setup": "momentum", "asof": ds,
+                        "ref_price": round(float(t["close"]), 2), "stop": 0.0, "target": 0.0,
+                        "rank": top.index(s) + 1, "score": round(float(rank[s]), 2),
+                        "technical": (f"Momentum rank {top.index(s) + 1} of {len(rank)}. 6-month return "
+                                      f"{t['ret126']:+.0%}, 12-month {t['ret252']:+.0%}, volatility {t['vol252']:.0%} a year."),
+                        "trend": "", "fundamental": None, "sizing": sizing, "news": None})
+        for prop in new:
+            actionable = prop["type"] == "EXIT" or any(v.get("qty") for v in prop["sizing"].values())
             if not actionable:
                 prop["status"], prop["closed_on"] = "not_sized", ds
             elif auto_approve:

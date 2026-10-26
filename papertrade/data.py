@@ -160,6 +160,12 @@ def update_prices(extra: list[str], history_start: str = "2010-01-01",
         print(f"Yahoo fetch failed ({e}); falling back to NSE bhavcopy")
         new, acts = _bhav_range(pd.Timestamp(start).date(), date.today()), pd.DataFrame()
         new = new[new["symbol"].isin(symbols)]
+    if not acts.empty and not have.empty:
+        # Yahoo split-adjusts the bars it just sent; older cached bars must be adjusted too
+        for _, e in acts[(acts["kind"] == "split") & (acts["date"] >= pd.Timestamp(start))].iterrows():
+            m = (have["symbol"] == e["symbol"]) & (have["date"] < pd.Timestamp(start))
+            have.loc[m, ["open", "high", "low", "close"]] /= e["value"]
+            have.loc[m, "volume"] *= e["value"]
     merged = pd.concat([have, new], ignore_index=True)
     save_prices(merged)
     if not acts.empty:

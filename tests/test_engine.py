@@ -5,6 +5,10 @@ import pytest
 from papertrade import costs, engine, portfolio, risk
 
 CFG = engine.load_cfg()
+# the swing-strategy tests run in swing mode with plain cash accounts
+SWING = dict(CFG, strategy={"mode": "swing"},
+             accounts={k: {kk: vv for kk, vv in v.items() if kk not in ("core", "vehicle", "direct_from")}
+                       for k, v in CFG["accounts"].items()})
 
 
 @pytest.fixture(autouse=True)
@@ -78,7 +82,7 @@ def _synthetic(breakout_day: int, n: int = 300):
 
 def test_breakout_entry_then_target():
     prices, days = _synthetic(breakout_day=250)
-    cfg = dict(CFG, start_date=days[245].strftime("%Y-%m-%d"))
+    cfg = dict(SWING, start_date=days[245].strftime("%Y-%m-%d"))
     acts = pd.DataFrame(columns=["date", "symbol", "kind", "value"])
     e = engine.Engine(prices, acts, {}, cfg)
     e.run(auto_approve=True)
@@ -96,7 +100,7 @@ def test_breakout_entry_then_target():
 
 def test_unapproved_proposal_expires():
     prices, days = _synthetic(breakout_day=250)
-    cfg = dict(CFG, start_date=days[245].strftime("%Y-%m-%d"))
+    cfg = dict(SWING, start_date=days[245].strftime("%Y-%m-%d"))
     e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg)
     e.run(auto_approve=False)
     assert not e.accounts["A_lumpsum"].closed and not e.accounts["A_lumpsum"].positions
@@ -124,7 +128,7 @@ def test_idle_cash_parked_in_liquid_etf_when_market_filter_off():
         rows.append({"date": d, "symbol": "GROWWLIQID", "open": lp, "high": lp,
                      "low": lp, "close": lp, "volume": 1e6})
     prices = pd.DataFrame(rows)
-    cfg = dict(CFG, start_date=days[220].strftime("%Y-%m-%d"))
+    cfg = dict(SWING, start_date=days[220].strftime("%Y-%m-%d"))
     e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg)
     e.run(auto_approve=True)
     a = e.accounts["A_lumpsum"]
@@ -168,7 +172,7 @@ def test_core_holding_constant_fraction(monkeypatch):
     from papertrade import strategy
     monkeypatch.setitem(strategy.PARAMS, "market_model", "quadrant")
     prices, days = _trend_prices(1.0)
-    cfg = dict(CFG, start_date=days[300].strftime("%Y-%m-%d"), global_symbols={},
+    cfg = dict(SWING, start_date=days[300].strftime("%Y-%m-%d"), global_symbols={},
                core=dict(CFG["core"], enabled=True, mode="constant", constant=0.6))
     e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg)
     e.run(auto_approve=True)
@@ -188,3 +192,40 @@ def test_core_fifo_tax_split():
     days = [r["holding_days"] for r in a.core_realised]
     assert days[0] > 365 and days[1] < 365                 # oldest lot first: long-term, then short-term
     assert a.core_units == a.core_lots[0]["units"]
+
+
+def test_momentum_monthly_rebalance(monkeypatch):
+    from papertrade import strategy
+    monkeypatch.setitem(strategy.MOMENTUM, "top_n", 3)
+    monkeypatch.setitem(strategy.MOMENTUM, "buffer", 1)   # 10 stocks: a 2x buffer would keep everything
+    days = pd.bdate_range("2024-01-01", periods=330)
+    rows = []
+    for i, d in enumerate(days):
+        bc = 1000 + i
+        rows.append({"date": d, "symbol": CFG["benchmark"], "open": bc, "high": bc, "low": bc, "close": bc, "volume": 0})
+        lp = 100 * (1 + 0.06 / 252) ** i
+        rows.append({"date": d, "symbol": "GROWWLIQID", "open": lp, "high": lp, "low": lp, "close": lp, "volume": 1e6})
+        for k in range(10):
+            # S0..S9: steady drift k%/yr with noise; S9 strongest until day 300, then collapses
+            drift = (k - 3) * 0.0006
+            c = 100 * np.exp(drift * i + 0.01 * np.sin(i / 7 + k))
+            if k == 9 and i > 300:          # S9 slides 2% a day after day 300
+                c *= np.exp(-0.02 * (i - 300))
+            rows.append({"date": d, "symbol": f"S{k}", "open": c, "high": c, "low": c, "close": c, "volume": 1e6})
+    prices = pd.DataFrame(rows)
+    cfg = dict(CFG, start_date=days[280].strftime("%Y-%m-%d"), global_symbols={},
+               strategy={"mode": "momentum"}, core=dict(CFG["core"], enabled=False),
+               accounts={"A_lumpsum": dict(CFG["accounts"]["A_lumpsum"], vehicle="direct")})
+    e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg,
+                      universe={f"S{k}" for k in range(10)})
+    e.run(auto_approve=True)
+    a = e.accounts["A_lumpsum"]
+    buys = [x for x in e.proposals if x["type"] == "ENTRY"]
+    assert {x["symbol"] for x in buys[:3]} == {"S9", "S8", "S7"}       # first month: top 3
+    assert all(p.setup == "momentum" for p in a.positions) and len(a.positions) <= 3
+    assert any(x["type"] == "EXIT" and x["symbol"] == "S9" for x in e.proposals)  # collapse -> sold
+    assert "S9" not in {p.symbol for p in a.positions}
+    entries = [x["date"] for x in a.events if x["kind"] == "buy"]
+    start = cfg["start_date"]
+    assert all(d == start or pd.Timestamp(d).day <= 3 for d in entries)  # start, then only at month turns
+    assert len(entries) > 3                                                # it did rebalance later

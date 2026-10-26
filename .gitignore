@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 data/fundamentals.json.bak
 data/prices.csv.gz
+data/pit/
+data/pit_pessimistic/

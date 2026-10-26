@@ -2,150 +2,113 @@
  "last_processed": "2026-10-26",
  "regime": {
   "date": "2026-10-26",
-  "entries_allowed": false
+  "regime": "BEAR",
+  "entries_allowed": true,
+  "text": "Bear: long-term and short-term trends both down. Long-term score 0.12, short-term 0.00. 31% of stocks are above their 200-day average, 14% above their 20-day. The market model is shown for context; the momentum strategy stays invested."
  },
  "watchlist": [
   {
    "symbol": "STLTECH",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 867.55,
-   "stop": 705.94,
-   "target": 1271.59,
-   "atr": 54.91,
-   "rsi": 49.3,
-   "rel_strength_63d": 0.5947,
-   "trend": "Above its 50-day (814) and 200-day (461) averages, and the 50-day is rising. 3-month return is 53.8% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (883.73) in an uptrend, then closed above the prior day's high (840.00). RSI 49.",
-   "fundamental": "no fundamentals cached"
+   "rank": 1,
+   "score": 7.25
   },
   {
-   "symbol": "COFORGE",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1993.0,
-   "stop": 1740.46,
-   "target": 2624.34,
-   "atr": 71.74,
-   "rsi": 64.1,
-   "rel_strength_63d": 0.3993,
-   "trend": "Above its 50-day (1867) and 200-day (1534) averages, and the 50-day is rising. 3-month return is 34.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1891.43) in an uptrend, then closed above the prior day's high (1992.40). RSI 64.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "ATHERENERG",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1575.0,
-   "stop": 1274.32,
-   "target": 2326.7,
-   "atr": 75.17,
-   "rsi": 59.7,
-   "rel_strength_63d": 0.36,
-   "trend": "Above its 50-day (1515) and 200-day (1062) averages, and the 50-day is rising. 3-month return is 30.3% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1472.06) in an uptrend, then closed above the prior day's high (1442.30). RSI 60.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "SANSERA",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 4147.7,
-   "stop": 3680.92,
-   "target": 5314.64,
-   "atr": 188.28,
-   "rsi": 50.5,
-   "rel_strength_63d": 0.3593,
-   "trend": "Above its 50-day (4096) and 200-day (2933) averages, and the 50-day is rising. 3-month return is 30.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (4142.58) in an uptrend, then closed above the prior day's high (4046.00). RSI 50.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "CUPID",
+   "rank": 2,
+   "score": 6.13
   },
   {
    "symbol": "LAURUSLABS",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 2058.9,
-   "stop": 1875.19,
-   "target": 2518.18,
-   "atr": 58.31,
-   "rsi": 57.4,
-   "rel_strength_63d": 0.3428,
-   "trend": "Above its 50-day (1948) and 200-day (1427) averages, and the 50-day is rising. 3-month return is 28.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (2014.14) in an uptrend, then closed above the prior day's high (2009.60). RSI 57.",
-   "fundamental": "no fundamentals cached"
+   "rank": 3,
+   "score": 4.25
   },
   {
-   "symbol": "TDPOWERSYS",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 688.35,
-   "stop": 570.3,
-   "target": 983.48,
-   "atr": 43.15,
-   "rsi": 41.6,
-   "rel_strength_63d": 0.2932,
-   "trend": "Above its 50-day (754) and 200-day (568) averages, and the 50-day is rising. 3-month return is 23.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (737.12) in an uptrend, then closed above the prior day's high (663.10). RSI 42.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "HFCL",
+   "rank": 4,
+   "score": 4.09
+  },
+  {
+   "symbol": "WELCORP",
+   "rank": 5,
+   "score": 3.47
+  },
+  {
+   "symbol": "SANSERA",
+   "rank": 6,
+   "score": 3.21
+  },
+  {
+   "symbol": "CPPLUS",
+   "rank": 7,
+   "score": 3.08
+  },
+  {
+   "symbol": "ATHERENERG",
+   "rank": 8,
+   "score": 2.44
+  },
+  {
+   "symbol": "DIVISLAB",
+   "rank": 9,
+   "score": 2.15
+  },
+  {
+   "symbol": "GLAND",
+   "rank": 10,
+   "score": 2.05
+  },
+  {
+   "symbol": "AEGISLOG",
+   "rank": 11,
+   "score": 1.98
+  },
+  {
+   "symbol": "SONACOMS",
+   "rank": 12,
+   "score": 1.95
+  },
+  {
+   "symbol": "ANANDRATHI",
+   "rank": 13,
+   "score": 1.94
+  },
+  {
+   "symbol": "ACUTAAS",
+   "rank": 14,
+   "score": 1.91
+  },
+  {
+   "symbol": "SYRMA",
+   "rank": 15,
+   "score": 1.87
+  },
+  {
+   "symbol": "MTARTECH",
+   "rank": 16,
+   "score": 1.86
+  },
+  {
+   "symbol": "RRKABEL",
+   "rank": 17,
+   "score": 1.83
   },
   {
    "symbol": "SAILIFE",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 1445.3,
-   "stop": 1310.62,
-   "target": 1782.01,
-   "atr": 49.98,
-   "rsi": 44.7,
-   "rel_strength_63d": 0.2292,
-   "trend": "Above its 50-day (1510) and 200-day (1185) averages, and the 50-day is rising. 3-month return is 17.2% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (1462.12) in an uptrend, then closed above the prior day's high (1429.00). RSI 45.",
-   "fundamental": "no fundamentals cached"
+   "rank": 18,
+   "score": 1.81
   },
   {
-   "symbol": "LENSKART",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 651.2,
-   "stop": 593.53,
-   "target": 795.38,
-   "atr": 21.67,
-   "rsi": 48.3,
-   "rel_strength_63d": 0.2284,
-   "trend": "Above its 50-day (663) and 200-day (546) averages, and the 50-day is rising. 3-month return is 17.1% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (654.48) in an uptrend, then closed above the prior day's high (635.00). RSI 48.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "CRAFTSMAN",
+   "rank": 19,
+   "score": 1.7
   },
   {
-   "symbol": "ETERNAL",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 325.55,
-   "stop": 291.28,
-   "target": 411.22,
-   "atr": 10.47,
-   "rsi": 53.0,
-   "rel_strength_63d": 0.2196,
-   "trend": "Above its 50-day (324) and 200-day (279) averages, and the 50-day is rising. 3-month return is 16.3% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (320.91) in an uptrend, then closed above the prior day's high (318.00). RSI 53.",
-   "fundamental": "no fundamentals cached"
-  },
-  {
-   "symbol": "KOTAKBANK",
-   "setup": "pullback",
-   "asof": "2026-10-26",
-   "ref_price": 440.75,
-   "stop": 417.71,
-   "target": 498.34,
-   "atr": 9.99,
-   "rsi": 58.9,
-   "rel_strength_63d": 0.2025,
-   "trend": "Above its 50-day (419) and 200-day (400) averages, and the 50-day is rising. 3-month return is 14.6% against -5.7% for the index.",
-   "technical": "Dipped to its 20-day EMA (432.63) in an uptrend, then closed above the prior day's high (439.40). RSI 59.",
-   "fundamental": "no fundamentals cached"
+   "symbol": "WELSPUNLIV",
+   "rank": 20,
+   "score": 1.69
   }
  ],
+ "mom_target": "2026-10",
  "benchmark": {
   "2026-09-30": 22072.1,
   "2026-10-01": 21857.75,

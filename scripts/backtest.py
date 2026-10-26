@@ -19,8 +19,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from papertrade import data, engine, portfolio, report, strategy  # noqa: E402
 
 
+def load_pit():
+    """Survivorship-free panel: NSE bhavcopy stocks + benchmark/ETFs/global series from Yahoo."""
+    root = Path(__file__).resolve().parent.parent
+    pit = pd.read_csv(root / "data/pit/prices.csv.gz", parse_dates=["date"])
+    y = data.load_prices()
+    cfg = engine.load_cfg()
+    special = {cfg["benchmark"], cfg["cash_management"]["liquid_etf"], cfg["core"]["etf"],
+               *cfg.get("global_symbols", {}).values(),
+               *(a.get("core", {}).get("etf", "") for a in cfg["accounts"].values())}
+    prices = pd.concat([pit[~pit["symbol"].isin(special)], y[y["symbol"].isin(special)]], ignore_index=True)
+    m = pd.read_csv(root / "data/pit/members.csv")
+    members = {k: set(g["symbol"]) for k, g in m.groupby("month")}
+    return prices, members
+
+
 def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=False,
-        ind=None) -> dict:
+        ind=None, members=None) -> dict:
     tmp = Path(tempfile.mkdtemp())
     portfolio.STATE = engine.STATE = tmp
     engine.PROPOSALS, engine.APPROVALS, engine.META = tmp / "p.json", tmp / "a.json", tmp / "m.json"
@@ -36,6 +51,8 @@ def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=
             strategy.PARAMS[k] = v
         elif k in cfg["risk"]:
             cfg["risk"][k] = float(v)
+        elif k == "mode":
+            cfg["strategy"] = {"mode": v}
         elif k.startswith("core_"):
             cur = cfg["core"][k[5:]]
             cfg["core"][k[5:]] = (str(v).lower() in ("1", "true", "yes")) if isinstance(cur, bool) else type(cur)(v)
@@ -44,7 +61,7 @@ def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=
     actions = data.load_actions() if actions is None else actions
     uni = data.load_universe()
     e = engine.Engine(prices, actions, {}, cfg, universe=set(uni["symbol"]),
-                      sectors=dict(zip(uni["symbol"], uni["industry"])), ind=ind)
+                      sectors=dict(zip(uni["symbol"], uni["industry"])), ind=ind, members=members)
     e.run(until=pd.Timestamp(end), auto_approve=True)
     strategy.PARAMS.clear()
     strategy.PARAMS.update(saved)

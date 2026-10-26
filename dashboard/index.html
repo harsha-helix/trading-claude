@@ -145,7 +145,7 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
   </section>
 
   <section id="watch-sec">
-    <div class="sec-head"><h2>Watchlist</h2><span class="muted">Stocks that pass every rule except the market filter</span></div>
+    <div class="sec-head"><h2 id="watch-title">Watchlist</h2><span class="muted" id="watch-sub">Stocks that pass every rule except the market filter</span></div>
     <div class="tbl-wrap"><table class="data" id="watch"></table></div>
   </section>
 
@@ -211,9 +211,11 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
       const r = D.regime || {};
       box.append(el("div", { class: "empty" },
         el("h3", { text: "No trades proposed for the next session" }),
-        el("p", { class: "muted", text: r.entries_allowed
-          ? "No stock in the NIFTY 500 met every entry rule allowed in this market at today's close."
-          : "The market model allows no new stock entries today. The watchlist below shows what would qualify." })));
+        el("p", { class: "muted", text: isMomentum()
+          ? "The momentum portfolio trades once a month. Proposals appear on the evening before the first trading day of each month; the ranking below shows what it would buy today."
+          : r.entries_allowed
+            ? "No stock in the NIFTY 500 met every entry rule allowed in this market at today's close."
+            : "The market model allows no new stock entries today. The watchlist below shows what would qualify." })));
       $("cutoff").textContent = "";
       return;
     }
@@ -225,18 +227,28 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
     for (const p of pend) box.append(proposalCard(p, open));
   }
 
+  function isMomentum() { return (D.watchlist || []).some((w) => w.rank != null) || (D.pending || []).some((p) => p.setup === "momentum"); }
+
   function proposalCard(p, open) {
     const dec = decisions[p.id];
     const card = el("article", { class: "prop" + (dec ? " " + (dec.decision === "approve" ? "approved" : "rejected") : "") });
     const isExit = p.type === "EXIT";
-    const rr = !isExit && p.ref_price - p.stop > 0 ? ((p.target - p.ref_price) / (p.ref_price - p.stop)).toFixed(1) : null;
+    const mom = p.setup === "momentum";
+    const rr = !mom && !isExit && p.ref_price - p.stop > 0 ? ((p.target - p.ref_price) / (p.ref_price - p.stop)).toFixed(1) : null;
     card.append(el("div", { class: "prop-head" },
       el("div", {}, el("div", { class: "sym", text: p.symbol }),
-        el("div", { class: "eyebrow", text: isExit ? "Exit proposal" : p.setup + (rr ? " · reward:risk " + rr : "") })),
+        el("div", { class: "eyebrow", text: mom ? (isExit ? "Momentum sell" : "Momentum buy · rank " + p.rank)
+          : isExit ? "Exit proposal" : p.setup + (rr ? " · reward:risk " + rr : "") })),
       el("span", { class: "chip " + (dec ? (dec.decision === "approve" ? "on" : "off") : "wait") },
         el("span", { class: "dot" }), dec ? (dec.decision === "approve" ? "Approved" : "Rejected") : "Awaiting you")));
-    if (!isExit) {
+    if (!isExit && mom) {
       card.append(el("div", { class: "levels" },
+        el("div", {}, el("span", { class: "eyebrow", text: "Close" }), el("span", { class: "num", text: inr(p.ref_price, 2) })),
+        el("div", {}, el("span", { class: "eyebrow", text: "Rank" }), el("span", { class: "num", text: String(p.rank) })),
+        el("div", {}, el("span", { class: "eyebrow", text: "Score" }), el("span", { class: "num", text: String(p.score) }))));
+    }
+    if (!isExit) {
+      if (!mom) card.append(el("div", { class: "levels" },
         el("div", {}, el("span", { class: "eyebrow", text: "Close" }), el("span", { class: "num", text: inr(p.ref_price, 2) })),
         el("div", {}, el("span", { class: "eyebrow", text: "Stop" }), el("span", { class: "num loss", text: inr(p.stop, 2) })),
         el("div", {}, el("span", { class: "eyebrow", text: "Target" }), el("span", { class: "num gain", text: inr(p.target, 2) }))));
@@ -244,7 +256,7 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
       t.append(el("tr", {}, el("th", { text: "Account" }), el("th", { text: "Qty" }), el("th", { text: "Value" }), el("th", { text: "At risk" }), el("th", { text: "Costs" })));
       for (const [name, s] of Object.entries(p.sizing || {})) {
         const label = (D.accounts[name] || {}).label || name;
-        if (s.qty) t.append(el("tr", {}, el("td", { text: label }), el("td", { class: "num", text: String(s.qty) }), el("td", { class: "num", text: inr(s.value) }), el("td", { class: "num", text: inr(s.risk) }), el("td", { class: "num", text: inr(s.est_costs) })));
+        if (s.qty) t.append(el("tr", {}, el("td", { text: label }), el("td", { class: "num", text: String(s.qty) }), el("td", { class: "num", text: inr(s.value) }), el("td", { class: "num", text: s.risk == null ? "—" : inr(s.risk) }), el("td", { class: "num", text: inr(s.est_costs) })));
         else t.append(el("tr", {}, el("td", { text: label }), el("td", { class: "muted", colspan: "4", style: "text-align:left", text: "Skipped: " + s.skip })));
       }
       card.append(t);
@@ -353,7 +365,7 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
       card.append(el("div", { style: "display:grid;gap:6px" }, alloc,
         el("div", { class: "legend" },
           el("span", {}, el("i", { style: `background:${ACCT_COLORS[name]}` }), "Stocks " + inr(last.holdings)),
-          (last.core ? el("span", {}, el("i", { style: "background:var(--fg)" }), "Index core " + inr(last.core)) : null),
+          (last.core ? el("span", {}, el("i", { style: "background:var(--fg)" }), (m.core_symbol || "Index core") + " " + inr(last.core)) : null),
           el("span", {}, el("i", { style: "background:var(--chart-n)" }), "Liquid ETF " + inr(last.liquid || 0)),
           el("span", {}, el("i", { style: "background:var(--line)" }), "Cash " + inr(last.cash)))));
       card.append(el("div", { style: "display:grid;gap:4px" }, chart(name, a),
@@ -383,15 +395,21 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
     const pos = [], closed = [], ev = [];
     for (const [name, a] of Object.entries(D.accounts)) {
       const last = {};
-      for (const p of a.positions) pos.push([a.label, p.symbol, p.setup, p.entry_date, String(p.qty), inr(p.entry_price, 2), inr(p.stop, 2), inr(p.target, 2)]);
+      for (const p of a.positions) pos.push([a.label, p.symbol, p.setup, p.entry_date, String(p.qty), inr(p.entry_price, 2), p.stop ? inr(p.stop, 2) : "—", p.target ? inr(p.target, 2) : "—"]);
       for (const t of a.closed) closed.push([a.label, t.symbol, t.setup, t.entry_date, t.exit_date, t.reason, inr(t.entry_price, 2), inr(t.exit_price, 2), { v: inr(t.net_pnl), c: cls(t.net_pnl) }, { v: t.r_multiple == null ? "—" : t.r_multiple + "R", c: cls(t.r_multiple) }]);
       for (const e of a.events) ev.push([e.date, a.label, e.text]);
     }
     table("positions", [{ t: "Account", l: 1 }, { t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "Entered", l: 1 }, { t: "Qty" }, { t: "Entry" }, { t: "Stop" }, { t: "Target" }], pos, "No open stock positions.");
     const w = D.watchlist || [];
     $("watch-sec").hidden = !w.length;
-    table("watch", [{ t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "Close" }, { t: "Stop" }, { t: "Target" }, { t: "vs NIFTY 500, 3 mo" }, { t: "Why", l: 1, w: 1 }],
-      w.map((x) => [x.symbol, x.setup, inr(x.ref_price, 2), inr(x.stop, 2), inr(x.target, 2), { v: pct(x.rel_strength_63d, 1), c: cls(x.rel_strength_63d) }, x.technical]), "");
+    if (isMomentum()) {
+      $("watch-title").textContent = "Momentum ranking";
+      $("watch-sub").textContent = "Today's top " + w.length + " in the NIFTY 500. The portfolio rebalances to this list once a month.";
+      table("watch", [{ t: "Rank" }, { t: "Stock", l: 1 }, { t: "Score" }], w.map((x) => [String(x.rank), x.symbol, String(x.score)]), "");
+    } else {
+      table("watch", [{ t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "Close" }, { t: "Stop" }, { t: "Target" }, { t: "vs NIFTY 500, 3 mo" }, { t: "Why", l: 1, w: 1 }],
+        w.map((x) => [x.symbol, x.setup, inr(x.ref_price, 2), inr(x.stop, 2), inr(x.target, 2), { v: pct(x.rel_strength_63d, 1), c: cls(x.rel_strength_63d) }, x.technical]), "");
+    }
     closed.sort((a, b) => (b[4] > a[4] ? 1 : -1));
     table("closed", [{ t: "Account", l: 1 }, { t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "In", l: 1 }, { t: "Out", l: 1 }, { t: "Exit", l: 1 }, { t: "Entry" }, { t: "Exit price" }, { t: "Net P&L" }, { t: "R" }], closed, "No closed trades yet.");
     ev.sort((a, b) => (b[0] > a[0] ? 1 : b[0] < a[0] ? -1 : 0));

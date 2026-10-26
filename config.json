@@ -7,12 +7,24 @@
     "A_lumpsum": {
       "label": "₹1L lump sum",
       "initial_cash": 100000,
-      "monthly_contribution": 0
+      "monthly_contribution": 0,
+      "vehicle": "direct"
     },
     "B_monthly": {
       "label": "₹10k + ₹10k/month",
       "initial_cash": 10000,
-      "monthly_contribution": 10000
+      "monthly_contribution": 10000,
+      "vehicle": "etf",
+      "direct_from": 100000,
+      "core": {
+        "enabled": true,
+        "etf": "MOM30IETF",
+        "mode": "constant",
+        "constant": 1.0,
+        "band": 0.05,
+        "min_trade": 1000,
+        "vehicle_only": true
+      }
     }
   },
   "risk": {
@@ -71,5 +83,8 @@
     "oil": "BZ=F",
     "usdinr": "INR=X",
     "vix": "^INDIAVIX"
+  },
+  "strategy": {
+    "mode": "momentum"
   }
 }

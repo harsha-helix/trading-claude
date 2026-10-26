@@ -58,6 +58,10 @@ def indicators(g: pd.DataFrame) -> pd.DataFrame:
     g["touched_ema"] = (l <= g["ema20"] * 1.01).rolling(PARAMS["pullback_touch_days"]).max()
     g["sma50_rising"] = g["sma50"] > g["sma50"].shift(10)
     g["prev_high"] = h.shift()
+    # momentum inputs: 6- and 12-month return, 1-year annualised volatility
+    g["ret126"] = c / c.shift(126) - 1
+    g["ret252"] = c / c.shift(252) - 1
+    g["vol252"] = np.log(c).diff().rolling(252, min_periods=200).std() * np.sqrt(252)
     g["n"] = range(1, len(g) + 1)
     return g
 
@@ -195,3 +199,28 @@ def exit_signals(ind: pd.DataFrame, asof: pd.Timestamp, symbols: list[str]) -> d
             if t["close"] < t["sma50"]:
                 out[sym] = f"Closed at {t['close']:.2f}, below its 50-day average ({t['sma50']:.2f}). The trend is weakening."
     return out
+
+
+# ------------------------------------------------------------------ momentum
+MOMENTUM = {
+    "top_n": 20,        # stocks held
+    "buffer": 2,        # keep a holding while it ranks within top_n * buffer
+}
+
+
+def momentum_ranking(ind: pd.DataFrame, asof: pd.Timestamp, universe: set[str]) -> pd.Series:
+    """NIFTY 200 Momentum 30-style score for universe members on `asof`, best first.
+
+    score = average of z(6m return / 1y vol) and z(12m return / 1y vol), z-scored across
+    the universe that day. Uses only data up to `asof`."""
+    try:
+        today = ind.loc[asof]
+    except KeyError:
+        return pd.Series(dtype=float)
+    t = today[today.index.isin(universe)]
+    t = t[t["vol252"] > 0].dropna(subset=["ret126", "ret252", "vol252"])
+    if t.empty:
+        return pd.Series(dtype=float)
+    z = lambda x: (x - x.mean()) / x.std()
+    score = (z(t["ret126"] / t["vol252"]) + z(t["ret252"] / t["vol252"])) / 2
+    return score.sort_values(ascending=False)

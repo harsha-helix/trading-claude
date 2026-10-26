@@ -23,12 +23,19 @@ VARIANTS = {
 }
 
 if __name__ == "__main__":
-    P, A = data.load_prices(), data.load_actions()
+    pit = "--pit" in sys.argv
+    if pit:  # survivorship-free: point-in-time universe, split-adjusted bhavcopy prices
+        import pandas as pd
+        P, members = backtest.load_pit()
+        A = pd.DataFrame(columns=["date", "symbol", "kind", "value"])
+        PERIODS.append(("2024-2026", "2024-01-01", "2026-09-30"))
+    else:
+        P, A, members = data.load_prices(), data.load_actions(), None
     ind = strategy.compute_all(P)
     out = {}
     for lab, s, e in PERIODS:
         for name, ov in VARIANTS.items():
-            r = backtest.run(s, e, dict(ov), P, A, quiet=True, ind=ind)
+            r = backtest.run(s, e, dict(ov), P, A, quiet=True, ind=ind, members=members)
             out[f"{lab} | {name}"] = r
             for acct, m in r.items():
                 yrs = m["days"] / 252
@@ -37,4 +44,4 @@ if __name__ == "__main__":
                 print(f"{lab:14s} {name:36s} {acct:9s} {cagr:+6.1%}/yr  NIFTY500 {bcagr:+6.1%}/yr  "
                       f"maxDD {m['max_drawdown']:5.1%}  trades {m['trades']:4d}  win {m['win_rate'] or 0:4.0%}  "
                       f"expR {m['expectancy_r']}  charges {m['charges_paid']:,.0f}", flush=True)
-    Path(__file__).resolve().parent.parent.joinpath("reports", "compare.json").write_text(json.dumps(out, indent=1, default=str))
+    Path(__file__).resolve().parent.parent.joinpath("reports", "compare_pit.json" if pit else "compare.json").write_text(json.dumps(out, indent=1, default=str))

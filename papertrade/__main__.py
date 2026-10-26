@@ -20,7 +20,9 @@ from .engine import APPROVALS, IST, PROPOSALS, Engine, _read, _write, load_cfg
 
 
 def _engine() -> Engine:
-    return Engine(data.load_prices(), data.load_actions(), data.load_fundamentals())
+    uni = data.load_universe()
+    return Engine(data.load_prices(), data.load_actions(), data.load_fundamentals(),
+                  universe=set(uni["symbol"]), sectors=dict(zip(uni["symbol"], uni["industry"])))
 
 
 def main() -> None:
@@ -46,7 +48,8 @@ def main() -> None:
     if args.cmd == "update-data":
         data.refresh_universe()
         prices = data.update_prices([cfg["benchmark"], cfg.get("cash_management", {}).get("liquid_etf"),
-                                     cfg.get("core", {}).get("etf")],
+                                     cfg.get("core", {}).get("etf"),
+                                     *(a.get("core", {}).get("etf") for a in cfg["accounts"].values())],
                                     raw=list(cfg.get("global_symbols", {}).values()))
         print(f"prices: {len(prices):,} rows, {prices['symbol'].nunique()} symbols, "
               f"latest {prices['date'].max():%Y-%m-%d}")

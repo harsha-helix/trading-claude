@@ -1,1 +1,682 @@
-[]
+[
+ {
+  "id": "2026-09-30-STLTECH",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "STLTECH",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 909.9,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 1,
+  "score": 7.64,
+  "technical": "Momentum rank 1 of 475. 6-month return +389%, 12-month +637%, volatility 61% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 5,
+    "value": 4549.5,
+    "risk": null,
+    "reward": null,
+    "est_costs": 46.82,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 5 @ 956.31",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-CUPID",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "CUPID",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 311.65,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 2,
+  "score": 6.47,
+  "technical": "Momentum rank 2 of 475. 6-month return +268%, 12-month +608%, volatility 59% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 16,
+    "value": 4986.4,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.48,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 16 @ 313.81",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-WELCORP",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "WELCORP",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 2717.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 3,
+  "score": 4.9,
+  "technical": "Momentum rank 3 of 475. 6-month return +232%, 12-month +208%, volatility 42% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 5434.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 48.15,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 2710.71",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-HFCL",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "HFCL",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 227.02,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 4,
+  "score": 3.89,
+  "technical": "Momentum rank 4 of 475. 6-month return +221%, 12-month +201%, volatility 50% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 21,
+    "value": 4767.42,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.15,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 21 @ 238.61",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-LAURUSLABS",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "LAURUSLABS",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 1980.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 5,
+  "score": 3.24,
+  "technical": "Momentum rank 5 of 475. 6-month return +96%, 12-month +118%, volatility 29% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 3960.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 45.94,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 1975.57",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-SANSERA",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "SANSERA",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 4537.5,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 6,
+  "score": 3.22,
+  "technical": "Momentum rank 6 of 475. 6-month return +110%, 12-month +203%, volatility 42% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 1,
+    "value": 4537.5,
+    "risk": null,
+    "reward": null,
+    "est_costs": 46.81,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 1 @ 4469.67",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-MTARTECH",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "MTARTECH",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 7797.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 7,
+  "score": 2.96,
+  "technical": "Momentum rank 7 of 475. 6-month return +118%, 12-month +317%, volatility 60% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 1,
+    "value": 7797.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 51.7,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 1 @ 8194.69",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-CPPLUS",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "CPPLUS",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 3846.5,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 8,
+  "score": 2.82,
+  "technical": "Momentum rank 8 of 475. 6-month return +111%, 12-month +176%, volatility 44% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 1,
+    "value": 3846.5,
+    "risk": null,
+    "reward": null,
+    "est_costs": 45.77,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 1 @ 3841.74",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-SYRMA",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "SYRMA",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 1782.9,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 9,
+  "score": 2.34,
+  "technical": "Momentum rank 9 of 475. 6-month return +118%, 12-month +118%, volatility 44% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 3,
+    "value": 5348.7,
+    "risk": null,
+    "reward": null,
+    "est_costs": 48.02,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 3 @ 1784.68",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-SONACOMS",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "SONACOMS",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 830.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 10,
+  "score": 2.3,
+  "technical": "Momentum rank 10 of 475. 6-month return +70%, 12-month +97%, volatility 31% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 6,
+    "value": 4980.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.47,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 6 @ 828.83",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-RRKABEL",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "RRKABEL",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 2518.6,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 11,
+  "score": 2.08,
+  "technical": "Momentum rank 11 of 475. 6-month return +92%, 12-month +95%, volatility 39% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 5037.2,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.56,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 2526.52",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-TDPOWERSYS",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "TDPOWERSYS",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 786.05,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 12,
+  "score": 1.99,
+  "technical": "Momentum rank 12 of 475. 6-month return +85%, 12-month +184%, volatility 54% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 6,
+    "value": 4716.3,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.07,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 6 @ 780.68",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-AEGISLOG",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "AEGISLOG",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 1380.1,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 13,
+  "score": 1.96,
+  "technical": "Momentum rank 13 of 475. 6-month return +126%, 12-month +79%, volatility 47% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 4,
+    "value": 5520.4,
+    "risk": null,
+    "reward": null,
+    "est_costs": 48.28,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 4 @ 1372.47",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-DIVISLAB",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "DIVISLAB",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 9291.5,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 14,
+  "score": 1.95,
+  "technical": "Momentum rank 14 of 475. 6-month return +55%, 12-month +54%, volatility 24% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 1,
+    "value": 9291.5,
+    "risk": null,
+    "reward": null,
+    "est_costs": 53.94,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 1 @ 9286.28",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-ATHERENERG",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "ATHERENERG",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 1425.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 15,
+  "score": 1.9,
+  "technical": "Momentum rank 15 of 475. 6-month return +79%, 12-month +149%, volatility 48% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 3,
+    "value": 4275.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 46.41,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 3 @ 1423.42",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-AZAD",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "AZAD",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 2963.2,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 16,
+  "score": 1.85,
+  "technical": "Momentum rank 16 of 475. 6-month return +100%, 12-month +84%, volatility 43% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 5926.4,
+    "risk": null,
+    "reward": null,
+    "est_costs": 48.89,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 2984.98",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-KIRLOSENG",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "KIRLOSENG",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 2304.2,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 17,
+  "score": 1.77,
+  "technical": "Momentum rank 17 of 475. 6-month return +71%, 12-month +139%, volatility 47% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 4608.4,
+    "risk": null,
+    "reward": null,
+    "est_costs": 46.91,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 2313.01",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-WELSPUNLIV",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "WELSPUNLIV",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 227.33,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 18,
+  "score": 1.76,
+  "technical": "Momentum rank 18 of 475. 6-month return +95%, 12-month +86%, volatility 44% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 21,
+    "value": 4773.93,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.16,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 21 @ 226.93",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-AETHER",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "AETHER",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 1699.3,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 19,
+  "score": 1.7,
+  "technical": "Momentum rank 19 of 475. 6-month return +45%, 12-month +129%, volatility 39% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 3,
+    "value": 5097.9,
+    "risk": null,
+    "reward": null,
+    "est_costs": 47.65,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "bought 2 @ 1681.68",
+   "B_monthly": "not taken: None"
+  }
+ },
+ {
+  "id": "2026-09-30-ANANDRATHI",
+  "type": "ENTRY",
+  "status": "approved",
+  "created": "2026-09-30",
+  "symbol": "ANANDRATHI",
+  "setup": "momentum",
+  "asof": "2026-09-30",
+  "ref_price": 2120.0,
+  "stop": 0.0,
+  "target": 0.0,
+  "rank": 20,
+  "score": 1.6,
+  "technical": "Momentum rank 20 of 475. 6-month return +40%, 12-month +43%, volatility 21% a year.",
+  "trend": "",
+  "fundamental": null,
+  "sizing": {
+   "A_lumpsum": {
+    "qty": 2,
+    "value": 4240.0,
+    "risk": null,
+    "reward": null,
+    "est_costs": 46.36,
+    "skip": null
+   }
+  },
+  "news": null,
+  "closed_on": "2026-10-01",
+  "approved_by": "claude (backfill)",
+  "fills": {
+   "A_lumpsum": "skipped: not enough cash",
+   "B_monthly": "not taken: None"
+  }
+ }
+]
