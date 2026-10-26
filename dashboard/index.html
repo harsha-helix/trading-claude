@@ -1,0 +1,419 @@
+<title>NSE Paper Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a trading-desk ledger. Action strip (tonight's proposals) first, then the two
+   accounts side by side, then positions, watchlist and the journal. */
+:root {
+  --bg: #f6f7f4;
+  --panel: #ffffff;
+  --fg: #16201d;
+  --muted: #5d6a66;
+  --line: #dde2dc;
+  --accent: #0f6b5c;        /* desk teal */
+  --accent-soft: #e2efeb;
+  --marigold: #b86a12;      /* pending / waiting */
+  --marigold-soft: #f8ecdc;
+  --gain: #17803d;
+  --loss: #c0352b;
+  --chart-b: #b86a12;
+  --chart-n: #8a948f;
+  --font-display: "Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1513; --panel: #161e1b; --fg: #e4ebe7; --muted: #94a39d; --line: #2a3632;
+    --accent: #4fc3a6; --accent-soft: #19302a; --marigold: #e7a24f; --marigold-soft: #33261a;
+    --gain: #4cc47a; --loss: #f07167; --chart-b: #e7a24f; --chart-n: #6f7c77;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1513; --panel: #161e1b; --fg: #e4ebe7; --muted: #94a39d; --line: #2a3632;
+  --accent: #4fc3a6; --accent-soft: #19302a; --marigold: #e7a24f; --marigold-soft: #33261a;
+  --gain: #4cc47a; --loss: #f07167; --chart-b: #e7a24f; --chart-n: #6f7c77;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 36px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; }
+h2 { font-size: 20px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 500; }
+.eyebrow { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.gain { color: var(--gain); } .loss { color: var(--loss); }
+section { display: grid; gap: 14px; min-width: 0; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* header */
+header.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+  border-bottom: 2px solid var(--fg); padding-bottom: 14px; }
+.top .meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+  font-size: 12.5px; font-weight: 600; border: 1px solid var(--line); background: var(--panel); white-space: nowrap; }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.chip.on { color: var(--gain); } .chip.off { color: var(--loss); } .chip.wait { color: var(--marigold); }
+
+/* proposals */
+.props { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 14px; }
+.prop { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.prop.approved { border-color: var(--gain); } .prop.rejected { opacity: 0.6; }
+.prop-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.sym { font-family: var(--font-display); font-size: 22px; font-weight: 700; }
+.levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.levels div { display: grid; gap: 2px; }
+.sizing { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.sizing td, .sizing th { padding: 5px 4px; border-top: 1px solid var(--line); text-align: right; }
+.sizing th { font-weight: 600; color: var(--muted); font-size: 12px; }
+.sizing td:first-child, .sizing th:first-child { text-align: left; }
+.why { font-size: 13.5px; display: grid; gap: 6px; }
+.why b { font-weight: 600; }
+.veto { color: var(--loss); font-weight: 600; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+button { font: inherit; font-weight: 600; font-size: 14px; border-radius: 8px; padding: 8px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--fg); }
+button.approve { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+button:hover:not(:disabled) { filter: brightness(1.08); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+.decision { font-size: 13px; font-weight: 600; }
+.empty { background: var(--panel); border: 1px dashed var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 8px; }
+
+/* accounts */
+.accts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 18px; }
+.acct { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 16px; min-width: 0; }
+.big { font-family: var(--font-mono); font-size: 30px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; }
+.kpis div { display: grid; gap: 1px; min-width: 0; }
+.alloc { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--line); }
+.alloc span { display: block; height: 100%; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.golive { display: grid; gap: 4px; font-size: 13.5px; }
+.golive .ok { color: var(--gain); } .golive .no { color: var(--muted); }
+.chart { width: 100%; height: auto; display: block; }
+.chart text { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+table.data { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+table.data th, table.data td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.data th { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+table.data td:first-child, table.data th:first-child, table.data .l { text-align: left; }
+table.data tr:last-child td { border-bottom: 0; }
+table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: left; }
+.foot { font-size: 12.5px; color: var(--muted); max-width: 70ch; }
+.err { color: var(--loss); }
+@media (prefers-reduced-motion: no-preference) { button { transition: filter .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Paper trading · NSE equities · delivery</div>
+      <h1>NSE Paper Desk</h1>
+    </div>
+    <div class="meta">
+      <span class="chip" id="asof">Loading…</span>
+      <span class="chip" id="regime">Market filter</span>
+    </div>
+  </header>
+
+  <section id="tonight">
+    <div class="sec-head">
+      <h2>Tonight's proposals</h2>
+      <span class="muted" id="cutoff"></span>
+    </div>
+    <div id="props" class="props"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Accounts</h2><span class="muted">Same strategy, two account sizes</span></div>
+    <div class="accts" id="accts"></div>
+  </section>
+
+  <section>
+    <h2>Open positions</h2>
+    <div class="tbl-wrap"><table class="data" id="positions"></table></div>
+  </section>
+
+  <section id="watch-sec">
+    <div class="sec-head"><h2>Watchlist</h2><span class="muted">Stocks that pass every rule except the market filter</span></div>
+    <div class="tbl-wrap"><table class="data" id="watch"></table></div>
+  </section>
+
+  <section>
+    <h2>Closed trades</h2>
+    <div class="tbl-wrap"><table class="data" id="closed"></table></div>
+  </section>
+
+  <section>
+    <h2>Journal</h2>
+    <div class="tbl-wrap"><table class="data" id="journal"></table></div>
+  </section>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const inr = (v, d = 0) => v == null ? "—" : "₹" + Number(v).toLocaleString("en-IN", { maximumFractionDigits: d, minimumFractionDigits: d });
+  const pct = (v, d = 2) => { if (v == null) return "—"; const t = (Math.abs(v) * 100).toFixed(d); return (+t === 0 ? "" : v > 0 ? "+" : "−") + t + "%"; };
+  const cls = (v) => v == null ? "" : v >= 0 ? "gain" : "loss";
+  const el = (tag, attrs = {}, ...kids) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+    }
+    for (const k of kids) if (k != null) e.append(k);
+    return e;
+  };
+  const ACCT_COLORS = { A_lumpsum: "var(--accent)", B_monthly: "var(--chart-b)" };
+
+  let D = null;            // dashboard.json
+  let decisions = {};      // proposal id -> {decision, at}
+  let db = null, canWrite = false, userId = null;
+
+  // Proposals made on evening D are valid until 09:15 IST on the next weekday.
+  function cutoffFor(created) {
+    const d = new Date(created + "T00:00:00+05:30");
+    do { d.setUTCDate(d.getUTCDate() + 1); } while ([0, 6].includes(new Date(d.getTime() + 5.5 * 3600e3).getUTCDay()));
+    const ymd = new Date(d.getTime() + 5.5 * 3600e3).toISOString().slice(0, 10);
+    return new Date(ymd + "T09:15:00+05:30");
+  }
+  const docId = (pid) => pid.replace(/[^A-Za-z0-9_\-.~:@+]/g, "_");
+
+  function renderHeader() {
+    $("asof").textContent = "As of close " + (D.asof || "—");
+    const r = D.regime || {};
+    const chip = $("regime");
+    chip.replaceChildren(el("span", { class: "dot" }), r.entries_allowed ? "Market filter on: entries allowed" : "Market filter off: no new entries");
+    chip.className = "chip " + (r.entries_allowed ? "on" : "off");
+  }
+
+  function renderProposals() {
+    const box = $("props");
+    box.replaceChildren();
+    const pend = D.pending || [];
+    if (!pend.length) {
+      const r = D.regime || {};
+      box.append(el("div", { class: "empty" },
+        el("h3", { text: "No trades proposed for the next session" }),
+        el("p", { class: "muted", text: r.entries_allowed
+          ? "No stock in the NIFTY 500 met every entry rule at today's close."
+          : "The NIFTY 500 closed below its 200-day average, so the strategy stays out of new positions. Idle cash sits in the liquid ETF. The watchlist below shows what would qualify once the filter turns back on." })));
+      $("cutoff").textContent = "";
+      return;
+    }
+    const cut = cutoffFor(pend[0].created);
+    const open = Date.now() < cut.getTime();
+    $("cutoff").textContent = open
+      ? "Decide before " + cut.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) + " IST"
+      : "Decision window closed. Unapproved proposals expire.";
+    for (const p of pend) box.append(proposalCard(p, open));
+  }
+
+  function proposalCard(p, open) {
+    const dec = decisions[p.id];
+    const card = el("article", { class: "prop" + (dec ? " " + (dec.decision === "approve" ? "approved" : "rejected") : "") });
+    const isExit = p.type === "EXIT";
+    const rr = !isExit && p.ref_price - p.stop > 0 ? ((p.target - p.ref_price) / (p.ref_price - p.stop)).toFixed(1) : null;
+    card.append(el("div", { class: "prop-head" },
+      el("div", {}, el("div", { class: "sym", text: p.symbol }),
+        el("div", { class: "eyebrow", text: isExit ? "Exit proposal" : p.setup + (rr ? " · reward:risk " + rr : "") })),
+      el("span", { class: "chip " + (dec ? (dec.decision === "approve" ? "on" : "off") : "wait") },
+        el("span", { class: "dot" }), dec ? (dec.decision === "approve" ? "Approved" : "Rejected") : "Awaiting you")));
+    if (!isExit) {
+      card.append(el("div", { class: "levels" },
+        el("div", {}, el("span", { class: "eyebrow", text: "Close" }), el("span", { class: "num", text: inr(p.ref_price, 2) })),
+        el("div", {}, el("span", { class: "eyebrow", text: "Stop" }), el("span", { class: "num loss", text: inr(p.stop, 2) })),
+        el("div", {}, el("span", { class: "eyebrow", text: "Target" }), el("span", { class: "num gain", text: inr(p.target, 2) }))));
+      const t = el("table", { class: "sizing" });
+      t.append(el("tr", {}, el("th", { text: "Account" }), el("th", { text: "Qty" }), el("th", { text: "Value" }), el("th", { text: "At risk" }), el("th", { text: "Costs" })));
+      for (const [name, s] of Object.entries(p.sizing || {})) {
+        const label = (D.accounts[name] || {}).label || name;
+        if (s.qty) t.append(el("tr", {}, el("td", { text: label }), el("td", { class: "num", text: String(s.qty) }), el("td", { class: "num", text: inr(s.value) }), el("td", { class: "num", text: inr(s.risk) }), el("td", { class: "num", text: inr(s.est_costs) })));
+        else t.append(el("tr", {}, el("td", { text: label }), el("td", { class: "muted", colspan: "4", style: "text-align:left", text: "Skipped: " + s.skip })));
+      }
+      card.append(t);
+    }
+    const why = el("div", { class: "why" });
+    if (p.technical) why.append(el("div", {}, el("b", { text: "Setup. " }), p.technical));
+    if (p.trend) why.append(el("div", {}, el("b", { text: "Trend. " }), p.trend));
+    if (p.fundamental) why.append(el("div", {}, el("b", { text: "Fundamentals. " }), p.fundamental));
+    const news = p.news || "Not checked yet";
+    why.append(el("div", { class: /^VETO/.test(news) ? "veto" : "" }, el("b", { text: "News. " }), news));
+    card.append(why);
+
+    const actions = el("div", { class: "actions" });
+    const can = open && canWrite && db;
+    const ap = el("button", { class: "approve", type: "button" }, "Approve");
+    const rj = el("button", { type: "button" }, "Reject");
+    ap.disabled = rj.disabled = !can;
+    if (dec) (dec.decision === "approve" ? ap : rj).disabled = true;
+    ap.addEventListener("click", () => decide(p.id, "approve", ap, rj));
+    rj.addEventListener("click", () => decide(p.id, "reject", ap, rj));
+    actions.append(ap, rj);
+    const note = el("span", { class: "decision muted" });
+    if (!db) note.textContent = "Sign in to claude.ai to approve.";
+    else if (!canWrite) note.textContent = "View only. Only the account owner can decide.";
+    else if (!open) note.textContent = "Window closed.";
+    else if (dec) note.textContent = "Saved " + new Date(dec.at).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" }) + " IST. Tap the other button to change.";
+    actions.append(note);
+    card.append(actions);
+    return card;
+  }
+
+  async function decide(pid, decision, ap, rj) {
+    ap.disabled = rj.disabled = true;
+    const body = { proposal_id: pid, decision, at: new Date().toISOString(), by: userId || "owner" };
+    try {
+      await db.collection("approvals").doc(docId(pid)).set(body);
+    } catch (e) {
+      if (e && e.code === "invalid_argument") canWrite = false;
+      showError(e && e.code === "invalid_argument" ? "You don't have permission to approve on this page." : "Couldn't save. Check your connection and try again.");
+      renderProposals();
+    }
+  }
+  function showError(msg) { $("cutoff").textContent = msg; $("cutoff").className = "err"; }
+
+  function twr(eq) {
+    if (!eq.length) return [];
+    let idx = 1, prev = { equity: eq[0].contributed, contributed: eq[0].contributed };
+    return eq.map((e) => { const base = prev.equity + (e.contributed - prev.contributed); if (base > 0) idx *= e.equity / base; prev = e; return idx; });
+  }
+
+  function chart(acctName, a) {
+    const eq = a.equity || [];
+    const W = 520, H = 150, P = { l: 44, r: 10, t: 10, b: 20 };
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("class", "chart"); svg.setAttribute("role", "img");
+    if (eq.length < 2) { svg.setAttribute("aria-label", "Not enough history yet"); return svg; }
+    const s = twr(eq).map((v) => (v - 1) * 100);
+    const dates = eq.map((e) => e.date);
+    const bk = Object.keys(D.benchmark).sort();
+    const before = bk.filter((k) => k < dates[0]);
+    const b0 = D.benchmark[before.length ? before[before.length - 1] : dates[0]];
+    const bn = dates.map((d) => D.benchmark[d] != null ? (D.benchmark[d] / b0 - 1) * 100 : null);
+    const all = s.concat(bn.filter((v) => v != null), [0]);
+    let lo = Math.min(...all), hi = Math.max(...all);
+    const pad = Math.max(0.5, (hi - lo) * 0.1); lo -= pad; hi += pad;
+    const x = (i) => P.l + (i / (dates.length - 1)) * (W - P.l - P.r);
+    const y = (v) => P.t + (1 - (v - lo) / (hi - lo)) * (H - P.t - P.b);
+    const ns = (t, at) => { const e = document.createElementNS("http://www.w3.org/2000/svg", t); for (const k in at) e.setAttribute(k, at[k]); return e; };
+    const step = niceStep(hi - lo);
+    for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
+      svg.append(ns("line", { x1: P.l, x2: W - P.r, y1: y(v), y2: y(v), stroke: "var(--line)", "stroke-width": Math.abs(v) < 1e-9 ? 1.2 : 0.6 }));
+      const t = ns("text", { x: P.l - 6, y: y(v) + 3, "text-anchor": "end" }); t.textContent = (v > 0 ? "+" : "") + v.toFixed(step < 1 ? 1 : 0) + "%"; svg.append(t);
+    }
+    const t1 = ns("text", { x: P.l, y: H - 4 }); t1.textContent = dates[0]; svg.append(t1);
+    const t2 = ns("text", { x: W - P.r, y: H - 4, "text-anchor": "end" }); t2.textContent = dates[dates.length - 1]; svg.append(t2);
+    const path = (arr) => arr.map((v, i) => v == null ? "" : `${i && arr[i - 1] != null ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
+    svg.append(ns("path", { d: path(bn), fill: "none", stroke: "var(--chart-n)", "stroke-width": 1.5, "stroke-dasharray": "4 3" }));
+    svg.append(ns("path", { d: path(s), fill: "none", stroke: ACCT_COLORS[acctName] || "var(--accent)", "stroke-width": 2.2 }));
+    svg.append(ns("circle", { cx: x(s.length - 1), cy: y(s[s.length - 1]), r: 3.5, fill: ACCT_COLORS[acctName] || "var(--accent)" }));
+    svg.setAttribute("aria-label", `Return ${s[s.length - 1].toFixed(2)}% against NIFTY 500 ${(bn[bn.length - 1] ?? 0).toFixed(2)}%`);
+    return svg;
+  }
+  function niceStep(span) { const raw = span / 4, p = Math.pow(10, Math.floor(Math.log10(raw))); const n = raw / p; return (n < 1.5 ? 1 : n < 3.5 ? 2 : n < 7.5 ? 5 : 10) * p; }
+
+  function renderAccounts() {
+    const box = $("accts"); box.replaceChildren();
+    for (const [name, a] of Object.entries(D.accounts)) {
+      const m = a.metrics;
+      const last = (a.equity || []).slice(-1)[0] || { cash: m.cash, holdings: 0, liquid: 0, equity: m.equity };
+      const tot = Math.max(1, last.equity);
+      const card = el("article", { class: "acct" },
+        el("div", { class: "sec-head" }, el("h3", { text: a.label }), el("span", { class: "muted", text: "Deposited " + inr(m.contributed) })),
+        el("div", {}, el("div", { class: "big", text: inr(m.equity) }),
+          el("div", { class: "num " + cls(m.pnl), text: (m.pnl >= 0 ? "+" : "−") + inr(Math.abs(m.pnl)) + " · " + pct(m.return_twr) + " (time-weighted)" })));
+      card.append(el("div", { class: "kpis" },
+        kpi("NIFTY 500", pct(m.benchmark_return), cls(m.benchmark_return)),
+        kpi("Max drawdown", pct(-m.max_drawdown, 1), m.max_drawdown > 0 ? "loss" : ""),
+        kpi("Closed trades", String(m.trades)),
+        kpi("Win rate", m.win_rate == null ? "—" : Math.round(m.win_rate * 100) + "%"),
+        kpi("Avg R per trade", m.expectancy_r == null ? "—" : (m.expectancy_r >= 0 ? "+" : "") + m.expectancy_r + "R", cls(m.expectancy_r)),
+        kpi("Charges paid", inr(m.charges_paid))));
+      const alloc = el("div", { class: "alloc", role: "img", "aria-label": "Allocation" },
+        el("span", { style: `width:${(last.holdings / tot) * 100}%;background:${ACCT_COLORS[name]}` }),
+        el("span", { style: `width:${((last.liquid || 0) / tot) * 100}%;background:var(--chart-n)` }));
+      card.append(el("div", { style: "display:grid;gap:6px" }, alloc,
+        el("div", { class: "legend" },
+          el("span", {}, el("i", { style: `background:${ACCT_COLORS[name]}` }), "Stocks " + inr(last.holdings)),
+          el("span", {}, el("i", { style: "background:var(--chart-n)" }), "Liquid ETF " + inr(last.liquid || 0)),
+          el("span", {}, el("i", { style: "background:var(--line)" }), "Cash " + inr(last.cash)))));
+      card.append(el("div", { style: "display:grid;gap:4px" }, chart(name, a),
+        el("div", { class: "legend" },
+          el("span", {}, el("i", { style: `background:${ACCT_COLORS[name]}` }), "This account"),
+          el("span", {}, el("i", { style: "background:var(--chart-n)" }), "NIFTY 500"))));
+      const gl = el("div", { class: "golive" }, el("div", { class: "eyebrow", text: a.go_live.ready ? "Ready to go live" : "Go-live checklist" }));
+      for (const [k, ok] of Object.entries(a.go_live.checks)) gl.append(el("div", { class: ok ? "ok" : "no", text: (ok ? "✓ " : "○ ") + k }));
+      const tax = m.est_tax || {};
+      gl.append(el("div", { class: "muted", text: "Estimated tax on realised gains: " + inr(tax.total_tax || 0) }));
+      card.append(gl);
+      box.append(card);
+    }
+  }
+  function kpi(label, val, c = "") { return el("div", {}, el("span", { class: "eyebrow", text: label }), el("span", { class: "num " + c, text: val })); }
+
+  function table(id, head, rows, emptyMsg) {
+    const t = $(id); t.replaceChildren();
+    t.append(el("thead", {}, el("tr", {}, ...head.map((h) => el("th", { class: h.l ? "l" : "", text: h.t })))));
+    const tb = el("tbody");
+    if (!rows.length) tb.append(el("tr", {}, el("td", { class: "muted l", colspan: String(head.length), text: emptyMsg })));
+    for (const r of rows) tb.append(el("tr", {}, ...r.map((c, i) => el("td", { class: (head[i].l ? "l " : "num ") + (c && c.c ? c.c : "") + (head[i].w ? " wrap-cell" : ""), text: c && typeof c === "object" ? c.v : c }))));
+    t.append(tb);
+  }
+
+  function renderTables() {
+    const pos = [], closed = [], ev = [];
+    for (const [name, a] of Object.entries(D.accounts)) {
+      const last = {};
+      for (const p of a.positions) pos.push([a.label, p.symbol, p.setup, p.entry_date, String(p.qty), inr(p.entry_price, 2), inr(p.stop, 2), inr(p.target, 2)]);
+      for (const t of a.closed) closed.push([a.label, t.symbol, t.setup, t.entry_date, t.exit_date, t.reason, inr(t.entry_price, 2), inr(t.exit_price, 2), { v: inr(t.net_pnl), c: cls(t.net_pnl) }, { v: t.r_multiple == null ? "—" : t.r_multiple + "R", c: cls(t.r_multiple) }]);
+      for (const e of a.events) ev.push([e.date, a.label, e.text]);
+    }
+    table("positions", [{ t: "Account", l: 1 }, { t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "Entered", l: 1 }, { t: "Qty" }, { t: "Entry" }, { t: "Stop" }, { t: "Target" }], pos, "No open stock positions.");
+    const w = D.watchlist || [];
+    $("watch-sec").hidden = !w.length;
+    table("watch", [{ t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "Close" }, { t: "Stop" }, { t: "Target" }, { t: "vs NIFTY 500, 3 mo" }, { t: "Why", l: 1, w: 1 }],
+      w.map((x) => [x.symbol, x.setup, inr(x.ref_price, 2), inr(x.stop, 2), inr(x.target, 2), { v: pct(x.rel_strength_63d, 1), c: cls(x.rel_strength_63d) }, x.technical]), "");
+    closed.sort((a, b) => (b[4] > a[4] ? 1 : -1));
+    table("closed", [{ t: "Account", l: 1 }, { t: "Stock", l: 1 }, { t: "Setup", l: 1 }, { t: "In", l: 1 }, { t: "Out", l: 1 }, { t: "Exit", l: 1 }, { t: "Entry" }, { t: "Exit price" }, { t: "Net P&L" }, { t: "R" }], closed, "No closed trades yet.");
+    ev.sort((a, b) => (b[0] > a[0] ? 1 : b[0] < a[0] ? -1 : 0));
+    table("journal", [{ t: "Date", l: 1 }, { t: "Account", l: 1 }, { t: "Entry", l: 1, w: 1 }], ev.slice(0, 80), "Nothing yet.");
+    $("foot").textContent = "Paper trading only: no real orders are placed. Prices are NSE end-of-day data. Fills happen at the next open plus 0.10% slippage, with Groww delivery charges (brokerage, STT, exchange and SEBI fees, stamp duty, GST, DP charge). " +
+      "Everything before " + D.live_from + " is a walk-forward backfill: Claude approved its own proposals using only data available on each day, without a news check. Your approvals start " + D.live_from + ".";
+  }
+
+  function renderAll() { if (!D) return; renderHeader(); renderProposals(); renderAccounts(); renderTables(); }
+
+  fetch("dashboard.json", { cache: "no-store" }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then((j) => { D = j; renderAll(); })
+    .catch(() => { $("asof").textContent = "Couldn't load today's data"; $("asof").className = "chip off"; });
+
+  (async () => {
+    if (!window.claude || !window.claude.use) return;
+    const [dbNs, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+    db = dbNs;
+    if (user) {
+      try { userId = await user.id(); } catch (e) {}
+      canWrite = await user.canEdit();  // approvals are editor-only (db rule write: admin)
+    }
+    if (!db) { renderAll(); return; }
+    db.collection("approvals").onSnapshot((snap) => {
+      decisions = {};
+      for (const d of snap.docs) { const b = d.data(); if (b && b.proposal_id) decisions[b.proposal_id] = b; }
+      renderAll();
+    }, () => { renderAll(); });
+    renderAll();
+  })();
+})();
+</script>
