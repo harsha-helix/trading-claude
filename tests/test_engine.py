@@ -136,3 +136,55 @@ def test_idle_cash_parked_in_liquid_etf_when_market_filter_off():
     before = a.liquid_units
     e.raise_cash(a, days[-1], a.cash + 20_000)
     assert a.cash >= 20_000 and 0 < before - a.liquid_units < before
+
+
+def _trend_prices(slope: float, n: int = 400, extra=("NIFTYBEES",)):
+    days = pd.bdate_range("2024-01-01", periods=n)
+    rows = []
+    for i, d in enumerate(days):
+        bc = 1000 + slope * i
+        rows.append({"date": d, "symbol": CFG["benchmark"], "open": bc, "high": bc, "low": bc, "close": bc, "volume": 0})
+        for k in range(5):  # a few stocks moving with the market, for breadth
+            c = 100 + slope * 0.1 * i + k
+            rows.append({"date": d, "symbol": f"S{k}", "open": c, "high": c, "low": c, "close": c, "volume": 1e5})
+        for sym in extra:
+            c = 100 + slope * 0.1 * i
+            rows.append({"date": d, "symbol": sym, "open": c, "high": c, "low": c, "close": c, "volume": 1e6})
+        lp = 100 * (1 + 0.06 / 252) ** i
+        rows.append({"date": d, "symbol": "GROWWLIQID", "open": lp, "high": lp, "low": lp, "close": lp, "volume": 1e6})
+    return pd.DataFrame(rows), days
+
+
+def test_regime_quadrants():
+    from papertrade import regime, strategy
+    for slope, want in ((1.0, "BULL"), (-1.0, "BEAR")):
+        prices, _ = _trend_prices(slope)
+        ind = strategy.compute_all(prices)
+        r = regime.compute(prices, ind, CFG["benchmark"], {f"S{k}" for k in range(5)}, {}, use_global=False)
+        assert r["regime"].iloc[-1] == want
+
+
+def test_core_holding_constant_fraction(monkeypatch):
+    from papertrade import strategy
+    monkeypatch.setitem(strategy.PARAMS, "market_model", "quadrant")
+    prices, days = _trend_prices(1.0)
+    cfg = dict(CFG, start_date=days[300].strftime("%Y-%m-%d"), global_symbols={},
+               core=dict(CFG["core"], enabled=True, mode="constant", constant=0.6))
+    e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg)
+    e.run(auto_approve=True)
+    a = e.accounts["A_lumpsum"]
+    last = a.equity[-1]
+    assert 0.5 < last["core"] / last["equity"] < 0.75     # within the rebalance band of 60%
+    assert last["liquid"] > 0                              # the rest earns the liquid yield
+
+
+def test_core_fifo_tax_split():
+    a = portfolio.Account.new("A_lumpsum", CFG["accounts"]["A_lumpsum"], "2025-01-01")
+    a.core_symbol = "NIFTYBEES"
+    a.core_buy("2025-01-01", 100.0, 10_000, CFG["costs"], "t")
+    a.core_buy("2025-12-01", 120.0, 10_000, CFG["costs"], "t")
+    first = a.core_lots[0]["units"]
+    a.core_sell("2026-02-01", 130.0, first + 5, CFG["costs"], "t")
+    days = [r["holding_days"] for r in a.core_realised]
+    assert days[0] > 365 and days[1] < 365                 # oldest lot first: long-term, then short-term
+    assert a.core_units == a.core_lots[0]["units"]

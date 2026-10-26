@@ -1,0 +1,24 @@
+IS 2011-2018   v2: 200-day on/off, no core          A_lumpsum +26.4%/yr  NIFTY500  +8.2%/yr  maxDD 28.6%  trades  441  win  36%  expR 0.38  charges 74,429
+IS 2011-2018   v2: 200-day on/off, no core          B_monthly +26.1%/yr  NIFTY500  +8.2%/yr  maxDD 29.3%  trades  459  win  38%  expR 0.28  charges 222,796
+IS 2011-2018   Q: multi-timeframe model, no core    A_lumpsum +28.7%/yr  NIFTY500  +8.2%/yr  maxDD 28.2%  trades  495  win  39%  expR 0.32  charges 93,138
+IS 2011-2018   Q: multi-timeframe model, no core    B_monthly +24.6%/yr  NIFTY500  +8.2%/yr  maxDD 29.3%  trades  502  win  38%  expR 0.29  charges 221,376
+IS 2011-2018   Q + core 60% constant                A_lumpsum +32.9%/yr  NIFTY500  +8.2%/yr  maxDD 30.0%  trades  495  win  39%  expR 0.31  charges 126,818
+IS 2011-2018   Q + core 60% constant                B_monthly +24.7%/yr  NIFTY500  +8.2%/yr  maxDD 31.8%  trades  504  win  37%  expR 0.29  charges 256,340
+IS 2011-2018   Q + core scaled by regime            A_lumpsum +30.0%/yr  NIFTY500  +8.2%/yr  maxDD 29.4%  trades  497  win  39%  expR 0.31  charges 119,879
+IS 2011-2018   Q + core scaled by regime            B_monthly +22.0%/yr  NIFTY500  +8.2%/yr  maxDD 31.4%  trades  506  win  37%  expR 0.28  charges 244,705
+IS 2011-2018   Q + core 60% + sector tilt           A_lumpsum +28.0%/yr  NIFTY500  +8.2%/yr  maxDD 30.1%  trades  503  win  38%  expR 0.28  charges 104,031
+IS 2011-2018   Q + core 60% + sector tilt           B_monthly +18.0%/yr  NIFTY500  +8.2%/yr  maxDD 29.9%  trades  506  win  37%  expR 0.28  charges 194,152
+IS 2011-2018   Q (India only) + core 60%            A_lumpsum +32.5%/yr  NIFTY500  +8.2%/yr  maxDD 29.0%  trades  508  win  36%  expR 0.29  charges 121,158
+IS 2011-2018   Q (India only) + core 60%            B_monthly +31.5%/yr  NIFTY500  +8.2%/yr  maxDD 30.4%  trades  508  win  37%  expR 0.32  charges 286,712
+OOS 2019-2026  v2: 200-day on/off, no core          A_lumpsum +31.7%/yr  NIFTY500 +12.3%/yr  maxDD 30.0%  trades  481  win  40%  expR 0.25  charges 98,241
+OOS 2019-2026  v2: 200-day on/off, no core          B_monthly +30.8%/yr  NIFTY500 +12.3%/yr  maxDD 26.8%  trades  491  win  40%  expR 0.28  charges 248,430
+OOS 2019-2026  Q: multi-timeframe model, no core    A_lumpsum +35.8%/yr  NIFTY500 +12.3%/yr  maxDD 24.5%  trades  521  win  40%  expR 0.45  charges 103,421
+OOS 2019-2026  Q: multi-timeframe model, no core    B_monthly +26.9%/yr  NIFTY500 +12.3%/yr  maxDD 29.0%  trades  515  win  39%  expR 0.29  charges 219,764
+OOS 2019-2026  Q + core 60% constant                A_lumpsum +40.5%/yr  NIFTY500 +12.3%/yr  maxDD 29.2%  trades  519  win  41%  expR 0.44  charges 139,541
+OOS 2019-2026  Q + core 60% constant                B_monthly +29.6%/yr  NIFTY500 +12.3%/yr  maxDD 26.5%  trades  510  win  39%  expR 0.29  charges 271,608
+OOS 2019-2026  Q + core scaled by regime            A_lumpsum +42.0%/yr  NIFTY500 +12.3%/yr  maxDD 25.4%  trades  514  win  41%  expR 0.45  charges 134,883
+OOS 2019-2026  Q + core scaled by regime            B_monthly +26.7%/yr  NIFTY500 +12.3%/yr  maxDD 29.6%  trades  519  win  38%  expR 0.26  charges 274,444
+OOS 2019-2026  Q + core 60% + sector tilt           A_lumpsum +31.8%/yr  NIFTY500 +12.3%/yr  maxDD 37.3%  trades  509  win  40%  expR 0.4  charges 113,043
+OOS 2019-2026  Q + core 60% + sector tilt           B_monthly +27.0%/yr  NIFTY500 +12.3%/yr  maxDD 36.4%  trades  504  win  40%  expR 0.37  charges 246,858
+OOS 2019-2026  Q (India only) + core 60%            A_lumpsum +40.5%/yr  NIFTY500 +12.3%/yr  maxDD 25.9%  trades  526  win  41%  expR 0.32  charges 141,932
+OOS 2019-2026  Q (India only) + core 60%            B_monthly +42.5%/yr  NIFTY500 +12.3%/yr  maxDD 27.3%  trades  511  win  42%  expR 0.35  charges 383,761

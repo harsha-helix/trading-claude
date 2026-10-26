@@ -56,5 +56,20 @@
     "min_park": 5000,
     "cash_buffer": 500,
     "slab_tax_pct": 30.0
+  },
+  "core": {
+    "enabled": false,
+    "etf": "NIFTYBEES",
+    "mode": "constant",
+    "constant": 0.6,
+    "band": 0.1,
+    "min_trade": 1000
+  },
+  "global_symbols": {
+    "spx": "^GSPC",
+    "em": "EEM",
+    "oil": "BZ=F",
+    "usdinr": "INR=X",
+    "vix": "^INDIAVIX"
   }
 }

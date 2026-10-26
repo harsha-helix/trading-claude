@@ -27,6 +27,9 @@ PARAMS = {
     "target_r": 2.5,
     "regime_filter": True,         # only enter when the benchmark is above its 200-day average
     "exit_on_sma50": False,        # propose exits on a close below the 50-day average
+    "market_model": "binary",      # "binary" (v2 200-day filter) or "quadrant" (papertrade/regime.py)
+    "use_global": True,            # quadrant model: blend in global markets and macro stress
+    "sector_tilt": False,          # rank by stock + sector relative strength
     "max_candidates": 10,
     # fundamental filter (applied only when data exists)
     "min_roe": 0.12,
@@ -98,15 +101,22 @@ def regime_ok(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str) -> bool:
 
 def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
          fundamentals: dict | None = None, exclude: set[str] = frozenset(),
-         ignore_regime: bool = False) -> list[dict]:
+         ignore_regime: bool = False, universe: set[str] | None = None,
+         setups: tuple = ("breakout", "pullback"), min_rs: float | None = None,
+         sectors: dict[str, str] | None = None) -> list[dict]:
     """Ranked trade candidates from indicator rows dated exactly `asof`.
-    ignore_regime=True builds the watchlist shown while the market filter is off."""
+
+    ignore_regime=True skips the v2 binary filter (watchlist, or when the quadrant
+    model decides instead). `setups` and `min_rs` come from the quadrant model.
+    `sectors` maps symbol -> industry for the sector tilt."""
     try:
         today = ind.loc[asof]
     except KeyError:
         return []
     if not ignore_regime and not regime_ok(ind, asof, benchmark):
         return []
+    if universe is not None:
+        today = today[today.index.isin(universe | {benchmark})]
     bench_ret63 = today["ret63"].get(benchmark, 0.0)
     bench_ret63 = 0.0 if pd.isna(bench_ret63) else bench_ret63
     fundamentals = fundamentals or {}
@@ -132,7 +142,7 @@ def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
             stop = min(t["low5"], t["ema20"]) - PARAMS["pullback_atr_buffer"] * atr
             why = (f"Dipped to its 20-day EMA ({t['ema20']:.2f}) in an uptrend, then closed above "
                    f"the prior day's high ({t['prev_high']:.2f}). RSI {t['rsi14']:.0f}.")
-        if not setup:
+        if not setup or setup not in setups:
             continue
         stop = max(stop, t["close"] - PARAMS["max_stop_atr"] * atr)
         risk = t["close"] - stop
@@ -142,6 +152,8 @@ def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
         if not ok:
             continue
         rs = t["ret63"] - bench_ret63
+        if min_rs is not None and not rs >= min_rs:
+            continue
         out.append({
             "symbol": sym, "setup": setup, "asof": asof.strftime("%Y-%m-%d"),
             "ref_price": round(float(t["close"]), 2),
@@ -155,6 +167,15 @@ def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
             "technical": why,
             "fundamental": fnote,
         })
+    if PARAMS["sector_tilt"] and sectors:
+        ret = today["ret63"].dropna()
+        sec = pd.Series({s: sectors.get(s) for s in ret.index}).dropna()
+        sec_rs = (ret[sec.index].groupby(sec).median() - bench_ret63).to_dict()
+        for c in out:
+            c["sector"] = sectors.get(c["symbol"])
+            c["sector_rs_63d"] = round(float(sec_rs.get(c["sector"], 0.0)), 4)
+        out.sort(key=lambda x: x["rel_strength_63d"] + x.get("sector_rs_63d", 0.0), reverse=True)
+        return out[:PARAMS["max_candidates"]]
     out.sort(key=lambda x: x["rel_strength_63d"], reverse=True)
     return out[:PARAMS["max_candidates"]]
 

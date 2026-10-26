@@ -1,0 +1,1034 @@
+{
+ "IS 2011-2018 | v2: 200-day on/off, no core": {
+  "A_lumpsum": {
+   "equity": 623689.29,
+   "contributed": 100000.0,
+   "cash": 146881.14,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 523689.29,
+   "return_twr": 5.2369,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2864,
+   "trades": 441,
+   "open": 5,
+   "win_rate": 0.365,
+   "avg_win": 9933.92,
+   "avg_loss": -3918.11,
+   "expectancy_r": 0.38,
+   "charges_paid": 74429.35,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 257,
+     "win": 0.37,
+     "avg_r": 0.39,
+     "net": 331496
+    },
+    "breakout": {
+     "n": 184,
+     "win": 0.36,
+     "avg_r": 0.37,
+     "net": 170795
+    }
+   },
+   "exits": {
+    "stop (gap)": 21,
+    "stop": 219,
+    "target": 58,
+    "time stop": 129,
+    "target (gap)": 14
+   }
+  },
+  "B_monthly": {
+   "equity": 3069038.9,
+   "contributed": 960000.0,
+   "cash": 727467.83,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 2109038.9,
+   "return_twr": 5.1194,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2933,
+   "trades": 459,
+   "open": 5,
+   "win_rate": 0.375,
+   "avg_win": 38642.16,
+   "avg_loss": -16124.66,
+   "expectancy_r": 0.28,
+   "charges_paid": 222795.66,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 271,
+     "win": 0.37,
+     "avg_r": 0.15,
+     "net": 1590683
+    },
+    "breakout": {
+     "n": 188,
+     "win": 0.38,
+     "avg_r": 0.46,
+     "net": 427992
+    }
+   },
+   "exits": {
+    "stop (gap)": 21,
+    "stop": 229,
+    "target": 60,
+    "time stop": 135,
+    "target (gap)": 14
+   }
+  }
+ },
+ "IS 2011-2018 | Q: multi-timeframe model, no core": {
+  "A_lumpsum": {
+   "equity": 717466.75,
+   "contributed": 100000.0,
+   "cash": 496993.9,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 617466.75,
+   "return_twr": 6.1747,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2824,
+   "trades": 495,
+   "open": 4,
+   "win_rate": 0.39,
+   "avg_win": 10447.95,
+   "avg_loss": -4763.0,
+   "expectancy_r": 0.32,
+   "charges_paid": 93138.32,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 327,
+     "win": 0.41,
+     "avg_r": 0.27,
+     "net": 384423
+    },
+    "breakout": {
+     "n": 168,
+     "win": 0.35,
+     "avg_r": 0.43,
+     "net": 193608
+    }
+   },
+   "exits": {
+    "stop (gap)": 17,
+    "stop": 246,
+    "target (gap)": 12,
+    "time stop": 159,
+    "target": 61
+   }
+  },
+  "B_monthly": {
+   "equity": 2523598.9,
+   "contributed": 960000.0,
+   "cash": 1732305.67,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 1563598.9,
+   "return_twr": 4.5635,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2932,
+   "trades": 502,
+   "open": 4,
+   "win_rate": 0.38,
+   "avg_win": 31577.9,
+   "avg_loss": -14647.04,
+   "expectancy_r": 0.29,
+   "charges_paid": 221376.37,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 324,
+     "win": 0.38,
+     "avg_r": 0.2,
+     "net": 816218
+    },
+    "breakout": {
+     "n": 178,
+     "win": 0.38,
+     "avg_r": 0.45,
+     "net": 659932
+    }
+   },
+   "exits": {
+    "stop (gap)": 19,
+    "stop": 252,
+    "target (gap)": 15,
+    "time stop": 159,
+    "target": 57
+   }
+  }
+ },
+ "IS 2011-2018 | Q + core 60% constant": {
+  "A_lumpsum": {
+   "equity": 918394.61,
+   "contributed": 100000.0,
+   "cash": 238525.12,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 400590.71,
+   "core_units": 3524,
+   "pnl": 818394.61,
+   "return_twr": 8.1839,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.3001,
+   "trades": 495,
+   "open": 4,
+   "win_rate": 0.39,
+   "avg_win": 12847.1,
+   "avg_loss": -5782.91,
+   "expectancy_r": 0.31,
+   "charges_paid": 126817.68,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 323,
+     "win": 0.42,
+     "avg_r": 0.27,
+     "net": 464823
+    },
+    "breakout": {
+     "n": 172,
+     "win": 0.34,
+     "avg_r": 0.39,
+     "net": 268230
+    }
+   },
+   "exits": {
+    "stop (gap)": 18,
+    "stop": 247,
+    "target (gap)": 15,
+    "time stop": 155,
+    "target": 60
+   }
+  },
+  "B_monthly": {
+   "equity": 2604875.1,
+   "contributed": 960000.0,
+   "cash": 461103.83,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 1337954.79,
+   "core_units": 11770,
+   "pnl": 1644875.1,
+   "return_twr": 4.5931,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.3179,
+   "trades": 504,
+   "open": 4,
+   "win_rate": 0.369,
+   "avg_win": 30960.54,
+   "avg_loss": -13624.99,
+   "expectancy_r": 0.29,
+   "charges_paid": 256340.12,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 321,
+     "win": 0.37,
+     "avg_r": 0.21,
+     "net": 941401
+    },
+    "breakout": {
+     "n": 183,
+     "win": 0.37,
+     "avg_r": 0.45,
+     "net": 484512
+    }
+   },
+   "exits": {
+    "stop (gap)": 19,
+    "stop": 257,
+    "target (gap)": 15,
+    "time stop": 155,
+    "target": 58
+   }
+  }
+ },
+ "IS 2011-2018 | Q + core scaled by regime": {
+  "A_lumpsum": {
+   "equity": 772925.98,
+   "contributed": 100000.0,
+   "cash": 360672.87,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 171990.28,
+   "core_units": 1513,
+   "pnl": 672925.98,
+   "return_twr": 6.7293,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2942,
+   "trades": 497,
+   "open": 4,
+   "win_rate": 0.386,
+   "avg_win": 11475.69,
+   "avg_loss": -5102.96,
+   "expectancy_r": 0.31,
+   "charges_paid": 119878.87,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 326,
+     "win": 0.4,
+     "avg_r": 0.26,
+     "net": 403211
+    },
+    "breakout": {
+     "n": 171,
+     "win": 0.35,
+     "avg_r": 0.41,
+     "net": 243717
+    }
+   },
+   "exits": {
+    "stop (gap)": 17,
+    "stop": 249,
+    "target (gap)": 14,
+    "time stop": 158,
+    "target": 59
+   }
+  },
+  "B_monthly": {
+   "equity": 2269814.6,
+   "contributed": 960000.0,
+   "cash": 1063138.68,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 500397.36,
+   "core_units": 4402,
+   "pnl": 1309814.6,
+   "return_twr": 3.7196,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.3139,
+   "trades": 506,
+   "open": 4,
+   "win_rate": 0.368,
+   "avg_win": 28634.63,
+   "avg_loss": -12852.53,
+   "expectancy_r": 0.28,
+   "charges_paid": 244705.08,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 324,
+     "win": 0.37,
+     "avg_r": 0.2,
+     "net": 778349
+    },
+    "breakout": {
+     "n": 182,
+     "win": 0.36,
+     "avg_r": 0.42,
+     "net": 434881
+    }
+   },
+   "exits": {
+    "stop (gap)": 19,
+    "stop": 260,
+    "target (gap)": 14,
+    "time stop": 154,
+    "target": 59
+   }
+  }
+ },
+ "IS 2011-2018 | Q + core 60% + sector tilt": {
+  "A_lumpsum": {
+   "equity": 687395.83,
+   "contributed": 100000.0,
+   "cash": 169026.48,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 255086.71,
+   "core_units": 2244,
+   "pnl": 587395.83,
+   "return_twr": 5.874,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.3009,
+   "trades": 503,
+   "open": 4,
+   "win_rate": 0.378,
+   "avg_win": 9523.66,
+   "avg_loss": -4089.71,
+   "expectancy_r": 0.28,
+   "charges_paid": 104030.76,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 335,
+     "win": 0.4,
+     "avg_r": 0.25,
+     "net": 375167
+    },
+    "breakout": {
+     "n": 168,
+     "win": 0.34,
+     "avg_r": 0.33,
+     "net": 154248
+    }
+   },
+   "exits": {
+    "stop (gap)": 24,
+    "stop": 251,
+    "target (gap)": 13,
+    "time stop": 156,
+    "target": 59
+   }
+  },
+  "B_monthly": {
+   "equity": 1910827.31,
+   "contributed": 960000.0,
+   "cash": 347570.9,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 823689.07,
+   "core_units": 7246,
+   "pnl": 950827.31,
+   "return_twr": 2.6494,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2992,
+   "trades": 506,
+   "open": 4,
+   "win_rate": 0.372,
+   "avg_win": 19913.97,
+   "avg_loss": -9172.28,
+   "expectancy_r": 0.28,
+   "charges_paid": 194152.09,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 336,
+     "win": 0.39,
+     "avg_r": 0.32,
+     "net": 872856
+    },
+    "breakout": {
+     "n": 170,
+     "win": 0.33,
+     "avg_r": 0.19,
+     "net": -45815
+    }
+   },
+   "exits": {
+    "stop (gap)": 20,
+    "stop": 260,
+    "target (gap)": 18,
+    "time stop": 151,
+    "target": 57
+   }
+  }
+ },
+ "IS 2011-2018 | Q (India only) + core 60%": {
+  "A_lumpsum": {
+   "equity": 898879.69,
+   "contributed": 100000.0,
+   "cash": 283.94,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 3523.93,
+   "core_units": 31,
+   "pnl": 798879.69,
+   "return_twr": 7.9888,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.2903,
+   "trades": 508,
+   "open": 8,
+   "win_rate": 0.362,
+   "avg_win": 12888.32,
+   "avg_loss": -5082.93,
+   "expectancy_r": 0.29,
+   "charges_paid": 121157.7,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 341,
+     "win": 0.36,
+     "avg_r": 0.2,
+     "net": 435992
+    },
+    "breakout": {
+     "n": 167,
+     "win": 0.37,
+     "avg_r": 0.46,
+     "net": 288589
+    }
+   },
+   "exits": {
+    "stop (gap)": 19,
+    "stop": 266,
+    "target (gap)": 18,
+    "time stop": 148,
+    "target": 57
+   }
+  },
+  "B_monthly": {
+   "equity": 3709943.36,
+   "contributed": 960000.0,
+   "cash": 106.86,
+   "liquid": 0.0,
+   "liquid_units": 0,
+   "core": 15118.78,
+   "core_units": 133,
+   "pnl": 2749943.36,
+   "return_twr": 7.4604,
+   "benchmark_return": 0.8559,
+   "max_drawdown": 0.3045,
+   "trades": 508,
+   "open": 8,
+   "win_rate": 0.374,
+   "avg_win": 39663.28,
+   "avg_loss": -15868.33,
+   "expectancy_r": 0.32,
+   "charges_paid": 286711.67,
+   "days": 1967,
+   "by_setup": {
+    "pullback": {
+     "n": 334,
+     "win": 0.38,
+     "avg_r": 0.3,
+     "net": 1601935
+    },
+    "breakout": {
+     "n": 174,
+     "win": 0.36,
+     "avg_r": 0.37,
+     "net": 887960
+    }
+   },
+   "exits": {
+    "stop (gap)": 21,
+    "stop": 255,
+    "target (gap)": 19,
+    "time stop": 150,
+    "target": 63
+   }
+  }
+ },
+ "OOS 2019-2026 | v2: 200-day on/off, no core": {
+  "A_lumpsum": {
+   "equity": 801778.46,
+   "contributed": 100000.0,
+   "cash": 4806.97,
+   "liquid": 688000.93,
+   "liquid_units": 6201,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 701778.46,
+   "return_twr": 7.0178,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.3003,
+   "trades": 481,
+   "open": 1,
+   "win_rate": 0.401,
+   "avg_win": 11883.41,
+   "avg_loss": -5596.0,
+   "expectancy_r": 0.25,
+   "charges_paid": 98241.07,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 227,
+     "win": 0.41,
+     "avg_r": 0.12,
+     "net": 127767
+    },
+    "breakout": {
+     "n": 254,
+     "win": 0.4,
+     "avg_r": 0.37,
+     "net": 554082
+    }
+   },
+   "exits": {
+    "stop": 207,
+    "time stop": 140,
+    "target": 77,
+    "target (gap)": 21,
+    "stop (gap)": 36
+   }
+  },
+  "B_monthly": {
+   "equity": 3101296.77,
+   "contributed": 930000.0,
+   "cash": 1054.52,
+   "liquid": 1748017.2,
+   "liquid_units": 15755,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 2171296.77,
+   "return_twr": 6.6186,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.268,
+   "trades": 491,
+   "open": 3,
+   "win_rate": 0.401,
+   "avg_win": 39624.14,
+   "avg_loss": -19404.24,
+   "expectancy_r": 0.28,
+   "charges_paid": 248429.91,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 225,
+     "win": 0.4,
+     "avg_r": 0.17,
+     "net": 846067
+    },
+    "breakout": {
+     "n": 266,
+     "win": 0.4,
+     "avg_r": 0.38,
+     "net": 1255043
+    }
+   },
+   "exits": {
+    "stop": 214,
+    "time stop": 135,
+    "target": 81,
+    "target (gap)": 25,
+    "stop (gap)": 36
+   }
+  }
+ },
+ "OOS 2019-2026 | Q: multi-timeframe model, no core": {
+  "A_lumpsum": {
+   "equity": 1010834.62,
+   "contributed": 100000.0,
+   "cash": 255128.73,
+   "liquid": 541325.04,
+   "liquid_units": 4879,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 910834.62,
+   "return_twr": 9.1083,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.245,
+   "trades": 521,
+   "open": 2,
+   "win_rate": 0.405,
+   "avg_win": 12448.9,
+   "avg_loss": -5593.4,
+   "expectancy_r": 0.45,
+   "charges_paid": 103421.1,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 276,
+     "win": 0.38,
+     "avg_r": 0.17,
+     "net": 118452
+    },
+    "breakout": {
+     "n": 245,
+     "win": 0.43,
+     "avg_r": 0.75,
+     "net": 774311
+    }
+   },
+   "exits": {
+    "stop": 238,
+    "stop (gap)": 29,
+    "time stop": 139,
+    "target": 89,
+    "target (gap)": 26
+   }
+  },
+  "B_monthly": {
+   "equity": 2445479.3,
+   "contributed": 930000.0,
+   "cash": 613340.22,
+   "liquid": 1300888.71,
+   "liquid_units": 11725,
+   "core": 0.0,
+   "core_units": 0,
+   "pnl": 1515479.3,
+   "return_twr": 5.0567,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2905,
+   "trades": 515,
+   "open": 2,
+   "win_rate": 0.39,
+   "avg_win": 31134.08,
+   "avg_loss": -15336.72,
+   "expectancy_r": 0.29,
+   "charges_paid": 219763.76,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 271,
+     "win": 0.38,
+     "avg_r": 0.16,
+     "net": 117558
+    },
+    "breakout": {
+     "n": 244,
+     "win": 0.4,
+     "avg_r": 0.43,
+     "net": 1324660
+    }
+   },
+   "exits": {
+    "stop": 240,
+    "time stop": 133,
+    "target": 84,
+    "target (gap)": 25,
+    "stop (gap)": 33
+   }
+  }
+ },
+ "OOS 2019-2026 | Q + core 60% constant": {
+  "A_lumpsum": {
+   "equity": 1305014.24,
+   "contributed": 100000.0,
+   "cash": 332211.69,
+   "liquid": 83434.4,
+   "liquid_units": 752,
+   "core": 605924.0,
+   "core_units": 2344,
+   "pnl": 1205014.24,
+   "return_twr": 12.0501,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2918,
+   "trades": 519,
+   "open": 2,
+   "win_rate": 0.408,
+   "avg_win": 15327.05,
+   "avg_loss": -6779.0,
+   "expectancy_r": 0.44,
+   "charges_paid": 139540.71,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 276,
+     "win": 0.38,
+     "avg_r": 0.12,
+     "net": 210306
+    },
+    "breakout": {
+     "n": 243,
+     "win": 0.44,
+     "avg_r": 0.79,
+     "net": 957874
+    }
+   },
+   "exits": {
+    "stop": 238,
+    "stop (gap)": 28,
+    "time stop": 136,
+    "target": 91,
+    "target (gap)": 26
+   }
+  },
+  "B_monthly": {
+   "equity": 2723163.7,
+   "contributed": 930000.0,
+   "cash": 584560.15,
+   "liquid": 269830.39,
+   "liquid_units": 2432,
+   "core": 1268459.5,
+   "core_units": 4907,
+   "pnl": 1793163.7,
+   "return_twr": 6.1102,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2648,
+   "trades": 510,
+   "open": 2,
+   "win_rate": 0.392,
+   "avg_win": 33975.86,
+   "avg_loss": -16632.42,
+   "expectancy_r": 0.29,
+   "charges_paid": 271608.26,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 267,
+     "win": 0.41,
+     "avg_r": 0.22,
+     "net": 338498
+    },
+    "breakout": {
+     "n": 243,
+     "win": 0.37,
+     "avg_r": 0.37,
+     "net": 1300622
+    }
+   },
+   "exits": {
+    "stop": 233,
+    "time stop": 135,
+    "target": 83,
+    "stop (gap)": 35,
+    "target (gap)": 24
+   }
+  }
+ },
+ "OOS 2019-2026 | Q + core scaled by regime": {
+  "A_lumpsum": {
+   "equity": 1415071.79,
+   "contributed": 100000.0,
+   "cash": 357755.1,
+   "liquid": 613109.68,
+   "liquid_units": 5526,
+   "core": 132869.0,
+   "core_units": 514,
+   "pnl": 1315071.79,
+   "return_twr": 13.1507,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2541,
+   "trades": 514,
+   "open": 2,
+   "win_rate": 0.407,
+   "avg_win": 16019.63,
+   "avg_loss": -6690.72,
+   "expectancy_r": 0.45,
+   "charges_paid": 134883.36,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 270,
+     "win": 0.39,
+     "avg_r": 0.15,
+     "net": 456962
+    },
+    "breakout": {
+     "n": 244,
+     "win": 0.43,
+     "avg_r": 0.78,
+     "net": 850473
+    }
+   },
+   "exits": {
+    "stop": 233,
+    "stop (gap)": 32,
+    "time stop": 133,
+    "target": 91,
+    "target (gap)": 25
+   }
+  },
+  "B_monthly": {
+   "equity": 2381795.97,
+   "contributed": 930000.0,
+   "cash": 597865.44,
+   "liquid": 1034386.82,
+   "liquid_units": 9323,
+   "core": 224378.0,
+   "core_units": 868,
+   "pnl": 1451795.97,
+   "return_twr": 4.9998,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2959,
+   "trades": 519,
+   "open": 2,
+   "win_rate": 0.385,
+   "avg_win": 32653.14,
+   "avg_loss": -16240.0,
+   "expectancy_r": 0.26,
+   "charges_paid": 274444.33,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 270,
+     "win": 0.36,
+     "avg_r": 0.05,
+     "net": -353306
+    },
+    "breakout": {
+     "n": 249,
+     "win": 0.41,
+     "avg_r": 0.48,
+     "net": 1703373
+    }
+   },
+   "exits": {
+    "stop": 244,
+    "time stop": 130,
+    "target": 86,
+    "target (gap)": 24,
+    "stop (gap)": 35
+   }
+  }
+ },
+ "OOS 2019-2026 | Q + core 60% + sector tilt": {
+  "A_lumpsum": {
+   "equity": 805714.71,
+   "contributed": 100000.0,
+   "cash": 204966.86,
+   "liquid": 75778.85,
+   "liquid_units": 683,
+   "core": 230582.0,
+   "core_units": 892,
+   "pnl": 705714.71,
+   "return_twr": 7.0571,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.373,
+   "trades": 509,
+   "open": 3,
+   "win_rate": 0.405,
+   "avg_win": 11260.5,
+   "avg_loss": -5497.16,
+   "expectancy_r": 0.4,
+   "charges_paid": 113043.05,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 269,
+     "win": 0.37,
+     "avg_r": 0.08,
+     "net": 172882
+    },
+    "breakout": {
+     "n": 240,
+     "win": 0.44,
+     "avg_r": 0.76,
+     "net": 481141
+    }
+   },
+   "exits": {
+    "stop": 226,
+    "stop (gap)": 32,
+    "time stop": 146,
+    "target": 85,
+    "target (gap)": 20
+   }
+  },
+  "B_monthly": {
+   "equity": 2556781.76,
+   "contributed": 930000.0,
+   "cash": 642541.77,
+   "liquid": 192054.44,
+   "liquid_units": 1731,
+   "core": 659692.0,
+   "core_units": 2552,
+   "pnl": 1626781.76,
+   "return_twr": 5.0771,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.3642,
+   "trades": 504,
+   "open": 3,
+   "win_rate": 0.405,
+   "avg_win": 31038.64,
+   "avg_loss": -16039.58,
+   "expectancy_r": 0.37,
+   "charges_paid": 246858.01,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 271,
+     "win": 0.38,
+     "avg_r": 0.09,
+     "net": 418243
+    },
+    "breakout": {
+     "n": 233,
+     "win": 0.43,
+     "avg_r": 0.7,
+     "net": 1101764
+    }
+   },
+   "exits": {
+    "stop": 227,
+    "time stop": 154,
+    "stop (gap)": 27,
+    "target": 80,
+    "target (gap)": 16
+   }
+  }
+ },
+ "OOS 2019-2026 | Q (India only) + core 60%": {
+  "A_lumpsum": {
+   "equity": 1304826.57,
+   "contributed": 100000.0,
+   "cash": 328500.22,
+   "liquid": 132363.35,
+   "liquid_units": 1193,
+   "core": 498646.5,
+   "core_units": 1929,
+   "pnl": 1204826.57,
+   "return_twr": 12.0483,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2587,
+   "trades": 526,
+   "open": 2,
+   "win_rate": 0.414,
+   "avg_win": 15698.65,
+   "avg_loss": -7412.05,
+   "expectancy_r": 0.32,
+   "charges_paid": 141932.31,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 288,
+     "win": 0.39,
+     "avg_r": 0.16,
+     "net": 415053
+    },
+    "breakout": {
+     "n": 238,
+     "win": 0.45,
+     "avg_r": 0.52,
+     "net": 724342
+    }
+   },
+   "exits": {
+    "stop": 236,
+    "stop (gap)": 27,
+    "time stop": 143,
+    "target": 94,
+    "target (gap)": 26
+   }
+  },
+  "B_monthly": {
+   "equity": 4991511.7,
+   "contributed": 930000.0,
+   "cash": 1254626.09,
+   "liquid": 465546.19,
+   "liquid_units": 4196,
+   "core": 1833023.5,
+   "core_units": 7091,
+   "pnl": 4061511.7,
+   "return_twr": 13.5422,
+   "benchmark_return": 1.407,
+   "max_drawdown": 0.2725,
+   "trades": 511,
+   "open": 2,
+   "win_rate": 0.417,
+   "avg_win": 54884.48,
+   "avg_loss": -25978.91,
+   "expectancy_r": 0.35,
+   "charges_paid": 383761.45,
+   "days": 1905,
+   "by_setup": {
+    "pullback": {
+     "n": 271,
+     "win": 0.4,
+     "avg_r": 0.2,
+     "net": 1961812
+    },
+    "breakout": {
+     "n": 240,
+     "win": 0.43,
+     "avg_r": 0.52,
+     "net": 1986868
+    }
+   },
+   "exits": {
+    "stop": 226,
+    "time stop": 142,
+    "target": 88,
+    "target (gap)": 27,
+    "stop (gap)": 28
+   }
+  }
+ }
+}

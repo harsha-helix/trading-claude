@@ -53,6 +53,11 @@ class Account:
     liquid_cost: float = 0.0          # cost basis incl. buy charges, for tax
     liquid_last_price: float = 0.0
     liquid_realised: list[dict] = field(default_factory=list)
+    # core index-ETF holding, kept as FIFO lots so tax can tell short- from long-term
+    core_symbol: str = ""
+    core_lots: list[dict] = field(default_factory=list)
+    core_last_price: float = 0.0
+    core_realised: list[dict] = field(default_factory=list)
 
     # ------------------------------------------------------------ persistence
     @classmethod
@@ -91,7 +96,17 @@ class Account:
         return self.liquid_units * self.liquid_last_price
 
     def equity_value(self, closes: dict[str, float]) -> float:
-        return self.cash + self.market_value(closes) + self.liquid_value(closes)
+        return self.cash + self.market_value(closes) + self.liquid_value(closes) + self.core_value(closes)
+
+    @property
+    def core_units(self) -> int:
+        return sum(l["units"] for l in self.core_lots)
+
+    def core_value(self, closes: dict[str, float]) -> float:
+        if not self.core_lots:
+            return 0.0
+        self.core_last_price = closes.get(self.core_symbol, self.core_last_price)
+        return self.core_units * self.core_last_price
 
     # ---------------------------------------------------------------- actions
     def contribute(self, day: str) -> None:
@@ -174,3 +189,42 @@ class Account:
         self.liquid_realised.append({"date": day, "units": units, "gain": round(gain, 2)})
         self.log(day, "unpark", f"Withdrew ₹{value:,.0f} from {self.liquid_symbol} ({units} units @ ₹{price:,.2f})",
                  units=units, price=price, charges=ch.as_dict(), gain=round(gain, 2))
+
+    # -------------------------------------------------------------- core ETF
+    def core_buy(self, day: str, price: float, amount: float, cc: dict, why: str) -> None:
+        price = to_tick(price)
+        units = int(amount / (price * 1.003))
+        if units < 1:
+            return
+        value = units * price
+        ch = C.charges("BUY", value, cc)
+        self.cash -= value + ch.total
+        self.core_lots.append({"date": day, "units": units, "unit_cost": (value + ch.total) / units})
+        self.core_last_price = price
+        self.log(day, "core", f"Core: bought {units} {self.core_symbol} @ ₹{price:,.2f} (₹{value:,.0f}). {why}",
+                 units=units, price=price, charges=ch.as_dict())
+
+    def core_sell(self, day: str, price: float, units: int, cc: dict, why: str) -> None:
+        price = to_tick(price)
+        units = min(units, self.core_units)
+        if units < 1:
+            return
+        value = units * price
+        ch = C.charges("SELL", value, cc)
+        self.cash += value - ch.total
+        net_per_unit = (value - ch.total) / units
+        left = units
+        from datetime import date
+        while left:
+            lot = self.core_lots[0]
+            take = min(left, lot["units"])
+            self.core_realised.append({
+                "date": day, "units": take,
+                "net_pnl": round(take * (net_per_unit - lot["unit_cost"]), 2),
+                "holding_days": (date.fromisoformat(day) - date.fromisoformat(lot["date"])).days})
+            lot["units"] -= take
+            left -= take
+            if not lot["units"]:
+                self.core_lots.pop(0)
+        self.log(day, "core", f"Core: sold {units} {self.core_symbol} @ ₹{price:,.2f} (₹{value:,.0f}). {why}",
+                 units=units, price=price, charges=ch.as_dict())

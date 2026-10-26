@@ -43,17 +43,18 @@ def metrics(a: Account, cfg: dict, bench: dict[str, float]) -> dict:
     bench_ret = (b[-1] / b[0] - 1) if len(b) > 1 else 0.0
     last = eq[-1] if eq else {"equity": a.cash, "contributed": a.contributed}
     rs = [t["r_multiple"] for t in closed if t["r_multiple"] is not None]
-    tax = C.estimate_tax(closed, cfg["tax"])
+    tax = C.estimate_tax(closed + a.core_realised, cfg["tax"])
     liquid_gain = sum(x["gain"] for x in a.liquid_realised)
     slab = cfg.get("cash_management", {}).get("slab_tax_pct", 30.0)
     tax["liquid_gain"] = round(liquid_gain, 2)
     tax["liquid_tax"] = round(max(0.0, liquid_gain) * slab / 100, 2)
     tax["total_tax"] = round(tax["total_tax"] + tax["liquid_tax"], 2)
     charges = (sum(t["charges"] for t in closed) + sum(p.entry_charges for p in a.positions)
-               + sum(e["charges"]["total"] for e in a.events if e["kind"] in ("park", "unpark")))
+               + sum(e["charges"]["total"] for e in a.events if e["kind"] in ("park", "unpark", "core")))
     return {
         "equity": last["equity"], "contributed": a.contributed, "cash": round(a.cash, 2),
         "liquid": last.get("liquid", 0.0), "liquid_units": a.liquid_units,
+        "core": last.get("core", 0.0), "core_units": a.core_units,
         "pnl": round(last["equity"] - a.contributed, 2),
         "return_twr": round(twr[-1] - 1, 4) if twr else 0.0,
         "benchmark_return": round(bench_ret, 4),
@@ -119,8 +120,7 @@ def text_summary(d: dict) -> str:
             lines.append(f"   open: {p['qty']} {p['symbol']} @ {p['entry_price']} "
                          f"stop {p['stop']} target {p['target']}")
     r = d.get("regime") or {}
-    lines.append(f"\nMarket filter ({r.get('date')}): "
-                 + ("ON: new entries allowed" if r.get("entries_allowed") else "OFF: NIFTY 500 below its 200-day average, so no new entries"))
+    lines.append(f"\nMarket ({r.get('date')}): {r.get('text', '')}")
     if d.get("watchlist"):
         lines.append("Watchlist (would qualify if the filter were on): " + ", ".join(
             f"{w['symbol']} ({w['setup']})" for w in d["watchlist"]))

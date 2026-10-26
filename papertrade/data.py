@@ -80,11 +80,13 @@ def save_prices(df: pd.DataFrame) -> None:
     df.to_csv(PRICES, index=False, date_format="%Y-%m-%d")
 
 
-def fetch_yahoo(symbols: list[str], start: str, end: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Split-adjusted OHLCV plus dividend/split actions from Yahoo."""
+def fetch_yahoo(symbols: list[str], start: str, end: str | None = None,
+                raw: frozenset = frozenset()) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Split-adjusted OHLCV plus dividend/split actions from Yahoo.
+    NSE symbols get the .NS suffix; indices (^...) and `raw` symbols are used as-is."""
     import yfinance as yf
 
-    tickers = [s if s.startswith("^") else f"{s}.NS" for s in symbols]
+    tickers = [s if s.startswith("^") or s in raw else f"{s}.NS" for s in symbols]
     raw = yf.download(tickers, start=start, end=end, auto_adjust=False, actions=True,
                       group_by="ticker", progress=False, threads=True)
     rows, acts = [], []
@@ -130,19 +132,29 @@ def fetch_bhavcopy(d: date) -> pd.DataFrame:
     }).dropna()
 
 
-def update_prices(extra: list[str], history_start: str = "2023-01-01") -> pd.DataFrame:
+def update_prices(extra: list[str], history_start: str = "2010-01-01",
+                  raw: list[str] = ()) -> pd.DataFrame:
     """Bring the local price cache up to date. Yahoo first, bhavcopy fallback.
     `extra` adds symbols outside the universe (benchmark, liquid ETF)."""
     uni = load_universe()
-    symbols = list(uni["symbol"]) + [s for s in extra if s]
+    raw = frozenset(raw)
+    symbols = list(uni["symbol"]) + [s for s in list(extra) + list(raw) if s]
     have = load_prices()
     start = history_start if have.empty else (have["date"].max() - timedelta(days=10)).strftime("%Y-%m-%d")
     end = (date.today() + timedelta(days=1)).isoformat()
     fresh = [] if have.empty else sorted(set(symbols) - set(have["symbol"]))
+    if not have.empty and have["date"].min() > pd.Timestamp(history_start) + timedelta(days=30):
+        # history_start moved earlier: backfill the gap for everyone
+        old, old_acts = fetch_yahoo(symbols, history_start, have["date"].min().strftime("%Y-%m-%d"), raw)
+        have = pd.concat([old, have], ignore_index=True)
+        if not old_acts.empty:
+            prev = pd.read_csv(ACTIONS, parse_dates=["date"]) if ACTIONS.exists() else pd.DataFrame()
+            pd.concat([old_acts, prev]).drop_duplicates(["date", "symbol", "kind"]).to_csv(
+                ACTIONS, index=False, date_format="%Y-%m-%d")
     try:
-        new, acts = fetch_yahoo(symbols, start, end)
+        new, acts = fetch_yahoo(symbols, start, end, raw)
         if fresh:  # symbols added since the last run need full history
-            n2, a2 = fetch_yahoo(fresh, history_start, end)
+            n2, a2 = fetch_yahoo(fresh, history_start, end, raw)
             new, acts = pd.concat([new, n2]), pd.concat([acts, a2])
     except Exception as e:  # Yahoo down/blocked: fall back to NSE bhavcopy
         print(f"Yahoo fetch failed ({e}); falling back to NSE bhavcopy")

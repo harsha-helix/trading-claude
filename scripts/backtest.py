@@ -19,7 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from papertrade import data, engine, portfolio, report, strategy  # noqa: E402
 
 
-def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=False) -> dict:
+def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=False,
+        ind=None) -> dict:
     tmp = Path(tempfile.mkdtemp())
     portfolio.STATE = engine.STATE = tmp
     engine.PROPOSALS, engine.APPROVALS, engine.META = tmp / "p.json", tmp / "a.json", tmp / "m.json"
@@ -35,10 +36,15 @@ def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=
             strategy.PARAMS[k] = v
         elif k in cfg["risk"]:
             cfg["risk"][k] = float(v)
+        elif k.startswith("core_"):
+            cur = cfg["core"][k[5:]]
+            cfg["core"][k[5:]] = (str(v).lower() in ("1", "true", "yes")) if isinstance(cur, bool) else type(cur)(v)
     cfg["start_date"] = start
     prices = data.load_prices() if prices is None else prices
     actions = data.load_actions() if actions is None else actions
-    e = engine.Engine(prices, actions, {}, cfg)
+    uni = data.load_universe()
+    e = engine.Engine(prices, actions, {}, cfg, universe=set(uni["symbol"]),
+                      sectors=dict(zip(uni["symbol"], uni["industry"])), ind=ind)
     e.run(until=pd.Timestamp(end), auto_approve=True)
     strategy.PARAMS.clear()
     strategy.PARAMS.update(saved)

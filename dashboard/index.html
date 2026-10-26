@@ -121,9 +121,10 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
     </div>
     <div class="meta">
       <span class="chip" id="asof">Loading…</span>
-      <span class="chip" id="regime">Market filter</span>
+      <span class="chip" id="regime">Market</span>
     </div>
   </header>
+  <p class="muted" id="regime-text" style="margin:-20px 0 0;max-width:80ch"></p>
 
   <section id="tonight">
     <div class="sec-head">
@@ -194,8 +195,12 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
     $("asof").textContent = "As of close " + (D.asof || "—");
     const r = D.regime || {};
     const chip = $("regime");
-    chip.replaceChildren(el("span", { class: "dot" }), r.entries_allowed ? "Market filter on: entries allowed" : "Market filter off: no new entries");
-    chip.className = "chip " + (r.entries_allowed ? "on" : "off");
+    const names = { BULL: "Bull market", DIP: "Dip in an uptrend", RECOVERY: "Possible recovery", BEAR: "Bear market", ON: "Market filter on", OFF: "Market filter off" };
+    const tone = { BULL: "on", DIP: "wait", RECOVERY: "wait", BEAR: "off", ON: "on", OFF: "off" };
+    chip.replaceChildren(el("span", { class: "dot" }), (names[r.regime] || "Market") + (r.risk_pct != null && r.entries_allowed ? " · " + r.risk_pct + "% risk/trade" : ""));
+    chip.className = "chip " + (tone[r.regime] || "");
+    chip.title = r.text || "";
+    $("regime-text").textContent = r.text || "";
   }
 
   function renderProposals() {
@@ -207,8 +212,8 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
       box.append(el("div", { class: "empty" },
         el("h3", { text: "No trades proposed for the next session" }),
         el("p", { class: "muted", text: r.entries_allowed
-          ? "No stock in the NIFTY 500 met every entry rule at today's close."
-          : "The NIFTY 500 closed below its 200-day average, so the strategy stays out of new positions. Idle cash sits in the liquid ETF. The watchlist below shows what would qualify once the filter turns back on." })));
+          ? "No stock in the NIFTY 500 met every entry rule allowed in this market at today's close."
+          : "The market model allows no new stock entries today. The watchlist below shows what would qualify." })));
       $("cutoff").textContent = "";
       return;
     }
@@ -343,10 +348,12 @@ table.data td.wrap-cell { white-space: normal; min-width: 280px; text-align: lef
         kpi("Charges paid", inr(m.charges_paid))));
       const alloc = el("div", { class: "alloc", role: "img", "aria-label": "Allocation" },
         el("span", { style: `width:${(last.holdings / tot) * 100}%;background:${ACCT_COLORS[name]}` }),
+        el("span", { style: `width:${((last.core || 0) / tot) * 100}%;background:var(--fg)` }),
         el("span", { style: `width:${((last.liquid || 0) / tot) * 100}%;background:var(--chart-n)` }));
       card.append(el("div", { style: "display:grid;gap:6px" }, alloc,
         el("div", { class: "legend" },
           el("span", {}, el("i", { style: `background:${ACCT_COLORS[name]}` }), "Stocks " + inr(last.holdings)),
+          (last.core ? el("span", {}, el("i", { style: "background:var(--fg)" }), "Index core " + inr(last.core)) : null),
           el("span", {}, el("i", { style: "background:var(--chart-n)" }), "Liquid ETF " + inr(last.liquid || 0)),
           el("span", {}, el("i", { style: "background:var(--line)" }), "Cash " + inr(last.cash)))));
       card.append(el("div", { style: "display:grid;gap:4px" }, chart(name, a),

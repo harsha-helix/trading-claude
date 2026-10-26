@@ -45,7 +45,9 @@ def main() -> None:
 
     if args.cmd == "update-data":
         data.refresh_universe()
-        prices = data.update_prices([cfg["benchmark"], cfg.get("cash_management", {}).get("liquid_etf")])
+        prices = data.update_prices([cfg["benchmark"], cfg.get("cash_management", {}).get("liquid_etf"),
+                                     cfg.get("core", {}).get("etf")],
+                                    raw=list(cfg.get("global_symbols", {}).values()))
         print(f"prices: {len(prices):,} rows, {prices['symbol'].nunique()} symbols, "
               f"latest {prices['date'].max():%Y-%m-%d}")
         if not args.no_fundamentals:
