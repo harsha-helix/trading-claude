@@ -19,12 +19,14 @@ PARAMS = {
     "min_price": 50.0,
     "breakout_lookback": 55,
     "breakout_vol_mult": 1.5,
-    "breakout_atr_stop": 2.0,
+    "breakout_atr_stop": 3.0,
     "pullback_touch_days": 3,
     "pullback_rsi": (40, 65),
-    "pullback_atr_buffer": 0.5,
-    "max_stop_atr": 3.0,
+    "pullback_atr_buffer": 1.0,
+    "max_stop_atr": 4.0,
     "target_r": 2.5,
+    "regime_filter": True,         # only enter when the benchmark is above its 200-day average
+    "exit_on_sma50": False,        # propose exits on a close below the 50-day average
     "max_candidates": 10,
     # fundamental filter (applied only when data exists)
     "min_roe": 0.12,
@@ -52,6 +54,8 @@ def indicators(g: pd.DataFrame) -> pd.DataFrame:
     g["low5"] = l.rolling(5).min()
     g["touched_ema"] = (l <= g["ema20"] * 1.01).rolling(PARAMS["pullback_touch_days"]).max()
     g["sma50_rising"] = g["sma50"] > g["sma50"].shift(10)
+    g["prev_high"] = h.shift()
+    g["n"] = range(1, len(g) + 1)
     return g
 
 
@@ -75,27 +79,35 @@ def _fundamental_ok(f: dict | None) -> tuple[bool, str]:
     return True, ", ".join(bits) or "fundamentals n/a"
 
 
-def scan(prices: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
+def compute_all(prices: pd.DataFrame) -> pd.DataFrame:
+    """Indicators for every symbol. All are trailing, so row D uses data up to D only."""
+    out = [indicators(g) for _, g in prices.groupby("symbol") if len(g) >= 20]
+    return pd.concat(out, ignore_index=True).set_index(["date", "symbol"]).sort_index()
+
+
+def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
          fundamentals: dict | None = None, exclude: set[str] = frozenset()) -> list[dict]:
-    """Return ranked trade candidates using only data up to and including `asof`."""
-    p = prices[prices["date"] <= asof]
-    bench = p[p["symbol"] == benchmark].sort_values("date")
-    bench_ret63 = (bench["close"].iloc[-1] / bench["close"].iloc[-64] - 1) if len(bench) > 64 else 0.0
+    """Ranked trade candidates from indicator rows dated exactly `asof`."""
+    try:
+        today = ind.loc[asof]
+    except KeyError:
+        return []
+    if PARAMS["regime_filter"]:
+        b = today.loc[benchmark] if benchmark in today.index else None
+        if b is None or not b["close"] > b["sma200"]:
+            return []
+    bench_ret63 = today["ret63"].get(benchmark, 0.0)
+    bench_ret63 = 0.0 if pd.isna(bench_ret63) else bench_ret63
     fundamentals = fundamentals or {}
+    t_all = today[(today.index != benchmark) & (today["n"] >= PARAMS["min_history"])
+                  & (today["close"] >= PARAMS["min_price"])
+                  & (today["tv20"] >= PARAMS["min_avg_traded_value"])
+                  & (today["close"] > today["sma200"]) & (today["sma50"] > today["sma200"])
+                  & today["sma50_rising"]]
     out = []
-    for sym, g in p.groupby("symbol"):
-        if sym == benchmark or sym in exclude or len(g) < PARAMS["min_history"]:
+    for sym, t in t_all.iterrows():
+        if sym in exclude:
             continue
-        g = indicators(g.tail(300))
-        t = g.iloc[-1]
-        if t["date"] != asof:
-            continue  # not traded today (suspended / holiday mismatch)
-        if t["close"] < PARAMS["min_price"] or t["tv20"] < PARAMS["min_avg_traded_value"]:
-            continue
-        uptrend = t["close"] > t["sma200"] and t["sma50"] > t["sma200"] and t["sma50_rising"]
-        if not uptrend:
-            continue
-        y = g.iloc[-2]
         setup, stop, why = None, None, ""
         atr = t["atr14"]
         if t["close"] > t["hh55"] and t["volume"] >= PARAMS["breakout_vol_mult"] * t["vol20"]:
@@ -103,12 +115,12 @@ def scan(prices: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
             stop = t["close"] - PARAMS["breakout_atr_stop"] * atr
             why = (f"Closed at {t['close']:.2f}, above its 55-day high of {t['hh55']:.2f}, "
                    f"on {t['volume'] / t['vol20']:.1f}x average volume.")
-        elif (t["touched_ema"] == 1 and t["close"] > y["high"]
+        elif (t["touched_ema"] == 1 and t["close"] > t["prev_high"]
               and PARAMS["pullback_rsi"][0] <= t["rsi14"] <= PARAMS["pullback_rsi"][1]):
             setup = "pullback"
             stop = min(t["low5"], t["ema20"]) - PARAMS["pullback_atr_buffer"] * atr
             why = (f"Dipped to its 20-day EMA ({t['ema20']:.2f}) in an uptrend, then closed above "
-                   f"the prior day's high ({y['high']:.2f}). RSI {t['rsi14']:.0f}.")
+                   f"the prior day's high ({t['prev_high']:.2f}). RSI {t['rsi14']:.0f}.")
         if not setup:
             continue
         stop = max(stop, t["close"] - PARAMS["max_stop_atr"] * atr)
@@ -136,13 +148,18 @@ def scan(prices: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
     return out[:PARAMS["max_candidates"]]
 
 
-def exit_signals(prices: pd.DataFrame, asof: pd.Timestamp, symbols: list[str]) -> dict[str, str]:
+def exit_signals(ind: pd.DataFrame, asof: pd.Timestamp, symbols: list[str]) -> dict[str, str]:
     """Discretionary exit suggestions (need approval): trend broken."""
-    p = prices[(prices["date"] <= asof) & prices["symbol"].isin(symbols)]
+    if not PARAMS["exit_on_sma50"]:
+        return {}
+    try:
+        today = ind.loc[asof]
+    except KeyError:
+        return {}
     out = {}
-    for sym, g in p.groupby("symbol"):
-        g = indicators(g.tail(260))
-        t = g.iloc[-1]
-        if t["date"] == asof and t["close"] < t["sma50"]:
-            out[sym] = f"Closed at {t['close']:.2f}, below its 50-day average ({t['sma50']:.2f}). The trend is weakening."
+    for sym in symbols:
+        if sym in today.index:
+            t = today.loc[sym]
+            if t["close"] < t["sma50"]:
+                out[sym] = f"Closed at {t['close']:.2f}, below its 50-day average ({t['sma50']:.2f}). The trend is weakening."
     return out

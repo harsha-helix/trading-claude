@@ -47,6 +47,7 @@ class Engine:
         self.prices = prices
         self.actions = actions
         self.fund = fundamentals
+        self.ind = strategy.compute_all(prices)
         self.bars = prices.set_index(["date", "symbol"]).sort_index()
         bench = prices[prices["symbol"] == self.cfg["benchmark"]]
         self.days = sorted(bench["date"].unique()) if not bench.empty else sorted(prices["date"].unique())
@@ -231,7 +232,7 @@ class Engine:
     def propose(self, d: pd.Timestamp, auto_approve: bool) -> list[dict]:
         ds = d.strftime("%Y-%m-%d")
         held = {p.symbol for a in self.accounts.values() for p in a.positions}
-        cands = strategy.scan(self.prices, d, self.cfg["benchmark"], self.fund)
+        cands = strategy.scan(self.ind, d, self.cfg["benchmark"], self.fund)
         cl = self.closes(d)
         new = []
         reserved = {n: 0.0 for n in self.accounts}
@@ -247,7 +248,7 @@ class Engine:
                 sizing[name] = s
             new.append({"id": f"{ds}-{c['symbol']}", "type": "ENTRY", "status": "pending",
                         "created": ds, **c, "sizing": sizing, "news": None})
-        for sym, why in strategy.exit_signals(self.prices, d, sorted(held)).items():
+        for sym, why in strategy.exit_signals(self.ind, d, sorted(held)).items():
             new.append({"id": f"{ds}-{sym}-EXIT", "type": "EXIT", "status": "pending",
                         "created": ds, "symbol": sym, "asof": ds, "technical": why,
                         "sizing": {}, "news": None})
