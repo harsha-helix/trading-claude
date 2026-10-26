@@ -205,14 +205,16 @@ def exit_signals(ind: pd.DataFrame, asof: pd.Timestamp, symbols: list[str]) -> d
 MOMENTUM = {
     "top_n": 20,        # stocks held
     "buffer": 2,        # keep a holding while it ranks within top_n * buffer
+    "low_vol_weight": 0.5,  # blend with low volatility (momentum + low-vol, NSE Alpha Low-Vol style)
 }
 
 
 def momentum_ranking(ind: pd.DataFrame, asof: pd.Timestamp, universe: set[str]) -> pd.Series:
-    """NIFTY 200 Momentum 30-style score for universe members on `asof`, best first.
+    """Momentum + low-volatility score for universe members on `asof`, best first.
 
-    score = average of z(6m return / 1y vol) and z(12m return / 1y vol), z-scored across
-    the universe that day. Uses only data up to `asof`."""
+    momentum = average of z(6m return / 1y vol) and z(12m return / 1y vol) (NIFTY 200 Momentum 30
+    method); score = (1 - w) * momentum + w * z(-1y vol), w = MOMENTUM["low_vol_weight"].
+    All z-scores are across the universe that day. Uses only data up to `asof`."""
     try:
         today = ind.loc[asof]
     except KeyError:
@@ -222,5 +224,7 @@ def momentum_ranking(ind: pd.DataFrame, asof: pd.Timestamp, universe: set[str]) 
     if t.empty:
         return pd.Series(dtype=float)
     z = lambda x: (x - x.mean()) / x.std()
-    score = (z(t["ret126"] / t["vol252"]) + z(t["ret252"] / t["vol252"])) / 2
+    mom = (z(t["ret126"] / t["vol252"]) + z(t["ret252"] / t["vol252"])) / 2
+    w = MOMENTUM["low_vol_weight"]
+    score = (1 - w) * mom + w * z(-t["vol252"])
     return score.sort_values(ascending=False)

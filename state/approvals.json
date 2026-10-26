@@ -4,17 +4,12 @@
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-CUPID": {
-  "decision": "approve",
-  "by": "claude (backfill)",
-  "at": "2026-09-30T20:00:00+05:30"
- },
  "2026-09-30-WELCORP": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-HFCL": {
+ "2026-09-30-CUPID": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
@@ -24,22 +19,12 @@
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-SANSERA": {
+ "2026-09-30-DIVISLAB": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-MTARTECH": {
-  "decision": "approve",
-  "by": "claude (backfill)",
-  "at": "2026-09-30T20:00:00+05:30"
- },
- "2026-09-30-CPPLUS": {
-  "decision": "approve",
-  "by": "claude (backfill)",
-  "at": "2026-09-30T20:00:00+05:30"
- },
- "2026-09-30-SYRMA": {
+ "2026-09-30-ANANDRATHI": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
@@ -49,52 +34,57 @@
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-RRKABEL": {
+ "2026-09-30-SANSERA": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-TDPOWERSYS": {
+ "2026-09-30-HFCL": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-AEGISLOG": {
+ "2026-09-30-CASTROLIND": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-DIVISLAB": {
+ "2026-09-30-AJANTPHARM": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-ATHERENERG": {
+ "2026-09-30-AUROPHARMA": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-AZAD": {
+ "2026-09-30-FEDERALBNK": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-KIRLOSENG": {
+ "2026-09-30-CPPLUS": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-WELSPUNLIV": {
+ "2026-09-30-TORNTPHARM": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-AETHER": {
+ "2026-09-30-GRANULES": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"
  },
- "2026-09-30-ANANDRATHI": {
+ "2026-09-30-MARICO": {
+  "decision": "approve",
+  "by": "claude (backfill)",
+  "at": "2026-09-30T20:00:00+05:30"
+ },
+ "2026-09-30-TITAN": {
   "decision": "approve",
   "by": "claude (backfill)",
   "at": "2026-09-30T20:00:00+05:30"

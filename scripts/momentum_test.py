@@ -47,7 +47,7 @@ def scores(close: pd.DataFrame) -> pd.DataFrame:
 
 
 def run(close, opn, mem, special, score, start, end, top_n=20, every=1, capital=100_000.0,
-        filter_fn=None, liquid_yield=0.06, lazy=False) -> dict:
+        filter_fn=None, liquid_yield=0.06, lazy=False, vol_target=None, vol_lookback=126) -> dict:
     """lazy=True: keep a holding while it ranks in the top 2N (buffer), never trim or top up
     existing holdings; only sell drop-outs and buy new names. Cuts per-order charges."""
     days = close.loc[start:end].index
@@ -78,6 +78,11 @@ def run(close, opn, mem, special, score, start, end, top_n=20, every=1, capital=
             elig = [s for s in mem.get(m, ()) if s in score.columns]
             sc = score.loc[sig_day, elig].dropna()
             exposure = 1.0 if filter_fn is None else filter_fn(sig_day)
+            if vol_target and len(eq_hist) > vol_lookback // 2:
+                # Barroso & Santa-Clara (2015): scale exposure by the strategy's own recent volatility
+                r = pd.Series(eq_hist[-vol_lookback:]).pct_change().dropna()
+                realised = r.std() * np.sqrt(252)
+                exposure *= min(1.0, vol_target / realised) if realised > 0 else 1.0
             value = cash + sum(u * last_px[s][0] for s, u in units.items())
 
             def sell(s, n):
@@ -113,6 +118,19 @@ def run(close, opn, mem, special, score, start, end, top_n=20, every=1, capital=
                 each = min(value * exposure / top_n, cash / max(1, len(new)))
                 for s in new:
                     buy(s, each)
+                # exposure management: scale all holdings when invested share is >10 pts off target
+                invested = sum(u * o[s] for s, u in units.items() if tradable(s)) / value
+                if invested > exposure + 0.10:
+                    f = 1 - exposure / invested
+                    for s in [s for s in units if tradable(s)]:
+                        n = int(units[s] * f)
+                        if n:
+                            sell(s, n)
+                elif invested < exposure - 0.10 and units:
+                    gap = (exposure - invested) * value / len(units)
+                    for s in [s for s in list(units) if tradable(s)]:
+                        if gap > o[s]:
+                            buy(s, gap)
             else:
                 want = [s for s in sc.nlargest(top_n).index if tradable(s)]
                 target_each = value * exposure / max(1, len(want))

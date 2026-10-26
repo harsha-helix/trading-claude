@@ -3,9 +3,11 @@
 Paper trading only. No real orders, no broker connection. Claude proposes trades and the owner
 approves them on the dashboard. Spec and evidence: README.md. Settings: config.json.
 
-The live strategy is a **monthly momentum portfolio** (`strategy.mode = "momentum"`):
-- Account A holds the top 20 NIFTY 500 stocks by momentum directly.
-- Account B invests in the MOM30IETF momentum ETF until it reaches ₹1L, then switches to direct stocks.
+The live strategy is a **monthly momentum + low-volatility portfolio** (`strategy.mode = "momentum"`,
+`MOMENTUM["low_vol_weight"] = 0.5`):
+- Account A holds the top 20 NIFTY 500 stocks by that score directly.
+- Account B invests in the ALPL30IETF (NIFTY Alpha Low-Volatility 30) ETF until it reaches ₹1L, then
+  switches to direct stocks.
 - The multi-timeframe market model (papertrade/regime.py) is shown for context only. It does not
   change trades, because backtests showed it didn't help.
 

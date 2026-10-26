@@ -18,7 +18,7 @@
       "direct_from": 100000,
       "core": {
         "enabled": true,
-        "etf": "MOM30IETF",
+        "etf": "ALPL30IETF",
         "mode": "constant",
         "constant": 1.0,
         "band": 0.05,

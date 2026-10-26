@@ -8,104 +8,104 @@
  },
  "watchlist": [
   {
-   "symbol": "STLTECH",
+   "symbol": "LAURUSLABS",
    "rank": 1,
-   "score": 7.25
+   "score": 2.4
+  },
+  {
+   "symbol": "STLTECH",
+   "rank": 2,
+   "score": 2.26
   },
   {
    "symbol": "CUPID",
-   "rank": 2,
-   "score": 6.13
-  },
-  {
-   "symbol": "LAURUSLABS",
    "rank": 3,
-   "score": 4.25
-  },
-  {
-   "symbol": "HFCL",
-   "rank": 4,
-   "score": 4.09
-  },
-  {
-   "symbol": "WELCORP",
-   "rank": 5,
-   "score": 3.47
-  },
-  {
-   "symbol": "SANSERA",
-   "rank": 6,
-   "score": 3.21
-  },
-  {
-   "symbol": "CPPLUS",
-   "rank": 7,
-   "score": 3.08
-  },
-  {
-   "symbol": "ATHERENERG",
-   "rank": 8,
-   "score": 2.44
-  },
-  {
-   "symbol": "DIVISLAB",
-   "rank": 9,
-   "score": 2.15
-  },
-  {
-   "symbol": "GLAND",
-   "rank": 10,
-   "score": 2.05
-  },
-  {
-   "symbol": "AEGISLOG",
-   "rank": 11,
-   "score": 1.98
-  },
-  {
-   "symbol": "SONACOMS",
-   "rank": 12,
-   "score": 1.95
+   "score": 1.79
   },
   {
    "symbol": "ANANDRATHI",
-   "rank": 13,
-   "score": 1.94
-  },
-  {
-   "symbol": "ACUTAAS",
-   "rank": 14,
-   "score": 1.91
-  },
-  {
-   "symbol": "SYRMA",
-   "rank": 15,
-   "score": 1.87
-  },
-  {
-   "symbol": "MTARTECH",
-   "rank": 16,
-   "score": 1.86
-  },
-  {
-   "symbol": "RRKABEL",
-   "rank": 17,
-   "score": 1.83
-  },
-  {
-   "symbol": "SAILIFE",
-   "rank": 18,
-   "score": 1.81
-  },
-  {
-   "symbol": "CRAFTSMAN",
-   "rank": 19,
+   "rank": 4,
    "score": 1.7
   },
   {
-   "symbol": "WELSPUNLIV",
+   "symbol": "DIVISLAB",
+   "rank": 5,
+   "score": 1.65
+  },
+  {
+   "symbol": "FEDERALBNK",
+   "rank": 6,
+   "score": 1.24
+  },
+  {
+   "symbol": "WELCORP",
+   "rank": 7,
+   "score": 1.23
+  },
+  {
+   "symbol": "SANSERA",
+   "rank": 8,
+   "score": 1.21
+  },
+  {
+   "symbol": "SONACOMS",
+   "rank": 9,
+   "score": 1.17
+  },
+  {
+   "symbol": "AJANTPHARM",
+   "rank": 10,
+   "score": 1.16
+  },
+  {
+   "symbol": "HFCL",
+   "rank": 11,
+   "score": 1.16
+  },
+  {
+   "symbol": "TORNTPHARM",
+   "rank": 12,
+   "score": 1.14
+  },
+  {
+   "symbol": "ZYDUSLIFE",
+   "rank": 13,
+   "score": 1.14
+  },
+  {
+   "symbol": "CASTROLIND",
+   "rank": 14,
+   "score": 1.13
+  },
+  {
+   "symbol": "GLAND",
+   "rank": 15,
+   "score": 1.1
+  },
+  {
+   "symbol": "KOTAKBANK",
+   "rank": 16,
+   "score": 1.07
+  },
+  {
+   "symbol": "CPPLUS",
+   "rank": 17,
+   "score": 1.05
+  },
+  {
+   "symbol": "IPCALAB",
+   "rank": 18,
+   "score": 1.02
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "rank": 19,
+   "score": 1.01
+  },
+  {
+   "symbol": "SUNPHARMA",
    "rank": 20,
-   "score": 1.69
+   "score": 0.97
   }
  ],
  "mom_target": "2026-10",

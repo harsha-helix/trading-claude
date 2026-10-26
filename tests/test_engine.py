@@ -198,6 +198,7 @@ def test_momentum_monthly_rebalance(monkeypatch):
     from papertrade import strategy
     monkeypatch.setitem(strategy.MOMENTUM, "top_n", 3)
     monkeypatch.setitem(strategy.MOMENTUM, "buffer", 1)   # 10 stocks: a 2x buffer would keep everything
+    monkeypatch.setitem(strategy.MOMENTUM, "low_vol_weight", 0.0)  # test the rebalance mechanics on pure momentum
     days = pd.bdate_range("2024-01-01", periods=330)
     rows = []
     for i, d in enumerate(days):

@@ -1,7 +1,7 @@
 # trading-claude
 
-A paper-trading desk for NSE equities. Claude runs a **monthly momentum portfolio** on the
-NIFTY 500 and proposes each month's buys and sells. The owner approves them on a private
+A paper-trading desk for NSE equities. Claude runs a **monthly momentum + low-volatility
+portfolio** on the NIFTY 500 and proposes each month's buys and sells. The owner approves them on a private
 dashboard, and a simulator fills them at the next open with realistic Groww charges and taxes.
 
 > **Paper trading only.** No broker is connected and no real orders are ever placed. The point
@@ -30,7 +30,7 @@ On a normal weekday nothing trades. You'll see the ranking move, and the trades 
 | Account | Start (1 Oct 2026) | How it holds momentum |
 |---|---|---|
 | `A_lumpsum` | ₹1,00,000 | The top 20 stocks directly, about ₹5,000 each |
-| `B_monthly` | ₹10,000, plus ₹10,000 each month | **MOM30IETF** (NIFTY 200 Momentum 30 ETF) until the account reaches ₹1L, then the top 20 directly |
+| `B_monthly` | ₹10,000, plus ₹10,000 each month | **ALPL30IETF** (NIFTY Alpha Low-Volatility 30 ETF, the same idea in one fund) until the account reaches ₹1L, then the top 20 directly |
 
 Account B uses the ETF because at ₹10k, 20 stocks would mean ₹500 positions, and charges would
 eat 7–11% a year. Each ETF purchase is a single order. Idle cash in both accounts sits in the
@@ -40,9 +40,13 @@ eat 7–11% a year. Each ETF purchase is a single order. Idle cash in both accou
 
 The code is `strategy.momentum_ranking` and `Engine.propose_momentum`.
 
-**Score.** For each NIFTY 500 stock, the 6-month and 12-month returns are each divided by 1-year
-volatility. Both are z-scored across the universe and averaged. This is the method of NSE's
-NIFTY 200 Momentum 30 index, applied to the NIFTY 500.
+**Score** = ½ momentum + ½ low volatility:
+- **Momentum:** the 6-month and 12-month returns, each divided by 1-year volatility, z-scored
+  across the universe and averaged. This is NSE's NIFTY 200 Momentum 30 method.
+- **Low volatility:** minus the 1-year volatility, z-scored.
+
+Combining the two is a well-documented multi-factor approach (it's NSE's NIFTY Alpha Low-Volatility
+30 idea). Momentum earns the return, and low volatility softens momentum's crashes.
 
 **Each month:**
 1. Sell holdings that fell out of the top 40 (a 2× buffer, so stocks hovering around 20th place
@@ -60,7 +64,20 @@ All tests are on **survivorship-free** data: every stock in each month's univers
 the time, rebuilt from 4,000+ daily NSE bhavcopies (`scripts/build_pit.py`), including stocks that
 later collapsed or were delisted. Results include all charges.
 
-Momentum, top 20, monthly, ₹1L, in % per year:
+Top 20, monthly, ₹1L, in % per year (worst fall in brackets):
+
+| | 2011–2018 | 2019–Sep 2026 | 2024–Sep 2026 | Oct 2026 |
+|---|---|---|---|---|
+| **Momentum + low-vol (live)** | **+17.1** (−27%) | **+27.3** (−30%) | **+24.0** (−24%) | −3.2% |
+| Same, pessimistic data* | +13.2 (−32%) | +24.4 (−40%) | +19.2 (−34%) | |
+| Momentum + low-vol + volatility targeting | +14.6 (−26%) | +21.4 (−30%) | +20.9 (−24%) | −3.2% |
+| Momentum only | +22.9 (−33%) | +24.2 (−40%) | +13.1 (−41%) | −4.1% |
+| NIFTY 500 index | +8.2 | +12.2 | +4.8 | −2.1% |
+
+Volatility targeting (Barroso & Santa-Clara, 2015) was tested and **not** adopted: for this
+long-only portfolio it cut returns more than it cut drawdowns.
+
+Earlier comparison (momentum only), in % per year:
 
 | | 2011–2018 | 2019–Sep 2026 | 2024–Sep 2026 |
 |---|---|---|---|
