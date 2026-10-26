@@ -27,7 +27,12 @@ def run(start: str, end: str, overrides: dict, prices=None, actions=None, quiet=
     cfg = engine.load_cfg()
     for k, v in overrides.items():
         if k in strategy.PARAMS:
-            strategy.PARAMS[k] = type(strategy.PARAMS[k])(v) if not isinstance(strategy.PARAMS[k], tuple) else v
+            cur = strategy.PARAMS[k]
+            if isinstance(cur, bool):
+                v = v if isinstance(v, bool) else str(v).lower() in ("1", "true", "yes")
+            elif not isinstance(cur, tuple):
+                v = type(cur)(v)
+            strategy.PARAMS[k] = v
         elif k in cfg["risk"]:
             cfg["risk"][k] = float(v)
     cfg["start_date"] = start
