@@ -1,0 +1,565 @@
+{
+ "asof": "2026-10-26",
+ "live_from": "2026-10-27",
+ "regime": {
+  "date": "2026-10-26",
+  "entries_allowed": false
+ },
+ "watchlist": [
+  {
+   "symbol": "STLTECH",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 867.55,
+   "stop": 705.94,
+   "target": 1271.59,
+   "atr": 54.91,
+   "rsi": 49.3,
+   "rel_strength_63d": 0.5947,
+   "trend": "Above its 50-day (814) and 200-day (461) averages, and the 50-day is rising. 3-month return is 53.8% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (883.73) in an uptrend, then closed above the prior day's high (840.00). RSI 49.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "COFORGE",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 1993.0,
+   "stop": 1740.46,
+   "target": 2624.34,
+   "atr": 71.74,
+   "rsi": 64.1,
+   "rel_strength_63d": 0.3993,
+   "trend": "Above its 50-day (1867) and 200-day (1534) averages, and the 50-day is rising. 3-month return is 34.2% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (1891.43) in an uptrend, then closed above the prior day's high (1992.40). RSI 64.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "ATHERENERG",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 1575.0,
+   "stop": 1274.32,
+   "target": 2326.7,
+   "atr": 75.17,
+   "rsi": 59.7,
+   "rel_strength_63d": 0.36,
+   "trend": "Above its 50-day (1515) and 200-day (1062) averages, and the 50-day is rising. 3-month return is 30.3% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (1472.06) in an uptrend, then closed above the prior day's high (1442.30). RSI 60.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "SANSERA",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 4147.7,
+   "stop": 3680.92,
+   "target": 5314.64,
+   "atr": 188.28,
+   "rsi": 50.5,
+   "rel_strength_63d": 0.3593,
+   "trend": "Above its 50-day (4096) and 200-day (2933) averages, and the 50-day is rising. 3-month return is 30.2% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (4142.58) in an uptrend, then closed above the prior day's high (4046.00). RSI 50.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "LAURUSLABS",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 2058.9,
+   "stop": 1875.19,
+   "target": 2518.18,
+   "atr": 58.31,
+   "rsi": 57.4,
+   "rel_strength_63d": 0.3428,
+   "trend": "Above its 50-day (1948) and 200-day (1427) averages, and the 50-day is rising. 3-month return is 28.6% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (2014.14) in an uptrend, then closed above the prior day's high (2009.60). RSI 57.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "TDPOWERSYS",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 688.35,
+   "stop": 570.3,
+   "target": 983.48,
+   "atr": 43.15,
+   "rsi": 41.6,
+   "rel_strength_63d": 0.2932,
+   "trend": "Above its 50-day (754) and 200-day (568) averages, and the 50-day is rising. 3-month return is 23.6% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (737.12) in an uptrend, then closed above the prior day's high (663.10). RSI 42.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "SAILIFE",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 1445.3,
+   "stop": 1310.62,
+   "target": 1782.01,
+   "atr": 49.98,
+   "rsi": 44.7,
+   "rel_strength_63d": 0.2292,
+   "trend": "Above its 50-day (1510) and 200-day (1185) averages, and the 50-day is rising. 3-month return is 17.2% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (1462.12) in an uptrend, then closed above the prior day's high (1429.00). RSI 45.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "LENSKART",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 651.2,
+   "stop": 593.53,
+   "target": 795.38,
+   "atr": 21.67,
+   "rsi": 48.3,
+   "rel_strength_63d": 0.2284,
+   "trend": "Above its 50-day (663) and 200-day (546) averages, and the 50-day is rising. 3-month return is 17.1% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (654.48) in an uptrend, then closed above the prior day's high (635.00). RSI 48.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "ETERNAL",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 325.55,
+   "stop": 291.28,
+   "target": 411.22,
+   "atr": 10.47,
+   "rsi": 53.0,
+   "rel_strength_63d": 0.2196,
+   "trend": "Above its 50-day (324) and 200-day (279) averages, and the 50-day is rising. 3-month return is 16.3% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (320.91) in an uptrend, then closed above the prior day's high (318.00). RSI 53.",
+   "fundamental": "no fundamentals cached"
+  },
+  {
+   "symbol": "KOTAKBANK",
+   "setup": "pullback",
+   "asof": "2026-10-26",
+   "ref_price": 440.75,
+   "stop": 417.71,
+   "target": 498.34,
+   "atr": 9.99,
+   "rsi": 58.9,
+   "rel_strength_63d": 0.2025,
+   "trend": "Above its 50-day (419) and 200-day (400) averages, and the 50-day is rising. 3-month return is 14.6% against -5.7% for the index.",
+   "technical": "Dipped to its 20-day EMA (432.63) in an uptrend, then closed above the prior day's high (439.40). RSI 59.",
+   "fundamental": "no fundamentals cached"
+  }
+ ],
+ "accounts": {
+  "A_lumpsum": {
+   "label": "₹1L lump sum",
+   "metrics": {
+    "equity": 100306.95,
+    "contributed": 100000.0,
+    "cash": 657.65,
+    "liquid": 99649.3,
+    "liquid_units": 895,
+    "pnl": 306.95,
+    "return_twr": 0.0031,
+    "benchmark_return": -0.021,
+    "max_drawdown": 0.0,
+    "trades": 0,
+    "open": 0,
+    "win_rate": null,
+    "avg_win": null,
+    "avg_loss": null,
+    "expectancy_r": null,
+    "charges_paid": 42.1,
+    "est_tax": {
+     "stcg": 0,
+     "ltcg": 0,
+     "stcg_tax": 0.0,
+     "ltcg_tax": 0.0,
+     "total_tax": 0.0,
+     "liquid_gain": 0,
+     "liquid_tax": 0.0
+    },
+    "days": 16
+   },
+   "go_live": {
+    "checks": {
+     "90+ trading days": false,
+     "max drawdown < 15.0%": true,
+     "beats NIFTY 500 after costs": true
+    },
+    "ready": false
+   },
+   "positions": [],
+   "closed": [],
+   "events": [
+    {
+     "date": "2026-10-01",
+     "kind": "deposit",
+     "text": "Opening balance ₹100,000",
+     "amount": 100000
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "park",
+     "text": "Parked ₹99,300 in GROWWLIQID (895 units @ ₹110.95)",
+     "units": 895,
+     "price": 110.95,
+     "charges": {
+      "brokerage": 20.0,
+      "stt": 0.0,
+      "exchange": 2.95,
+      "sebi": 0.1,
+      "stamp": 14.9,
+      "gst": 4.15,
+      "dp": 0.0,
+      "total": 42.1
+     }
+    }
+   ],
+   "equity": [
+    {
+     "date": "2026-10-01",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99353.95,
+     "equity": 100011.6,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-05",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99362.9,
+     "equity": 100020.55,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-06",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99371.85,
+     "equity": 100029.5,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-07",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99389.75,
+     "equity": 100047.4,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-08",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99407.65,
+     "equity": 100065.3,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-09",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99443.45,
+     "equity": 100101.1,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-12",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99461.35,
+     "equity": 100119.0,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-13",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99470.3,
+     "equity": 100127.95,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-14",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99488.2,
+     "equity": 100145.85,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-15",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99497.15,
+     "equity": 100154.8,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-16",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99541.9,
+     "equity": 100199.55,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-19",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99568.75,
+     "equity": 100226.4,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-21",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99586.65,
+     "equity": 100244.3,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-22",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99595.6,
+     "equity": 100253.25,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-23",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99640.35,
+     "equity": 100298.0,
+     "contributed": 100000.0
+    },
+    {
+     "date": "2026-10-26",
+     "cash": 657.65,
+     "holdings": 0,
+     "liquid": 99649.3,
+     "equity": 100306.95,
+     "contributed": 100000.0
+    }
+   ]
+  },
+  "B_monthly": {
+   "label": "₹10k + ₹10k/month",
+   "metrics": {
+    "equity": 10020.27,
+    "contributed": 10000.0,
+    "cash": 556.37,
+    "liquid": 9463.9,
+    "liquid_units": 85,
+    "pnl": 20.27,
+    "return_twr": 0.002,
+    "benchmark_return": -0.021,
+    "max_drawdown": 0.0,
+    "trades": 0,
+    "open": 0,
+    "win_rate": null,
+    "avg_win": null,
+    "avg_loss": null,
+    "expectancy_r": null,
+    "charges_paid": 12.88,
+    "est_tax": {
+     "stcg": 0,
+     "ltcg": 0,
+     "stcg_tax": 0.0,
+     "ltcg_tax": 0.0,
+     "total_tax": 0.0,
+     "liquid_gain": 0,
+     "liquid_tax": 0.0
+    },
+    "days": 16
+   },
+   "go_live": {
+    "checks": {
+     "90+ trading days": false,
+     "max drawdown < 15.0%": true,
+     "beats NIFTY 500 after costs": true
+    },
+    "ready": false
+   },
+   "positions": [],
+   "closed": [],
+   "events": [
+    {
+     "date": "2026-10-01",
+     "kind": "deposit",
+     "text": "Opening balance ₹10,000",
+     "amount": 10000
+    },
+    {
+     "date": "2026-10-01",
+     "kind": "park",
+     "text": "Parked ₹9,431 in GROWWLIQID (85 units @ ₹110.95)",
+     "units": 85,
+     "price": 110.95,
+     "charges": {
+      "brokerage": 9.43,
+      "stt": 0.0,
+      "exchange": 0.28,
+      "sebi": 0.01,
+      "stamp": 1.41,
+      "gst": 1.75,
+      "dp": 0.0,
+      "total": 12.88
+     }
+    }
+   ],
+   "equity": [
+    {
+     "date": "2026-10-01",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9435.85,
+     "equity": 9992.22,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-05",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9436.7,
+     "equity": 9993.07,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-06",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9437.55,
+     "equity": 9993.92,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-07",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9439.25,
+     "equity": 9995.62,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-08",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9440.95,
+     "equity": 9997.32,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-09",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9444.35,
+     "equity": 10000.72,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-12",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9446.05,
+     "equity": 10002.42,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-13",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9446.9,
+     "equity": 10003.27,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-14",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9448.6,
+     "equity": 10004.97,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-15",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9449.45,
+     "equity": 10005.82,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-16",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9453.7,
+     "equity": 10010.07,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-19",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9456.25,
+     "equity": 10012.62,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-21",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9457.95,
+     "equity": 10014.32,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-22",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9458.8,
+     "equity": 10015.17,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-23",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9463.05,
+     "equity": 10019.42,
+     "contributed": 10000.0
+    },
+    {
+     "date": "2026-10-26",
+     "cash": 556.37,
+     "holdings": 0,
+     "liquid": 9463.9,
+     "equity": 10020.27,
+     "contributed": 10000.0
+    }
+   ]
+  }
+ },
+ "benchmark": {
+  "2026-09-30": 22072.1,
+  "2026-10-01": 21857.75,
+  "2026-10-05": 21971.6,
+  "2026-10-06": 22202.85,
+  "2026-10-07": 22059.9,
+  "2026-10-08": 21616.15,
+  "2026-10-09": 21866.65,
+  "2026-10-12": 21822.75,
+  "2026-10-13": 22090.0,
+  "2026-10-14": 22038.0,
+  "2026-10-15": 22180.8,
+  "2026-10-16": 22270.05,
+  "2026-10-19": 22041.6,
+  "2026-10-21": 21837.9,
+  "2026-10-22": 21696.55,
+  "2026-10-23": 21427.6,
+  "2026-10-26": 21608.75
+ },
+ "pending": [],
+ "recent_proposals": []
+}

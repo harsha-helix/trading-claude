@@ -30,10 +30,11 @@ def brokerage(value: float, c: dict) -> float:
     return max(c["brokerage_min"], b)
 
 
-def charges(side: str, value: float, c: dict) -> Charges:
-    """Charges for one delivery order. side is 'BUY' or 'SELL'."""
+def charges(side: str, value: float, c: dict, stt: bool = True) -> Charges:
+    """Charges for one delivery order. side is 'BUY' or 'SELL'.
+    stt=False for debt/liquid ETFs, which don't attract STT."""
     brk = brokerage(value, c)
-    stt = value * c["stt_pct"] / 100
+    stt = value * c["stt_pct"] / 100 if stt else 0.0
     exch = value * c["exchange_txn_pct"] / 100
     sebi = value * c["sebi_per_crore"] / 1e7
     stamp = value * c["stamp_duty_buy_pct"] / 100 if side == "BUY" else 0.0

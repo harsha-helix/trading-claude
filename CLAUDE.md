@@ -18,8 +18,8 @@ and the owner approves them on the dashboard. Spec: README.md. Settings: config.
    next 2 sessions, fraud or regulatory action, a pending large block deal), write `VETO:` at the
    start of the note and do not recommend it.
 6. `python -m papertrade report`, then republish the dashboard with `reports/dashboard.json`.
-7. Commit `state/`, `reports/` and `data/` (excluding large caches; see .gitignore) to `main`,
-   then push.
+7. Commit `state/`, `reports/` and `data/` to `main`, then push. `data/prices.csv.gz` is
+   gitignored. Rebuild it with `update-data` in a fresh container, which takes about a minute.
 
 ## Weekly review (Saturday)
 Write `reports/weekly/YYYY-MM-DD.md` covering performance against the NIFTY 500, win rate,
@@ -30,5 +30,10 @@ proposals for the owner. Never change `config.json` or `strategy.PARAMS` without
 ## Rules
 - Never edit past entries in the ledger or `state/*.json` by hand. Corrections go in as new events.
 - Never use data after the as-of date when generating proposals (no lookahead).
+- Idle cash is parked in the GROWWLIQID liquid ETF and withdrawn automatically when a buy needs it.
+- When the market filter is off (NIFTY 500 below its 200-day average) there are no entry proposals.
+  Report the watchlist instead.
+- Backtest any proposed strategy change first: `python scripts/backtest.py --start 2024-01-01 --end <date>`.
+  Choose using the earlier half of the data and check the later half; report both.
 - Proposals from the Oct 1–26 backfill were auto-approved by Claude (labelled
   `claude (backfill)`) and had no news check, because news can't be checked without hindsight.

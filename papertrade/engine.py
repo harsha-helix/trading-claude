@@ -64,6 +64,7 @@ class Engine:
                 out[name] = Account.load(name)
             else:
                 out[name] = Account.new(name, acfg, self.cfg["start_date"])
+            out[name].liquid_symbol = self.cfg.get("cash_management", {}).get("liquid_etf", "")
         return out
 
     def save(self) -> None:
@@ -100,6 +101,9 @@ class Engine:
             prev = [d for d in self.days if d < start]
             if prev:  # proposals for the very first session, from the evening before
                 self.propose(prev[-1], auto_approve)
+                bc = self.closes(prev[-1]).get(self.cfg["benchmark"])
+                if bc:  # benchmark baseline = close before the start date
+                    self.meta.setdefault("benchmark", {})[prev[-1].strftime("%Y-%m-%d")] = round(float(bc), 2)
         for d in todo:
             self.step(d, auto_approve)
             self.meta["last_processed"] = d.strftime("%Y-%m-%d")
@@ -112,11 +116,13 @@ class Engine:
         for a in self.accounts.values():
             a.contribute(ds)
         self.fill_proposals(d)
+        self.park_idle_cash(d)
         self.check_exits(d)
         cl = self.closes(d)
         for a in self.accounts.values():
             a.equity.append({"date": ds, "cash": round(a.cash, 2),
                              "holdings": round(a.market_value(cl), 2),
+                             "liquid": round(a.liquid_value(cl), 2),
                              "equity": round(a.equity_value(cl), 2),
                              "contributed": a.contributed})
         bench = cl.get(self.cfg["benchmark"])
@@ -192,6 +198,7 @@ class Engine:
                 if b["open"] >= prop["target"] or b["open"] > prop["ref_price"] * 1.03:
                     prop["fills"][name] = "skipped: gapped up more than 3%, so not chasing"
                     continue
+                self.raise_cash(a, d, plan["qty"] * price * 1.003)
                 qty = min(plan["qty"], int(a.cash // (price * 1.003)))
                 if qty < 1:
                     prop["fills"][name] = "skipped: not enough cash"
@@ -199,6 +206,49 @@ class Engine:
                 a.buy(ds, prop["symbol"], qty, price, prop["stop"], prop["target"],
                       prop["setup"], prop["id"], cc)
                 prop["fills"][name] = f"bought {qty} @ {price:.2f}"
+
+    # --------------------------------------------------------- cash management
+    def liquid_fill(self, d: pd.Timestamp, side: str) -> float | None:
+        """Liquid-ETF fill price at the open. Thin ETFs often print stray opening
+        trades, so buys fill at the higher of open and previous close and sells at the lower."""
+        sym = self.cfg.get("cash_management", {}).get("liquid_etf", "")
+        b = self.bar(d, sym) if sym else None
+        if b is None:
+            return None
+        prev = [x for x in self.days if x < d]
+        pb = self.bar(prev[-1], sym) if prev else None
+        pc = float(pb["close"]) if pb is not None else float(b["open"])
+        return max(float(b["open"]), pc) if side == "BUY" else min(float(b["open"]), pc)
+
+    def raise_cash(self, a: Account, d: pd.Timestamp, need: float) -> None:
+        """Sell liquid-ETF units at the open if cash is short for a buy."""
+        short = need - a.cash
+        price = self.liquid_fill(d, "SELL") if a.liquid_units else None
+        if short > 0 and price:
+            a.unpark(d.strftime("%Y-%m-%d"), price, short, self.cfg["costs"])
+
+    def park_idle_cash(self, d: pd.Timestamp) -> None:
+        """At the open, sweep idle cash into the liquid ETF.
+
+        While the market filter allows entries, one full-size position's worth of
+        cash stays free so a new trade doesn't immediately pay to unpark.
+        """
+        cm = self.cfg.get("cash_management")
+        if not cm:
+            return
+        price = self.liquid_fill(d, "BUY")
+        if price is None:
+            return
+        prev = [x for x in self.days if x < d]
+        entries_allowed = bool(prev) and strategy.regime_ok(self.ind, prev[-1], self.cfg["benchmark"])
+        cl = self.closes(prev[-1]) if prev else {}
+        for a in self.accounts.values():
+            keep = cm["cash_buffer"]
+            if entries_allowed:
+                keep += a.equity_value(cl) * self.cfg["risk"]["max_position_pct"] / 100
+            spare = a.cash - keep
+            if spare >= cm["min_park"]:
+                a.park(d.strftime("%Y-%m-%d"), price, spare, self.cfg["costs"])
 
     def check_exits(self, d: pd.Timestamp) -> None:
         ds = d.strftime("%Y-%m-%d")
@@ -232,7 +282,12 @@ class Engine:
     def propose(self, d: pd.Timestamp, auto_approve: bool) -> list[dict]:
         ds = d.strftime("%Y-%m-%d")
         held = {p.symbol for a in self.accounts.values() for p in a.positions}
-        cands = strategy.scan(self.ind, d, self.cfg["benchmark"], self.fund)
+        liquid = self.cfg.get("cash_management", {}).get("liquid_etf", "")
+        cands = strategy.scan(self.ind, d, self.cfg["benchmark"], self.fund, exclude={liquid})
+        regime = strategy.regime_ok(self.ind, d, self.cfg["benchmark"])
+        self.meta["regime"] = {"date": ds, "entries_allowed": regime}
+        self.meta["watchlist"] = [] if regime else strategy.scan(
+            self.ind, d, self.cfg["benchmark"], self.fund, exclude={liquid}, ignore_regime=True)
         cl = self.closes(d)
         new = []
         reserved = {n: 0.0 for n in self.accounts}
@@ -240,7 +295,7 @@ class Engine:
         for c in cands:
             sizing = {}
             for name, a in self.accounts.items():
-                s = risk.size(c, a.equity_value(cl), a.cash - reserved[name], open_n[name],
+                s = risk.size(c, a.equity_value(cl), a.cash + a.liquid_value(cl) - reserved[name], open_n[name],
                               a.holding(c["symbol"]) is not None, self.cfg["risk"], self.cfg["costs"])
                 if s["qty"]:
                     reserved[name] += s["value"] * 1.003

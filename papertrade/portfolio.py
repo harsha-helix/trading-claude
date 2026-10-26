@@ -47,6 +47,12 @@ class Account:
     events: list[dict] = field(default_factory=list)
     equity: list[dict] = field(default_factory=list)
     last_contribution_month: str = ""
+    # idle cash parked in a liquid ETF (not a trading position)
+    liquid_symbol: str = ""
+    liquid_units: int = 0
+    liquid_cost: float = 0.0          # cost basis incl. buy charges, for tax
+    liquid_last_price: float = 0.0
+    liquid_realised: list[dict] = field(default_factory=list)
 
     # ------------------------------------------------------------ persistence
     @classmethod
@@ -78,8 +84,14 @@ class Account:
     def market_value(self, closes: dict[str, float]) -> float:
         return sum(p.qty * closes.get(p.symbol, p.entry_price) for p in self.positions)
 
+    def liquid_value(self, closes: dict[str, float]) -> float:
+        if not self.liquid_units:
+            return 0.0
+        self.liquid_last_price = closes.get(self.liquid_symbol, self.liquid_last_price)
+        return self.liquid_units * self.liquid_last_price
+
     def equity_value(self, closes: dict[str, float]) -> float:
-        return self.cash + self.market_value(closes)
+        return self.cash + self.market_value(closes) + self.liquid_value(closes)
 
     # ---------------------------------------------------------------- actions
     def contribute(self, day: str) -> None:
@@ -130,3 +142,35 @@ class Account:
                  f"net P&L ₹{net:,.0f}", symbol=pos.symbol, qty=pos.qty, price=round(price, 2),
                  charges=ch.as_dict(), reason=reason, net_pnl=round(net, 2))
         return trade
+
+    # ------------------------------------------------------------- liquid ETF
+    def park(self, day: str, price: float, amount: float, cc: dict) -> None:
+        """Buy liquid-ETF units with up to `amount` of cash (charges included)."""
+        price = to_tick(price) if price >= 1 else price
+        units = int(amount / (price * 1.002))
+        if units < 1:
+            return
+        value = units * price
+        ch = C.charges("BUY", value, cc, stt=False)
+        self.cash -= value + ch.total
+        self.liquid_units += units
+        self.liquid_cost += value + ch.total
+        self.liquid_last_price = price
+        self.log(day, "park", f"Parked ₹{value:,.0f} in {self.liquid_symbol} ({units} units @ ₹{price:,.2f})",
+                 units=units, price=price, charges=ch.as_dict())
+
+    def unpark(self, day: str, price: float, need: float, cc: dict) -> None:
+        """Sell enough liquid-ETF units to raise `need` in cash, after charges."""
+        if not self.liquid_units or need <= 0:
+            return
+        units = min(self.liquid_units, int(need / (price * 0.997)) + 1)
+        value = units * price
+        ch = C.charges("SELL", value, cc, stt=False)
+        basis = self.liquid_cost * units / self.liquid_units
+        self.cash += value - ch.total
+        self.liquid_units -= units
+        self.liquid_cost -= basis
+        gain = value - ch.total - basis
+        self.liquid_realised.append({"date": day, "units": units, "gain": round(gain, 2)})
+        self.log(day, "unpark", f"Withdrew ₹{value:,.0f} from {self.liquid_symbol} ({units} units @ ₹{price:,.2f})",
+                 units=units, price=price, charges=ch.as_dict(), gain=round(gain, 2))

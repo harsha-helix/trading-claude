@@ -13,13 +13,15 @@ DASHBOARD = ROOT / "reports" / "dashboard.json"
 
 def _twr(equity: list[dict]) -> list[float]:
     """Time-weighted return index, so monthly top-ups don't count as gains."""
-    idx, out, prev = 1.0, [], None
+    if not equity:
+        return []
+    idx, out = 1.0, []
+    prev = {"equity": equity[0]["contributed"], "contributed": equity[0]["contributed"]}
     for e in equity:
-        if prev is not None:
-            flow = e["contributed"] - prev["contributed"]
-            base = prev["equity"] + flow
-            if base > 0:
-                idx *= e["equity"] / base
+        flow = e["contributed"] - prev["contributed"]
+        base = prev["equity"] + flow
+        if base > 0:
+            idx *= e["equity"] / base
         out.append(idx)
         prev = e
     return out
@@ -35,15 +37,23 @@ def metrics(a: Account, cfg: dict, bench: dict[str, float]) -> dict:
     for v in twr:
         peak = max(peak, v)
         mdd = max(mdd, 1 - v / peak if peak else 0)
-    b = [bench.get(e["date"]) for e in eq]
-    b = [x for x in b if x]
+    first = eq[0]["date"] if eq else ""
+    before = [k for k in sorted(bench) if k < first]
+    b = ([bench[before[-1]]] if before else []) + [bench[e["date"]] for e in eq if bench.get(e["date"])]
     bench_ret = (b[-1] / b[0] - 1) if len(b) > 1 else 0.0
     last = eq[-1] if eq else {"equity": a.cash, "contributed": a.contributed}
     rs = [t["r_multiple"] for t in closed if t["r_multiple"] is not None]
     tax = C.estimate_tax(closed, cfg["tax"])
-    charges = sum(t["charges"] for t in closed) + sum(p.entry_charges for p in a.positions)
+    liquid_gain = sum(x["gain"] for x in a.liquid_realised)
+    slab = cfg.get("cash_management", {}).get("slab_tax_pct", 30.0)
+    tax["liquid_gain"] = round(liquid_gain, 2)
+    tax["liquid_tax"] = round(max(0.0, liquid_gain) * slab / 100, 2)
+    tax["total_tax"] = round(tax["total_tax"] + tax["liquid_tax"], 2)
+    charges = (sum(t["charges"] for t in closed) + sum(p.entry_charges for p in a.positions)
+               + sum(e["charges"]["total"] for e in a.events if e["kind"] in ("park", "unpark")))
     return {
         "equity": last["equity"], "contributed": a.contributed, "cash": round(a.cash, 2),
+        "liquid": last.get("liquid", 0.0), "liquid_units": a.liquid_units,
         "pnl": round(last["equity"] - a.contributed, 2),
         "return_twr": round(twr[-1] - 1, 4) if twr else 0.0,
         "benchmark_return": round(bench_ret, 4),
@@ -86,6 +96,7 @@ def export() -> dict:
             "closed": a.closed, "events": a.events[-200:], "equity": a.equity,
         }
     out = {"asof": meta.get("last_processed"), "live_from": cfg["live_from"],
+           "regime": meta.get("regime"), "watchlist": meta.get("watchlist", []),
            "accounts": accounts, "benchmark": bench,
            "pending": [p for p in props if p["status"] == "pending"],
            "recent_proposals": props[-150:]}
@@ -107,6 +118,12 @@ def text_summary(d: dict) -> str:
         for p in a["positions"]:
             lines.append(f"   open: {p['qty']} {p['symbol']} @ {p['entry_price']} "
                          f"stop {p['stop']} target {p['target']}")
+    r = d.get("regime") or {}
+    lines.append(f"\nMarket filter ({r.get('date')}): "
+                 + ("ON: new entries allowed" if r.get("entries_allowed") else "OFF: NIFTY 500 below its 200-day average, so no new entries"))
+    if d.get("watchlist"):
+        lines.append("Watchlist (would qualify if the filter were on): " + ", ".join(
+            f"{w['symbol']} ({w['setup']})" for w in d["watchlist"]))
     if d["pending"]:
         lines.append("\nPending proposals:")
         for p in d["pending"]:

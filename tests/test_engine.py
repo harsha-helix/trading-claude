@@ -110,3 +110,29 @@ def test_monthly_contribution():
     a.contribute("2026-11-02")
     a.contribute("2026-11-03")
     assert a.contributed == 20_000 and a.cash == 20_000
+
+
+def test_idle_cash_parked_in_liquid_etf_when_market_filter_off():
+    days = pd.bdate_range("2025-01-01", periods=260)
+    rows = []
+    for i, d in enumerate(days):
+        # benchmark in a steady downtrend: market filter blocks entries
+        bc = 1000 - i
+        rows.append({"date": d, "symbol": CFG["benchmark"], "open": bc, "high": bc,
+                     "low": bc, "close": bc, "volume": 0})
+        lp = 100 * (1 + 0.06 / 252) ** i
+        rows.append({"date": d, "symbol": "GROWWLIQID", "open": lp, "high": lp,
+                     "low": lp, "close": lp, "volume": 1e6})
+    prices = pd.DataFrame(rows)
+    cfg = dict(CFG, start_date=days[220].strftime("%Y-%m-%d"))
+    e = engine.Engine(prices, pd.DataFrame(columns=["date", "symbol", "kind", "value"]), {}, cfg)
+    e.run(auto_approve=True)
+    a = e.accounts["A_lumpsum"]
+    assert a.liquid_units > 0 and a.cash < CFG["cash_management"]["min_park"]
+    assert a.equity[-1]["equity"] > a.equity[0]["equity"]  # earning the liquid yield
+    b = e.accounts["B_monthly"]
+    assert b.liquid_units > 0  # ₹10k is above the ₹5k minimum
+    # raising cash sells just enough units
+    before = a.liquid_units
+    e.raise_cash(a, days[-1], a.cash + 20_000)
+    assert a.cash >= 20_000 and 0 < before - a.liquid_units < before

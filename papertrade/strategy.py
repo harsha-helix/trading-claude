@@ -85,17 +85,28 @@ def compute_all(prices: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(out, ignore_index=True).set_index(["date", "symbol"]).sort_index()
 
 
+def regime_ok(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str) -> bool:
+    """Market filter: new entries only while the benchmark closes above its 200-day average."""
+    if not PARAMS["regime_filter"]:
+        return True
+    try:
+        b = ind.loc[(asof, benchmark)]
+    except KeyError:
+        return False
+    return bool(b["close"] > b["sma200"])
+
+
 def scan(ind: pd.DataFrame, asof: pd.Timestamp, benchmark: str,
-         fundamentals: dict | None = None, exclude: set[str] = frozenset()) -> list[dict]:
-    """Ranked trade candidates from indicator rows dated exactly `asof`."""
+         fundamentals: dict | None = None, exclude: set[str] = frozenset(),
+         ignore_regime: bool = False) -> list[dict]:
+    """Ranked trade candidates from indicator rows dated exactly `asof`.
+    ignore_regime=True builds the watchlist shown while the market filter is off."""
     try:
         today = ind.loc[asof]
     except KeyError:
         return []
-    if PARAMS["regime_filter"]:
-        b = today.loc[benchmark] if benchmark in today.index else None
-        if b is None or not b["close"] > b["sma200"]:
-            return []
+    if not ignore_regime and not regime_ok(ind, asof, benchmark):
+        return []
     bench_ret63 = today["ret63"].get(benchmark, 0.0)
     bench_ret63 = 0.0 if pd.isna(bench_ret63) else bench_ret63
     fundamentals = fundamentals or {}

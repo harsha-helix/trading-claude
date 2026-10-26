@@ -130,15 +130,20 @@ def fetch_bhavcopy(d: date) -> pd.DataFrame:
     }).dropna()
 
 
-def update_prices(benchmark: str, history_start: str = "2023-01-01") -> pd.DataFrame:
-    """Bring the local price cache up to date. Yahoo first, bhavcopy fallback."""
+def update_prices(extra: list[str], history_start: str = "2023-01-01") -> pd.DataFrame:
+    """Bring the local price cache up to date. Yahoo first, bhavcopy fallback.
+    `extra` adds symbols outside the universe (benchmark, liquid ETF)."""
     uni = load_universe()
-    symbols = list(uni["symbol"]) + [benchmark]
+    symbols = list(uni["symbol"]) + [s for s in extra if s]
     have = load_prices()
     start = history_start if have.empty else (have["date"].max() - timedelta(days=10)).strftime("%Y-%m-%d")
     end = (date.today() + timedelta(days=1)).isoformat()
+    fresh = [] if have.empty else sorted(set(symbols) - set(have["symbol"]))
     try:
         new, acts = fetch_yahoo(symbols, start, end)
+        if fresh:  # symbols added since the last run need full history
+            n2, a2 = fetch_yahoo(fresh, history_start, end)
+            new, acts = pd.concat([new, n2]), pd.concat([acts, a2])
     except Exception as e:  # Yahoo down/blocked: fall back to NSE bhavcopy
         print(f"Yahoo fetch failed ({e}); falling back to NSE bhavcopy")
         new, acts = _bhav_range(pd.Timestamp(start).date(), date.today()), pd.DataFrame()

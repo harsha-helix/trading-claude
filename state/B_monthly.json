@@ -1,0 +1,170 @@
+{
+ "name": "B_monthly",
+ "label": "₹10k + ₹10k/month",
+ "cash": 556.3700000000008,
+ "monthly_contribution": 10000.0,
+ "contributed": 10000.0,
+ "positions": [],
+ "closed": [],
+ "events": [
+  {
+   "date": "2026-10-01",
+   "kind": "deposit",
+   "text": "Opening balance ₹10,000",
+   "amount": 10000
+  },
+  {
+   "date": "2026-10-01",
+   "kind": "park",
+   "text": "Parked ₹9,431 in GROWWLIQID (85 units @ ₹110.95)",
+   "units": 85,
+   "price": 110.95,
+   "charges": {
+    "brokerage": 9.43,
+    "stt": 0.0,
+    "exchange": 0.28,
+    "sebi": 0.01,
+    "stamp": 1.41,
+    "gst": 1.75,
+    "dp": 0.0,
+    "total": 12.88
+   }
+  }
+ ],
+ "equity": [
+  {
+   "date": "2026-10-01",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9435.85,
+   "equity": 9992.22,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-05",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9436.7,
+   "equity": 9993.07,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-06",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9437.55,
+   "equity": 9993.92,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-07",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9439.25,
+   "equity": 9995.62,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-08",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9440.95,
+   "equity": 9997.32,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-09",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9444.35,
+   "equity": 10000.72,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-12",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9446.05,
+   "equity": 10002.42,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-13",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9446.9,
+   "equity": 10003.27,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-14",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9448.6,
+   "equity": 10004.97,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-15",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9449.45,
+   "equity": 10005.82,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-16",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9453.7,
+   "equity": 10010.07,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-19",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9456.25,
+   "equity": 10012.62,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-21",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9457.95,
+   "equity": 10014.32,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-22",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9458.8,
+   "equity": 10015.17,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-23",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9463.05,
+   "equity": 10019.42,
+   "contributed": 10000.0
+  },
+  {
+   "date": "2026-10-26",
+   "cash": 556.37,
+   "holdings": 0,
+   "liquid": 9463.9,
+   "equity": 10020.27,
+   "contributed": 10000.0
+  }
+ ],
+ "last_contribution_month": "2026-10",
+ "liquid_symbol": "GROWWLIQID",
+ "liquid_units": 85,
+ "liquid_cost": 9443.63,
+ "liquid_last_price": 111.33999633789062,
+ "liquid_realised": []
+}
